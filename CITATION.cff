@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "VascuNet: An Automated Cardiac Vascular Network Mapping Platform from CT Angiography Using Attention U-Net for 3D Bioprinting"
+authors:
+  - family-names: "Yalageri"
+    given-names: "Mrinal"
+    orcid: "https://orcid.org/0009-0006-2968-8832"
+  - family-names: "Kumar"
+    given-names: "Angad"
+    orcid: "https://orcid.org/0009-0003-5253-3335"
+date-released: 2026-05-19
+version: "1.0.0"
+license: MIT
+type: software
+keywords:
+  - 3D Bioprinting
+  - Vascularization
+  - 3D U-Net
+  - Vascular Network
+  - Regenerative Medicine
+  - Biomaterials
+  - Bioinks
+  - CNN
+  - Segmentation
+  - Cardiac CT
+  - FRESH
+  - Topology-Preserving Segmentation
+  - Mesh Repair
