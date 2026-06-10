@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 # -----------------------------
 # 1) Find all label files in your structure
 # -----------------------------
-BASE = "/Users/prade/U-NET-ISEF/cloud_bundle/data/processed/all"
+BASE = os.environ.get("IMAGECAS_PROCESSED_ROOT", "data/processed/all")
 
 label_paths = []
 label_paths += glob(os.path.join(BASE, "*.label.nii.gz"))                # e.g., 1000.label.nii.gz at root

@@ -1,0 +1,10 @@
+numpy
+scipy
+pandas
+tqdm
+matplotlib
+SimpleITK
+scikit-image
+trimesh
+pyvista
+pymeshfix
