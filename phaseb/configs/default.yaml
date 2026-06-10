@@ -1,0 +1,29 @@
+segmentation:
+  seg_type: auto
+  default_threshold: 0.4
+  threshold_candidates: [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
+  min_probability: 0.0
+
+resample:
+  target_spacing_mm: null
+
+postprocess:
+  fill_holes: true
+  closing_mm: 1.0
+  min_component_mm3: 50.0
+  keep_mode: largest  # options: largest, seed
+
+mesh:
+  marching_cubes_step: 1
+
+repair:
+  use_pymeshfix: true
+
+qc:
+  min_radius_mm: 0.6
+
+previews:
+  enable: false
+
+logging:
+  level: INFO

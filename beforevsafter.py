@@ -22,10 +22,10 @@ Install helpers (recommended):
 Run examples:
   python beforevsafter.py
   python beforevsafter.py --case_id 801 \
-    --ct "/Users/prade/U-NET-ISEF/cloud_bundle/data/processed/all/801-1000/801.img.nii.gz" \
-    --label "/Users/prade/U-NET-ISEF/cloud_bundle/data/processed/all/801-1000/801.label.nii.gz" \
+    --ct "data/processed/all/801-1000/801.img.nii.gz" \
+    --label "data/processed/all/801-1000/801.label.nii.gz" \
     --pred_prob "/path/to/801_prob.nii.gz" \
-    --out_dir "/Users/prade/U-NET-ISEF/cloud_bundle/pipeline_outputs"
+    --out_dir "pipeline_outputs"
 
 """
 
@@ -42,8 +42,8 @@ import matplotlib.pyplot as plt
 # Defaults: match your repo
 # -----------------------------
 DEFAULT_CASE_ID = "801"
-DEFAULT_CT_PATH = "/Users/prade/U-NET-ISEF/cloud_bundle/data/processed/all/801-1000/801.img.nii.gz"
-DEFAULT_LBL_PATH = "/Users/prade/U-NET-ISEF/cloud_bundle/data/processed/all/801-1000/801.label.nii.gz"
+DEFAULT_CT_PATH = "data/processed/all/801-1000/801.img.nii.gz"
+DEFAULT_LBL_PATH = "data/processed/all/801-1000/801.label.nii.gz"
 
 
 def _safe_mkdir(p: Path) -> None:
