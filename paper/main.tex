@@ -112,9 +112,9 @@ belongs.
   \item \textbf{Paired segmentation-to-mesh analysis} (\S\ref{subsec:paired}).
   \item Optional, pending a scope decision: a \textbf{non-attention 3D U-Net baseline} under identical splits.
   \item Optional, pending a scope decision: \textbf{external validation} on an independent coronary CTA dataset.
-  \item Resolve the \textbf{v14 evaluated-checkpoint provenance} (\S\ref{subsec:training-convergence}): the architecture is now proven (strict load, zero key mismatches), but the averaged weights and soup recipe are still not reconstructable --- recover them or re-evaluate from an accountable checkpoint.
-  \item \textbf{Full augmentation parameters} for Appendix~\ref{app:repro}.
-  \item Proper formatting of the \textbf{WHO reference} in \texttt{references.bib}.
+  \item Resolve the \textbf{v14 evaluated-checkpoint provenance} (\S\ref{subsec:training-convergence}): the architecture is proven (strict load, zero key mismatches), but the averaged weights and soup recipe are not reconstructable. An accountable checkpoint is now available (\texttt{checkpoints/best\_dice05.pt}, epoch 79, 23.6M-parameter Attention U-Net, validation Dice@0.5 $=0.789$); the planned resolution is to re-evaluate the 250-case test set from it and replace the headline metrics throughout.
+  \item \textbf{Full augmentation parameters} for Appendix~\ref{app:repro}. \emph{Done} --- see Table~\ref{tab:aug}.
+  \item Proper formatting of the \textbf{WHO reference} in \texttt{references.bib}. \emph{Done.}
 \end{enumerate}}
 
 % =========================================================
@@ -164,8 +164,7 @@ Supervised training was performed on the public ImageCAS dataset, which contains
 
 Raw DICOM studies were converted to NIfTI prior to training or, during inference, converted when a DICOM directory was supplied \cite{li2016}. Preprocessing was implemented using MONAI transforms. Images and labels were loaded, converted to channel-first format, reoriented to RAS, and resampled to \SI{0.6}{mm} isotropic spacing. For CT inputs, intensities were clipped to $[-200,700]$ HU and linearly scaled to $[0,1]$. Labels were binarized to a single vessel foreground class. Training patches were extracted at $96\times192\times192$ voxels. The logs report a representative raw case shape of $512\times512\times275$ voxels before training-time preprocessing. A representative preprocessing panel showing raw, windowed, and resampled CTA is shown in figure~\ref{fig:preprocessing}.
 
-Data augmentation was applied during training. The implementation includes spatial padding, foreground/background random cropping, random flipping, random 90-degree rotation, random spatial rotation, elastic deformation, contrast adjustment, intensity scaling, intensity shifting, Gaussian noise, Gaussian smoothing, and final resize-with-pad-or-crop to the configured patch size. % CHANGED: flag missing magnitudes for reproducibility
-\TODO{add the per-transform probabilities and magnitude ranges (e.g. flip $p$, rotation range, elastic $\sigma$/$\alpha$, noise std, intensity-shift offsets) here or in Appendix~\ref{app:repro}; a reviewer will want them for reproducibility.} Validation and inference use sliding-window inference with Gaussian blending to reconstruct full-volume predictions.
+Data augmentation was applied during training. In the reported A40 run the pipeline comprised spatial padding, foreground/background random cropping (positive-to-negative ratio $3{:}1$), random flipping, random 90-degree rotation, random small-angle spatial rotation, contrast adjustment, intensity scaling, intensity shifting, Gaussian noise, Gaussian smoothing, and a final resize-with-pad-or-crop to the configured patch size. Elastic deformation is implemented in the codebase but was disabled for the reported run because it degraded thin-vessel topology; it was therefore not applied to the evaluated model. The complete per-transform probabilities and magnitude ranges are listed in Appendix~\ref{app:repro} (Table~\ref{tab:aug}). Validation and inference use sliding-window inference with Gaussian blending to reconstruct full-volume predictions.
 
 \begin{table}[!t]
 \centering
@@ -724,17 +723,47 @@ The implementation was developed in Python using PyTorch, MONAI, NumPy, SciPy, N
 \section{Reproducibility details}
 \label{app:repro}
 
-\TODOBLOCK{Appendix stub. Populate with: (1) the complete augmentation parameter values (per-transform probabilities and magnitude ranges for padding, foreground/background crop ratio, flip, 90$^\circ$ rotation, spatial rotation range, elastic-deformation $\sigma$/$\alpha$, contrast/intensity-scale/intensity-shift ranges, Gaussian-noise std, and Gaussian-smoothing $\sigma$); and (2) either the full per-case results table or an explicit pointer to \texttt{outputs/final\_test\_250/per\_case\_metrics.csv} with a column legend. These values were not available when this draft was assembled.}
+\subsection*{A.1\quad Training-time augmentation parameters}
+
+Table~\ref{tab:aug} lists every training-time transform applied to the evaluated model, in execution order, with its sampling probability and parameter values as configured in the training code (\texttt{get\_transforms}, \texttt{mode="train"}). All intensity transforms operate on images already scaled to $[0,1]$ (Section~\ref{subsec:dataset}); spatial transforms are applied jointly to image and label with nearest-neighbour interpolation on the label. Deterministic preprocessing common to training, validation, and inference (RAS reorientation, resampling to \SI{0.6}{mm} isotropic spacing, $[-200,700]$ HU windowing, linear scaling to $[0,1]$, and label binarization) is described in Section~\ref{subsec:dataset} and is not repeated here.
+
+\begin{table}[!t]
+\centering
+\caption{Training-time data-augmentation transforms (MONAI dictionary transforms), in execution order, as used for the evaluated model. Probabilities and parameters are read directly from the training configuration. Elastic deformation is implemented but was disabled for the reported run.}
+\label{tab:aug}
+\small
+\begin{tabular}{@{}lll@{}}
+\hline
+Transform (MONAI) & Probability & Parameters \\
+\hline
+\texttt{SpatialPadd} & 1.0 & target $96\times192\times192$ \\
+\texttt{RandCropByPosNegLabeld} & --- & pos:neg $=3{:}1$, num\_samples $=2$, allow\_smaller, image\_threshold $=0$ \\
+\texttt{RandFlipd} & 0.5 & spatial\_axis $=[0,1,2]$ \\
+\texttt{RandRotate90d} & 0.5 & max\_k $=3$ \\
+\texttt{RandRotated} & 0.1 & range\_x/y/z $=\pm0.2$ rad ($\approx\pm11.5^\circ$); mode (bilinear, nearest) \\
+\texttt{Rand3DElasticd} & disabled & implemented as $p=0.2$, sigma\_range $(4,6)$, magnitude\_range $(50,150)$; not applied \\
+\texttt{RandAdjustContrastd} & 0.4 & gamma $\in[0.8,1.2]$ \\
+\texttt{RandScaleIntensityd} & 0.5 & factors $=(0.85,1.15)$ \\
+\texttt{RandShiftIntensityd} & 0.3 & offsets $=0.1$ \\
+\texttt{RandGaussianNoised} & 0.2 & mean $=0.0$, std $=0.01$ \\
+\texttt{RandGaussianSmoothd} & 0.3 & sigma\_x/y/z $=(0.5,1.5)$ \\
+\texttt{ResizeWithPadOrCropd} & 1.0 & target $96\times192\times192$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection*{A.2\quad Per-case results table}
+
+Per-case held-out test results are provided as \texttt{outputs/final\_test\_250/per\_case\_metrics.csv} (one row per test case). Column legend: \texttt{case\_id}; \texttt{image}, \texttt{label} (source NIfTI paths); \texttt{status}; \texttt{soft\_dice}; \texttt{gt\_voxels} (ground-truth foreground voxels); \texttt{runtime\_seconds}; and, at the reporting threshold $0.5$, \texttt{dice@0.5}, \texttt{precision@0.5}, \texttt{recall@0.5}, \texttt{fp\_voxels@0.5}, \texttt{fn\_voxels@0.5}, \texttt{pred\_voxels@0.5}, \texttt{hd95@0.5} (mm), and \texttt{cldice@0.5}. When Phase~B QC is enabled, per-case mesh-quality columns (connected-component count, watertightness, non-manifold edge count, repair status, surface-roughness, minimum-radius proxy, and wall-thickness compliance) are appended to the same row and mirrored in \texttt{outputs/phase\_b\_mesh\_qc/per\_case\_mesh\_qc.csv}.
 
 \section{Model-provenance record}
 \label{app:provenance}
 
-The held-out test metrics were produced by the evaluation command recorded in \texttt{outputs/final\_test\_250/eval\_command.txt}, which loaded the checkpoint \texttt{soup\_ep75-80.pt} and ran sliding-window inference (ROI $96\times192\times192$, overlap 0.625, threshold 0.5) over the 250-case test partition, reporting 0 failed cases and a mean Dice@0.5 of 0.7953. The exported test console log records the loaded model as a MONAI Attention U-Net with channels $(32,64,128,256,512)$, three residual units, dropout 0.1, and 23,625,953 trainable parameters; an independent reconstruction reproduced this parameter count. The evaluation load diagnostics report \texttt{model\_type: attention\_unet} and a strict state-dict load with empty missing- and unexpected-key lists, confirming the evaluated weights matched this architecture. The averaged checkpoint and its epoch-75--80 ingredients were not retained (Section~\ref{subsec:training-convergence}). \TODO{once provenance is resolved, record here the exact soup recipe (ingredient checkpoints and averaging method) or the accountable checkpoint used for re-evaluation, so the evaluated weights are fully reconstructable.}
+The held-out test metrics were produced by the evaluation command recorded in \texttt{outputs/final\_test\_250/eval\_command.txt}, which loaded the checkpoint \texttt{soup\_ep75-80.pt} and ran sliding-window inference (ROI $96\times192\times192$, overlap 0.625, threshold 0.5) over the 250-case test partition, reporting 0 failed cases and a mean Dice@0.5 of 0.7953. The exported test console log records the loaded model as a MONAI Attention U-Net with channels $(32,64,128,256,512)$, three residual units, dropout 0.1, and 23,625,953 trainable parameters; an independent reconstruction reproduced this parameter count. The evaluation load diagnostics report \texttt{model\_type: attention\_unet} and a strict state-dict load with empty missing- and unexpected-key lists, confirming the evaluated weights matched this architecture. The averaged checkpoint and its epoch-75--80 ingredients were not retained (Section~\ref{subsec:training-convergence}). An accountable, fully retained checkpoint is, however, available for re-evaluation: \texttt{checkpoints/best\_dice05.pt} is an epoch-79 Attention U-Net with 23{,}631{,}875 parameters (matching the architecture above), recorded validation Dice@0.5 $=0.7889$ and soft Dice $=0.7811$, and complete optimizer, scheduler, configuration, and git-commit metadata. The planned resolution is to re-evaluate the 250-case held-out test set from this checkpoint (with \texttt{save\_case\_outputs}, \texttt{compute\_cldice}, and \texttt{run\_phase\_b\_qc} enabled) and replace the headline metrics throughout; the orchestration for this run is provided as \texttt{run\_full\_revision.sh} in the code archive. \TODO{after the re-evaluation, replace the soup path above with \texttt{best\_dice05.pt}, update all per-case metrics/figures, and confirm the strict-load diagnostics for the new run.}
 
 \newpage
-% CHANGED: reminder for the WHO reference formatting (lives in references.bib, not here).
-% \cite{who} must have a proper entry: organization=WHO, title="Cardiovascular
-% diseases (CVDs)", year, url, urldate. Currently a bare URL. \TODO{fix in references.bib}
+% WHO reference (references.bib, key `who`) now has a full @misc entry
+% (organization, title, fact-sheet note, year, url, urldate).
 \bibliographystyle{iopart-num}
 \bibliography{references}
 
