@@ -26,9 +26,18 @@ DATA_ROOT="${DATA_ROOT:-Data/all}"                      # <-- point at downloade
 SPLITS="${SPLITS:-extra_information/data_information/dataset_splits.json}"
 CHECKPOINT="${CHECKPOINT:-checkpoints/best_dice05.pt}"  # accountable epoch-79 Attention U-Net
 OUTDIR="${OUTDIR:-outputs/final_test_250}"
-DEVICE="${DEVICE:-cuda}"                                # cuda | cpu
+DEVICE="${DEVICE:-cuda}"                                # cuda | cpu | mps
 ROI="${ROI:-96,192,192}"
 SW_OVERLAP="${SW_OVERLAP:-0.625}"                       # matches manuscript inference setting
+# On Apple-Silicon MPS the sliding-window aggregation buffer must live on CPU,
+# otherwise the full-volume gaussian map exhausts unified memory (OOM). On CUDA
+# leave this as "same" for speed.
+if [ "${DEVICE}" = "mps" ]; then
+  VAL_OUTPUT_DEVICE="${VAL_OUTPUT_DEVICE:-cpu}"
+  export PYTORCH_ENABLE_MPS_FALLBACK="${PYTORCH_ENABLE_MPS_FALLBACK:-1}"
+else
+  VAL_OUTPUT_DEVICE="${VAL_OUTPUT_DEVICE:-same}"
+fi
 # -----------------------------------------------------------------------------
 
 echo "=============================================================="
@@ -58,6 +67,8 @@ python evaluate_full_test_a40.py \
   --roi_size "${ROI}" \
   --sw_overlap "${SW_OVERLAP}" \
   --threshold 0.5 \
+  --val_output_device "${VAL_OUTPUT_DEVICE}" \
+  --num_workers "${NUM_WORKERS:-0}" \
   --compute_hd95 \
   --compute_cldice \
   --save_case_outputs \

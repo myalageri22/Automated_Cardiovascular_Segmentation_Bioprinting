@@ -47,12 +47,26 @@ def import_train_module() -> Any:
     return module
 
 
+def _mps_available() -> bool:
+    return bool(
+        hasattr(torch.backends, "mps")
+        and torch.backends.mps.is_built()
+        and torch.backends.mps.is_available()
+    )
+
+
 def resolve_device(device_arg: str) -> torch.device:
     if device_arg == "auto":
-        return torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        if torch.cuda.is_available():
+            return torch.device("cuda")
+        if _mps_available():
+            return torch.device("mps")
+        return torch.device("cpu")
     device = torch.device(device_arg)
     if device.type == "cuda" and not torch.cuda.is_available():
         raise RuntimeError("Requested CUDA but CUDA is unavailable")
+    if device.type == "mps" and not _mps_available():
+        raise RuntimeError("Requested MPS but MPS is unavailable")
     return device
 
 
@@ -363,7 +377,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--imagecas_root", default=None)
     parser.add_argument("--split", default="test", choices=["test"])
     parser.add_argument("--output_dir", default="outputs/full_test_eval_a40")
-    parser.add_argument("--device", default="auto", choices=["auto", "cuda", "cpu"])
+    parser.add_argument("--device", default="auto", choices=["auto", "cuda", "cpu", "mps"])
     parser.add_argument("--roi_size", default="96,192,192")
     parser.add_argument("--sw_overlap", type=float, default=0.5)
     parser.add_argument("--sw_batch_size", type=int, default=1)
