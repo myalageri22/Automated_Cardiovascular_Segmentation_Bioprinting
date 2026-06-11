@@ -159,6 +159,7 @@ The proposed workflow converts cardiac CTA into bioprinting-oriented three-dimen
 The repository implementation is structured around a Phase A training/inference pipeline and a Phase B mesh-processing pipeline. The full pipeline saves Phase A outputs including \texttt{ct\_preprocessed.nii.gz}, \texttt{seg\_prob.nii.gz}, and optionally \texttt{seg\_mask.nii.gz}, followed by Phase B outputs such as \texttt{vessels\_raw.stl}, \texttt{vessels\_repaired.stl}, \texttt{qc\_report.json}, \texttt{qc\_summary.txt}, \texttt{qc\_summary.csv}, and \texttt{used\_config.yaml}. This organization supports a reproducible image-to-mesh workflow rather than a segmentation-only model.
 
 \subsection{Dataset and preprocessing}
+\label{subsec:dataset}
 
 Supervised training was performed on the public ImageCAS dataset, which contains approximately 1000 cardiac CTA cases with coronary artery annotations \cite{zeng2023}. The exported training and evaluation artifacts confirm that 1000 valid image-label samples were discovered. The implementation used an existing \texttt{splits.json} file containing 700 training cases, 50 validation cases, and 250 held-out test cases. Model selection was performed using the 50-case validation partition. The final reported performance in this manuscript comes from the complete 250-case held-out test partition, not from a smaller pilot subset. Split verification found no duplicate cases within splits and no overlap between the training, validation, and held-out test partitions.
 
@@ -201,8 +202,9 @@ Evaluation interpretation & The primary segmentation result is reported on the f
 \begin{figure}[!t]
     \centering
     \safeinclude[width=0.72\textwidth]{figure2_preprocessing.png}
-    \caption{Representative preprocessing panel showing raw CTA, windowed CTA, and resampled or normalized CTA prepared for model ingestion.}
+    \caption{Representative preprocessing panel showing raw CTA, windowed CTA, resampled CTA, and the ground-truth vessel overlay prepared for model ingestion.}
     \label{fig:preprocessing}
+    \TODO{regenerate this figure before submission: the current export carries an authoring ``Poster tip'' annotation and raw \texttt{np.float32(...)} debug text in the panel titles, and shows more panels (probability map, ground-truth overlay, case-level summary) than the caption describes. Remove the poster note/debug text and align the panels with the caption.}
 \end{figure}
 
 \FloatBarrier
@@ -224,7 +226,7 @@ The project logs show that training labels were highly imbalanced, with 78,936,3
 The evaluated model was trained with a Tversky--Dice composite objective~\cite{salehi2017,sudre2017}, the \texttt{tversky\_fn} configuration recorded in the final-evaluation run name. In this mode the source code combines a Tversky term and a Dice term at full resolution, with an additional downsampled Tversky supervision term. The implementation also supports alternative Dice, BCE, focal, and composite modes, but no formal loss-function ablation is claimed in this study. The loss configuration is therefore reported as part of the implementation rather than as an independently optimized contribution.
 
 % CHANGED: honest note on the v11/v14 provenance split.
-The fully documented hyperparameter set above corresponds to the exported \texttt{bioprint\_v11} run, which provides the training- and validation-history records summarized in Section~\ref{subsec:training-convergence}. The checkpoint actually evaluated on the held-out test set was a weight-averaged ``soup'' from a later Tversky--Dice run sharing the same Attention U-Net architecture; its full training-run folder was not retained (Section~\ref{subsec:training-convergence}). \TODO{once the evaluated checkpoint is recovered or re-created (or a re-evaluation from an accountable checkpoint is performed), reconcile this paragraph so the reported test metrics and the documented training run refer to the same checkpoint.}
+The fully documented hyperparameter set above corresponds to the exported \texttt{bioprint\_v11} run, which provides the training- and validation-history records summarized in Section~\ref{subsec:training-convergence}. The checkpoint actually evaluated on the held-out test set was a weight-averaged ``soup'' from a later Tversky--Dice run sharing the same Attention U-Net architecture; its full training-run folder was not retained (Section~\ref{subsec:training-convergence}). An accountable checkpoint (\texttt{checkpoints/best\_dice05.pt}; epoch 79; 23{,}631{,}875-parameter Attention U-Net; validation Dice@0.5 0.7889) is, however, retained and is the planned source for re-evaluation. \TODO{after re-evaluating the held-out test set from \texttt{best\_dice05.pt} (orchestrated by \texttt{run\_full\_revision.sh}), reconcile this paragraph so the reported test metrics and the documented training run refer to the same checkpoint.}
 
 \begin{table}[!t]
 \centering
@@ -454,8 +456,9 @@ The final held-out evaluation configuration records a checkpoint-soup path, \tex
 \begin{figure}[!t]
     \centering
     \safeinclude[width=0.86\textwidth]{figure4_training_curves.png}
-    \caption{Training and validation curves for the exported A40 validation-history run. The curves show train Dice, validation Dice@0.5, validation soft Dice, training loss, and validation loss across epochs.}
+    \caption{Validation Dice@0.5 trajectory across A40 fine-tuning. The plot shows the logged per-epoch validation Dice@0.5, a smoothed selected-validation curve and a running-best curve, the best validation checkpoint, and, for reference, the held-out 250-case test mean with its 95\% confidence band.}
     \label{fig:training-curves}
+    \TODO{the best validation value shown in this figure ($\approx$0.797) was generated from a run that differs from the v11 history quoted in Section~\ref{subsec:training-convergence} (best 0.7542 at epoch 73). After re-evaluating from the accountable checkpoint, regenerate this figure and reconcile the validation numbers across the text and this caption.}
 \end{figure}
 
 \subsection{Full 250-case held-out test performance}
@@ -564,7 +567,7 @@ The automated full-pipeline script supports Phase A inference followed by Phase 
 % CHANGED: honest verified case-720 result, reframed as scale mismatch.
 A representative computational fabrication-readiness panel was generated from the Phase B outputs for case~720 (figure~\ref{fig:fabrication-readiness-qc}). The input to this Phase~B demonstration was a binary mask thresholded at 0.4 (the Phase~B mesh-generation threshold, set independently of the 0.5 threshold used for the reported segmentation metrics), yielding a single mask component. The reconstructed geometry was watertight both before and after repair and consisted of a single connected mesh component, with a reconstructed surface area of 7854.84\,mm$^2$ and volume of 7071.36\,mm$^3$. The overall computational QC status for this case was reported as a failure, driven entirely by the radius-based printability proxy: the minimum mesh radius was \SI{0.355}{mm} and 39.94\% of sampled radii fell below the configured \SI{0.6}{mm} minimum-radius criterion. Because coronary arteries, and distal branches in particular, are intrinsically sub-millimeter, this outcome is better interpreted as evidence that coronary vascular geometry falls below a generic extrusion-printability threshold than as a loss of mesh integrity; the same artifact remained watertight and single-component after repair. This single-case result is interpreted as a representative computational demonstration and not as cohort-level fabrication validation. \TODO{after the cohort Phase~B run, report the distribution of the below-radius fraction across all 250 cases; if most cases fall below the 0.6\,mm proxy, state that the proxy threshold is mismatched to coronary caliber and consider reporting it as a radius distribution rather than a binary pass/fail.}
 
-Representative vessel-network and shell STL renderings from the geometry stage are shown in figures~\ref{fig:vessel-stl} and~\ref{fig:heart-stl}.
+A representative vessel-network STL rendering from the geometry stage is shown in figure~\ref{fig:vessel-stl}, and a representative case-level Phase~B quality-control summary is shown in figure~\ref{fig:heart-stl}.
 
 \begin{table}[!t]
 \centering
@@ -647,12 +650,12 @@ Not reported as final metrics & clDice, external-dataset performance, cohort-lev
 \begin{figure}[htbp]
     \centering
     \safeinclude[width=0.62\textwidth]{figure6_heart_stl_views.png}
-    \caption{Representative heart or shell STL renderings from multiple viewpoints. This panel provides a qualitative visualization of the downstream geometry workflow and is not presented as evidence of physical printing, perfusion, or biological validation.}
+    \caption{Representative Phase~B quality-control summary for case~720. The left panel shows geometry and topology checks (connected components after cleanup, watertight mesh, and median radius in mm) and the right panel shows the printability flag (percentage of skeleton-sample radii below the \SI{0.6}{mm} proxy). This is a single-case computational demonstration and is not presented as evidence of physical printing, perfusion, or biological validation.}
     \label{fig:heart-stl}
 \end{figure}
 
-% CHANGED: flag figure legibility/anonymity check for the STL renderings.
-\TODO{confirm figures~\ref{fig:vessel-stl} and~\ref{fig:heart-stl} are legible at print size and that no file paths, usernames, or other identifying text are baked into the axis annotations.}
+% Figure anonymity/legibility verified for the STL render (figure5); figure6 image is a QC bar chart, not a heart/shell STL.
+\TODO{figure~\ref{fig:vessel-stl} (vessel STL) was verified to carry no baked-in file paths, usernames, or identifying text; figure~\ref{fig:heart-stl} likewise carries none. Note that figure~\ref{fig:heart-stl} currently shows a Phase~B QC bar chart, not the heart/shell STL rendering originally intended for this slot, and is largely redundant with figure~\ref{fig:fabrication-readiness-qc}: either regenerate a shell/heart STL render from data or drop this figure. Re-confirm legibility at final print size.}
 
 \FloatBarrier
 
@@ -705,7 +708,7 @@ The primary held-out test result was a mean Dice@0.5 of 0.7953 (95\% CI 0.7896--
 This study used the public ImageCAS coronary CTA dataset for supervised training and evaluation. The dataset is available from the original ImageCAS source cited in this manuscript. The completed final held-out test artifacts are retained in \texttt{outputs/final\_test\_250/}, including \texttt{per\_case\_metrics.csv}, \texttt{summary\_metrics.csv}, \texttt{summary\_metrics.json}, \texttt{used\_config.yaml}, \texttt{eval\_command.txt}, \texttt{progress.json}, and \texttt{test\_console.log}. These files support verification of the reported 250-case held-out test results. Training and validation artifacts are retained under \texttt{outputs/train\_runs/}, and the representative Phase~B geometry-integrity artifacts for case~720 are retained with the exported Phase~B outputs.
 
 % CHANGED: describe what IS anonymized; honest provenance caveat.
-The implementation was developed in Python using PyTorch, MONAI, NumPy, SciPy, NiBabel, pandas, and related medical image-processing libraries. The manuscript text, tables, and figures have been anonymized for double-anonymous review, and an anonymized code and derived-results archive will be provided during review or upon reasonable request, subject to dataset-use restrictions. Raw local training and evaluation logs may still contain author-identifying metadata, usernames, local file paths, institutional names, email addresses, and hard-coded personal directory names; these are not claimed to be anonymized and will be scrubbed prior to any public deposition. \TODO{before camera-ready/deposition, run an anonymity scrub over the manuscript, all figures, and the code/results archive (grep for names, institution, emails, usernames, absolute home paths) and confirm zero hits; then update this paragraph to state that the deposited archive is fully anonymized.}
+The implementation was developed in Python using PyTorch, MONAI, NumPy, SciPy, NiBabel, pandas, and related medical image-processing libraries. The manuscript text, tables, and figures have been anonymized for double-anonymous review, and an anonymized code and derived-results archive will be provided during review or upon reasonable request, subject to dataset-use restrictions. A partial anonymity scrub has been performed: the username \texttt{prade} and absolute home paths have been removed from the training logs and from the dataset splits file (paths relativized to \texttt{Data/all/}), the manuscript figures were inspected and carry no baked-in file paths or usernames, and no author email addresses or institutional names remain in the manuscript text or in the source code. \TODO{before camera-ready/deposition: (i) regenerate figure~\ref{fig:preprocessing} to remove its authoring ``poster tip'' note and debug text; (ii) restore/replace the author names that remain in \texttt{LICENSE} and \texttt{CITATION.cff} as appropriate post-review; and (iii) re-run the grep (names, institution, emails, usernames, absolute home paths) over the full code/results archive, confirm zero hits, and update this paragraph to state that the deposited archive is fully anonymized.}
 
 \section*{Declarations}
 
