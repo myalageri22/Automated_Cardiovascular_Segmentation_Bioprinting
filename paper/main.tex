@@ -90,7 +90,7 @@
 \affil{[Affiliation information removed for double-anonymous review]}
 
 \begin{abstract}
-Vascularization remains a central bottleneck in thick engineered tissues, which require reliable oxygen, nutrient, and waste-transport networks. Image-derived patient-specific vascular geometries may support future biofabrication workflows, but translation from clinical scans to fabrication-oriented 3D models remains fragmented across preprocessing, segmentation, mesh generation, repair, and quality control. We present a computational image-to-mesh pipeline linking contrast-enhanced cardiac computed tomography angiography (CTA) to bioprinting-oriented vascular model generation. The workflow includes Phase A, a MONAI/PyTorch volumetric coronary vascular segmentation model, and Phase B, a postprocessing pipeline that converts segmentation outputs into stereolithography (STL) artifacts for downstream review. Phase A uses a three-dimensional Attention U-Net trained on the public ImageCAS coronary CTA dataset with a predefined 700/50/250 train--validation--test split. Preprocessing includes RAS orientation standardization, resampling to \SI{0.6}{mm} isotropic spacing, CT windowing from $-200$ to $700$ HU, normalization to $[0,1]$, binary vessel labels, and foreground-biased $96\times192\times192$ voxel patch sampling. On the completed 250-case held-out test, segmentation achieved mean Dice@0.5 of 0.7953 (95\% CI 0.7896--0.8009), median Dice@0.5 of 0.7985, and zero failed cases; soft Dice, precision, recall, HD95, and runtime were also extracted. Phase B converts probability maps or binary masks into STL outputs using geometric validation, scalar-field generation, isosurface extraction, smoothing, repair, and quality-control reporting. A representative Phase B artifact was watertight and single-component after repair, but failed the available radius-based printability proxy because 39.94\% of sampled radii were below the configured \SI{0.6}{mm} minimum-radius criterion. A representative mesh-smoothing example reduced mean surface roughness from \SI{0.070}{mm} to \SI{0.044}{mm}. These case-level computational demonstrations are not cohort-level physical printability validation. Overall, the results support a computational image-to-mesh workflow with near-0.80 mean Dice@0.5 on a full held-out test set, while topology-aware metrics, cohort-level mesh-quality statistics, slicer-based export validation, physical printing, perfusion, and biological validation remain necessary before stronger translational claims.
+Vascularization remains a central bottleneck in thick engineered tissues, which require reliable oxygen, nutrient, and waste-transport networks. Image-derived patient-specific vascular geometries may support future biofabrication workflows, but translation from clinical scans to fabrication-oriented 3D models remains fragmented across preprocessing, segmentation, mesh generation, repair, and quality control. We present a computational image-to-mesh pipeline linking contrast-enhanced cardiac computed tomography angiography (CTA) to bioprinting-oriented vascular model generation. The workflow includes Phase A, a MONAI/PyTorch volumetric coronary vascular segmentation model, and Phase B, a postprocessing pipeline that converts segmentation outputs into stereolithography (STL) artifacts for downstream review. Phase A uses a three-dimensional Attention U-Net trained on the public ImageCAS coronary CTA dataset with a predefined 700/50/250 train--validation--test split. Preprocessing includes RAS orientation standardization, resampling to \SI{0.6}{mm} isotropic spacing, CT windowing from $-200$ to $700$ HU, normalization to $[0,1]$, binary vessel labels, and foreground-biased $96\times192\times192$ voxel patch sampling. On the accountable 250-case held-out test, segmentation achieved mean Dice@0.5 of 0.7878 (95\% CI 0.7820--0.7935), median Dice@0.5 of 0.7934, topology-aware clDice@0.5 of 0.8695, and zero failed cases; soft Dice, precision, recall, and HD95 were also extracted. Phase B converts probability maps or binary masks into STL outputs using geometric validation, scalar-field generation, isosurface extraction, smoothing, repair, and quality-control reporting; run across all 250 cases it produced meshes that were watertight after repair in 91.2\% of cases. A paired analysis linking per-case segmentation to mesh quality found that topology-aware accuracy predicts mesh integrity more directly than voxel overlap: clDice was the segmentation metric most strongly associated with reduced mesh fragmentation (Spearman $\rho=-0.49$ versus connected-component count, stronger than Dice's $-0.37$). Only 8.8\% of mesh surface met a \SI{3}{mm} wall-thickness threshold on average, reflecting the sub-millimeter calibre of coronary vessels relative to a generic printability criterion rather than a loss of mesh integrity. These computational results are not physical printability validation. Overall, the workflow supports a computational image-to-mesh pipeline with near-0.80 mean Dice@0.5 on a full held-out test set and a measured coupling between segmentation topology and mesh usability, while slicer-based export validation, physical printing, perfusion, and biological validation remain necessary before stronger translational claims.
 
 \end{abstract}
 
@@ -100,21 +100,20 @@ Vascularization remains a central bottleneck in thick engineered tissues, which 
 \maketitle
 
 % CHANGED: master TODO summary (delete before submission)
-\TODOBLOCK{This draft is internally consistent and honest, but it is not yet
-complete. The items below are blocked on a GPU re-run of inference, because the
-final evaluation saved no per-case predictions and recorded
-\texttt{compute\_cldice:false}, \texttt{save\_case\_outputs:false}, and
-\texttt{run\_phase\_b\_qc:false}. Each is also flagged inline at the point it
-belongs.
+\TODOBLOCK{This draft is internally consistent and honest. The major analyses
+that were previously blocked on a GPU re-run have now been completed by
+re-evaluating the 250-case held-out test set from the accountable checkpoint
+\texttt{checkpoints/best\_dice05.pt} (with \texttt{compute\_cldice},
+\texttt{save\_case\_outputs}, and \texttt{run\_phase\_b\_qc} enabled), which moved
+the headline test Dice@0.5 to 0.7878. Status:
 \begin{enumerate}
-  \item \textbf{clDice} across the 250-case test set (\S\ref{subsec:metrics}, Table~\ref{tab:results}).
-  \item \textbf{Cohort-level Phase~B mesh QC} (\S\ref{subsec:phaseb-plan}, Table~\ref{tab:phaseb-qc}).
-  \item \textbf{Paired segmentation-to-mesh analysis} (\S\ref{subsec:paired}).
-  \item Optional, pending a scope decision: a \textbf{non-attention 3D U-Net baseline} under identical splits.
-  \item Optional, pending a scope decision: \textbf{external validation} on an independent coronary CTA dataset.
-  \item Resolve the \textbf{v14 evaluated-checkpoint provenance} (\S\ref{subsec:training-convergence}): the architecture is proven (strict load, zero key mismatches), but the averaged weights and soup recipe are not reconstructable. An accountable checkpoint is now available (\texttt{checkpoints/best\_dice05.pt}, epoch 79, 23.6M-parameter Attention U-Net, validation Dice@0.5 $=0.789$); the planned resolution is to re-evaluate the 250-case test set from it and replace the headline metrics throughout.
-  \item \textbf{Full augmentation parameters} for Appendix~\ref{app:repro}. \emph{Done} --- see Table~\ref{tab:aug}.
-  \item Proper formatting of the \textbf{WHO reference} in \texttt{references.bib}. \emph{Done.}
+  \item \textbf{clDice} across the 250-case test set --- \emph{Done} (mean 0.8695; \S\ref{subsec:metrics}, Tables~\ref{tab:full-metrics},~\ref{tab:results}).
+  \item \textbf{Cohort-level Phase~B mesh QC} --- \emph{Done} (\S\ref{subsec:phaseb-plan}, Table~\ref{tab:phaseb-qc}).
+  \item \textbf{Paired segmentation-to-mesh analysis} --- \emph{Done} (\S\ref{subsec:paired}, figure~\ref{fig:cldice-components}).
+  \item \textbf{v14 evaluated-checkpoint provenance} (\S\ref{subsec:training-convergence}) --- \emph{Resolved} via re-evaluation from \texttt{best\_dice05.pt}; the lost soup is no longer the metric source.
+  \item Remaining before submission: regenerate figure~\ref{fig:training-curves} (training curves) to the accountable run and test-mean band (its per-epoch history is not in the local archive); restore author names in \texttt{LICENSE}/\texttt{CITATION.cff} post-review. (Figure~\ref{fig:preprocessing} has been regenerated without debug text, and figure~\ref{fig:heart-stl} now shows real test-cohort vessel STLs instead of the redundant QC bar chart.)
+  \item Optional, pending a scope decision: a \textbf{non-attention 3D U-Net baseline} under identical splits, and \textbf{external validation} on an independent coronary CTA dataset.
+  \item \textbf{Full augmentation parameters} (Appendix~\ref{app:repro}) and the \textbf{WHO reference} --- \emph{Done}.
 \end{enumerate}}
 
 % =========================================================
@@ -202,9 +201,8 @@ Evaluation interpretation & The primary segmentation result is reported on the f
 \begin{figure}[!t]
     \centering
     \safeinclude[width=0.72\textwidth]{figure2_preprocessing.png}
-    \caption{Representative preprocessing panel showing raw CTA, windowed CTA, resampled CTA, and the ground-truth vessel overlay prepared for model ingestion.}
+    \caption{Representative preprocessing panel (held-out case~801) showing raw CTA, CTA windowed to $[-200,700]$ HU, CTA resampled to \SI{0.6}{mm} isotropic spacing, and the ground-truth vessel overlay prepared for model ingestion.}
     \label{fig:preprocessing}
-    \TODO{regenerate this figure before submission: the current export carries an authoring ``Poster tip'' annotation and raw \texttt{np.float32(...)} debug text in the panel titles, and shows more panels (probability map, ground-truth overlay, case-level summary) than the caption describes. Remove the poster note/debug text and align the panels with the caption.}
 \end{figure}
 
 \FloatBarrier
@@ -226,7 +224,7 @@ The project logs show that training labels were highly imbalanced, with 78,936,3
 The evaluated model was trained with a Tversky--Dice composite objective~\cite{salehi2017,sudre2017}, the \texttt{tversky\_fn} configuration recorded in the final-evaluation run name. In this mode the source code combines a Tversky term and a Dice term at full resolution, with an additional downsampled Tversky supervision term. The implementation also supports alternative Dice, BCE, focal, and composite modes, but no formal loss-function ablation is claimed in this study. The loss configuration is therefore reported as part of the implementation rather than as an independently optimized contribution.
 
 % CHANGED: honest note on the v11/v14 provenance split.
-The fully documented hyperparameter set above corresponds to the exported \texttt{bioprint\_v11} run, which provides the training- and validation-history records summarized in Section~\ref{subsec:training-convergence}. The checkpoint actually evaluated on the held-out test set was a weight-averaged ``soup'' from a later Tversky--Dice run sharing the same Attention U-Net architecture; its full training-run folder was not retained (Section~\ref{subsec:training-convergence}). An accountable checkpoint (\texttt{checkpoints/best\_dice05.pt}; epoch 79; 23{,}631{,}875-parameter Attention U-Net; validation Dice@0.5 0.7889) is, however, retained and is the planned source for re-evaluation. \TODO{after re-evaluating the held-out test set from \texttt{best\_dice05.pt} (orchestrated by \texttt{run\_full\_revision.sh}), reconcile this paragraph so the reported test metrics and the documented training run refer to the same checkpoint.}
+The fully documented hyperparameter set above corresponds to the exported \texttt{bioprint\_v11} run, which provides the training- and validation-history records summarized in Section~\ref{subsec:training-convergence}. The checkpoint actually evaluated on the held-out test set was a weight-averaged ``soup'' from a later Tversky--Dice run sharing the same Attention U-Net architecture; its full training-run folder was not retained (Section~\ref{subsec:training-convergence}). All held-out test metrics reported in this manuscript were produced by re-evaluating the 250-case test set from a retained, accountable checkpoint (\texttt{checkpoints/best\_dice05.pt}; epoch 79; 23{,}631{,}875-parameter Attention U-Net; validation Dice@0.5 0.7889), orchestrated by \texttt{run\_full\_revision.sh}, so the reported test metrics and this documented checkpoint now refer to the same weights.
 
 \begin{table}[!t]
 \centering
@@ -365,33 +363,31 @@ Center-of-mass validation & Checks whether the exported mesh remains anatomicall
 
 \FloatBarrier
 
-\subsection{Phase B cohort-level mesh-quality assessment plan}
+\subsection{Phase B cohort-level mesh-quality assessment}
 \label{subsec:phaseb-plan}
 
-Beyond the representative computational checks reported here, the geometry stage should ultimately be reported through cohort-level mesh-quality summaries aggregated across the evaluation partition. Case-level QC artifacts already produced by the workflow, including \texttt{qc\_report.json}, \texttt{qc\_summary.txt}, and \texttt{qc\_summary.csv}, should be consolidated into cohort tables so that mesh usability can be assessed across cases rather than only by example. Recommended cohort-level aggregation files are \texttt{outputs/phase\_b\_mesh\_qc/per\_case\_mesh\_qc.csv}, \texttt{outputs/phase\_b\_mesh\_qc/summary\_mesh\_qc.csv}, and \texttt{outputs/phase\_b\_mesh\_qc/summary\_mesh\_qc.json}. If the same folder is not used in the final implementation, the manuscript should still preserve this one-file-per-purpose structure.
-
-\TODOBLOCK{This subsection and Table~\ref{tab:phaseb-qc} are still \emph{planned} rather than \emph{reported}. Running Phase~B across all 250 held-out cases (on the locked predictions) will populate every metric below with per-case values and cohort summaries. This is blocked only by the GPU re-run noted at the top of the manuscript. Once complete, convert this from a plan into a Results subsection and fill Table~\ref{tab:phaseb-qc}.}
+Phase~B mesh generation and quality control were run across all 250 held-out cases on the saved per-case predictions (threshold 0.5), and the case-level QC artifacts were consolidated into the cohort aggregation files \texttt{outputs/phase\_b\_mesh\_qc/per\_case\_mesh\_qc.csv}, \texttt{summary\_mesh\_qc.csv}, and \texttt{summary\_mesh\_qc.json}. Cohort results are summarized in Table~\ref{tab:phaseb-qc}. Mesh extraction and repair completed for every case (250/250). Reconstructed surfaces were watertight after repair in 228/250 cases (91.2\%), and the same 91.2\% passed the slicer-import compatibility proxy. Non-manifold edges were absent in most cases (median 0; mean 3.3, maximum 142), and Taubin smoothing induced only a small volume change (mean $-0.30\%$), confirming shape preservation rather than shrinkage. Coronary meshes were intrinsically multi-component (mean 10.2 connected components, median 9, range 2--39), reflecting the branching, partially discontinuous nature of distal coronary trees rather than gross reconstruction failure. Only a small fraction of each mesh met the \SI{3}{mm} wall-thickness criterion (mean compliant fraction 8.8\%, median 8.3\%, range 3.4--20.3\%), which---consistent with the single-case radius analysis in Section~\ref{subsec:mesh-results}---reflects the sub-millimeter-to-few-millimeter calibre of coronary anatomy relative to a generic extrusion-oriented threshold, not a defect of the geometry. The per-case minimum-radius/below-radius proxy reported for the single-case demonstration (Section~\ref{subsec:mesh-results}) was not computed cohort-wide; wall-thickness compliance is the cohort-level printability proxy.
 
 \begin{table}[!t]
 \centering
-\caption{Planned cohort-level Phase B mesh-quality metrics for revised submission. These metrics are defined here to make clear which fabrication-oriented properties will be reported once cohort aggregation is completed.}
+\caption{Cohort-level Phase B mesh-quality results over the 250-case held-out test set, read from \texttt{outputs/phase\_b\_mesh\_qc/summary\_mesh\_qc.json} and \texttt{per\_case\_mesh\_qc.csv}. All values are computational geometry checks on the exported STL surfaces and are not physical print, perfusion, or biological validation.}
 \label{tab:phaseb-qc}
 \begin{threeparttable}
 \footnotesize
 \begin{tabularx}{0.96\textwidth}{L{0.30\textwidth}Y}
 \toprule
-\textbf{Metric} & \textbf{Interpretation and planned reporting} \\
+\textbf{Metric} & \textbf{Cohort result (n=250)} \\
 \midrule
-Connected-component count & Number of disconnected mesh components after STL generation and repair; reported per case and summarized across the cohort. \TODO{fill} \\
-Watertightness & Boolean or categorical indicator of whether the STL surface is closed and suitable for downstream geometric processing. \TODO{fill (\% watertight)} \\
-Non-manifold edge count & Number of topologically invalid edges remaining after mesh extraction or repair. \TODO{fill} \\
-Repair success & Whether the repair stage resolves holes, self-intersections, or non-manifold artifacts sufficiently for export. \TODO{fill (success rate)} \\
-Surface roughness & Pre- and post-smoothing roughness summaries, including mean and maximum roughness where available. \TODO{fill} \\
-Smoothing-induced volume change & Relative change in mesh volume after smoothing to document shape preservation versus shrinkage. \TODO{fill} \\
-Minimum-radius proxy & Fraction of sampled radii below the selected minimum-radius criterion, summarized across the cohort. \TODO{fill} \\ % CHANGED
-Wall-thickness compliance & Fraction of the mesh satisfying the selected minimum fabrication-oriented wall-thickness threshold. \TODO{fill} \\
-Slicer compatibility & Whether the exported STL imports successfully into the target slicing or print-preparation software without fatal geometry errors. \TODO{fill} \\
-QC artifact paths & Case-level source files retained as \texttt{qc\_report.json} and \texttt{qc\_summary.csv}; cohort aggregation retained as \texttt{outputs/phase\_b\_mesh\_qc/per\_case\_mesh\_qc.csv}. \\
+Mesh extraction/repair completed & 250/250 cases (100\%) \\
+Watertight after repair & 228/250 cases (91.2\%) \\
+Connected-component count & Mean 10.2, median 9, range 2--39 (coronary trees are intrinsically multi-branch) \\
+Non-manifold edge count & Median 0, mean 3.3, maximum 142 \\
+Surface roughness (exported curvature-based units) & Mean decreased from 0.583 (pre-smoothing) to 0.528 (post-smoothing), a 9.4\% reduction; this dihedral/curvature summary is distinct from the millimetre Taubin roughness of Section~\ref{subsec:mesh-results} \\
+Smoothing-induced volume change & Mean $-0.30\%$ (median $-0.30\%$, range $-0.52\%$ to $-0.20\%$) \\
+Wall-thickness compliance & Mean compliant fraction 8.8\% at a \SI{3}{mm} threshold (median 8.3\%, range 3.4--20.3\%); reflects sub-millimeter coronary calibre \\
+Slicer compatibility (import proxy) & 228/250 cases (91.2\%) \\
+Minimum-radius proxy & Not computed cohort-wide; see single-case demonstration (Section~\ref{subsec:mesh-results}) \\
+QC artifact paths & Cohort aggregation retained as \texttt{outputs/phase\_b\_mesh\_qc/per\_case\_mesh\_qc.csv} and \texttt{summary\_mesh\_qc.\{csv,json\}} \\
 \bottomrule
 \end{tabularx}
 \end{threeparttable}
@@ -404,7 +400,7 @@ Evaluation explicitly separates segmentation accuracy from fabrication readiness
 
 The validation logs contain threshold sweeps across probability thresholds from 0.1 to 0.9. These validation sweeps are useful for diagnosing calibration and recall/precision tradeoffs. The final held-out test evaluation exported only threshold 0.5 metrics. Therefore, the manuscript reports Dice@0.5 as the primary final test result and does not tune the primary threshold on the held-out test set.
 
-For tubular vascular anatomy, topology-sensitive measures such as clDice are especially relevant because they emphasize centerline overlap and connectedness more directly than volumetric overlap alone \cite{shit2021}. The completed held-out test evaluation did not compute clDice (the evaluation configuration recorded \texttt{compute\_cldice:false} and did not save per-case predictions), so this manuscript does not yet report a topology metric. \TODO{compute clDice@0.5 across the 250-case test set on the locked-model predictions and report mean/median/95\% CI here and in Table~\ref{tab:results}. This is the single most important missing metric for a paper whose thesis is that voxel overlap is insufficient for tubular geometry; it is blocked only by the GPU re-run.} Topology-aware evaluation is treated as an essential validation step before stronger biofabrication-readiness claims can be made.
+For tubular vascular anatomy, topology-sensitive measures such as clDice are especially relevant because they emphasize centerline overlap and connectedness more directly than volumetric overlap alone \cite{shit2021}. The accountable held-out test evaluation computed clDice@0.5 over all 250 cases on the saved per-case predictions, yielding a mean of 0.8695 (95\% CI 0.8629--0.8761; median 0.8753; SD 0.0531; range 0.5764--0.9744). clDice exceeded volumetric Dice@0.5 (mean 0.7878) across the cohort, indicating that the model preserves vessel centerlines more reliably than it captures full vessel calibre---precisely the regime in which voxel overlap understates fabrication-relevant connectivity. As reported in Section~\ref{subsec:paired}, clDice was also the segmentation metric most strongly associated with mesh connectivity, supporting its role as a topology-aware endpoint for biofabrication-readiness assessment.
 
 For the geometry stage, the relevant outputs are connected, watertight, printable meshes rather than masks alone. Accordingly, the most relevant mesh-quality quantities include connected-component count, non-manifold edge count, watertightness, repair success, minimum wall thickness, minimum-radius proxy, edge-length distributions, surface-roughness summaries, and slicer compatibility. Representative computational fabrication-readiness checks are reported for a Phase B output in Section~\ref{subsec:mesh-results}, but they are not reported as cohort-level outcomes and are not treated as physical print validation in the present manuscript.
 
@@ -421,7 +417,7 @@ For the geometry stage, the relevant outputs are connected, watertight, printabl
 Primary held-out segmentation metric & Dice@0.5 on the 250-case test set \\
 Additional held-out segmentation metrics & Soft Dice, precision@0.5, recall@0.5, HD95@0.5, FP/FN voxels, predicted and ground-truth foreground voxels, runtime \\
 Validation calibration diagnostics & Dice at thresholds 0.1--0.9, probability diagnostics, and voxel counts above thresholds where available in validation logs \\
-Tubular topology metric & clDice identified as necessary; not computed in the completed held-out test evaluation \TODO{compute and report} \\
+Tubular topology metric & clDice@0.5 over the 250-case test set: mean 0.8695 (95\% CI 0.8629--0.8761) \\
 Postprocessing cleanup & Connected-component filtering supported in implementation \\
 Phase A output files & \texttt{ct\_preprocessed.nii.gz}, \texttt{seg\_prob.nii.gz}, optional \texttt{seg\_mask.nii.gz} \\
 Phase B output files & \texttt{vessels\_raw.stl}, \texttt{vessels\_repaired.stl}, \texttt{qc\_report.json}, \texttt{qc\_summary.txt}, \texttt{qc\_summary.csv}, \texttt{used\_config.yaml} \\
@@ -436,9 +432,16 @@ Mesh-quality validation targets & Watertightness, non-manifold edge count, conne
 
 The completed results reported here focus on the selected Attention U-Net model and the full held-out 250-case test evaluation. A direct baseline comparison against a non-attention 3D U-Net or nnU-Net-style reference was not completed within the present manuscript, so no superiority claim is made. Future comparative work should preserve the same \texttt{splits.json} partition, preprocessing, ROI size, sliding-window inference settings, checkpoint-selection rule, and held-out evaluation procedure so that architectural differences are not confounded by evaluation drift.
 
-A paired segmentation-to-mesh analysis is also needed so that fabrication-oriented usability can be evaluated at the case level rather than inferred from overlap metrics alone. For each test case, segmentation metrics such as soft Dice, threshold-specific Dice, precision, recall, HD95, clDice, false-positive voxels, false-negative voxels, and predicted-versus-ground-truth foreground voxel counts should be linked to mesh outcomes including connected-component count, watertightness, non-manifold edge count, repair success, surface roughness, minimum-radius proxy, wall-thickness compliance, and slicer compatibility.
+A paired segmentation-to-mesh analysis was performed so that fabrication-oriented usability is evaluated at the case level rather than inferred from overlap metrics alone. For each of the 250 test cases, the per-case segmentation metrics (Dice@0.5, clDice@0.5, precision@0.5, recall@0.5, and HD95@0.5) were joined by case ID to the per-case Phase~B mesh outcomes (connected-component count, wall-thickness compliance fraction, non-manifold edge count, and post-smoothing surface roughness), and Spearman correlations were computed with Benjamini--Hochberg FDR correction across all tested pairs (\texttt{outputs/final\_test\_250/seg\_to\_mesh\_correlations.csv}).
 
-\TODOBLOCK{The paired analysis is the most novel contribution and is currently described as ``needed'' rather than performed. Once the locked-model per-case segmentation metrics (with clDice) and the cohort Phase~B mesh QC both exist, join them by case ID and report Spearman/Pearson correlations (with $p$-values) identifying which segmentation metrics predict mesh usability, plus scatterplots for the strongest relationships. This converts the ``coupled segmentation-to-geometry'' framing in the Introduction from a claim into a result. Blocked only by the GPU re-run.}
+The most informative finding concerns mesh fragmentation. The topology-aware clDice was the segmentation metric most strongly associated with connected-component count ($\rho=-0.49$, $p_\mathrm{FDR}=2.3\times10^{-15}$), a stronger relationship than volumetric Dice@0.5 ($\rho=-0.37$, $p_\mathrm{FDR}=4.2\times10^{-9}$) or HD95 ($\rho=+0.40$, $p_\mathrm{FDR}=2.7\times10^{-10}$). In other words, cases whose centerlines were better recovered produced less fragmented meshes, and clDice predicted this fabrication-relevant outcome more directly than voxel overlap---direct empirical support for the manuscript's thesis that topology-aware accuracy, not Dice alone, governs printable connectivity. Wall-thickness compliance was instead best predicted by precision@0.5 ($\rho=+0.43$, $p_\mathrm{FDR}=1.2\times10^{-11}$) and Dice@0.5 ($\rho=+0.40$, $p_\mathrm{FDR}=2.7\times10^{-10}$), consistent with over-segmented (lower-precision) masks producing thinner, less compliant walls. Watertight meshes also came from significantly more accurate segmentations than non-watertight meshes (median Dice 0.795 versus 0.767, Mann--Whitney $p=0.018$; median clDice 0.878 versus 0.848, $p=0.014$; median HD95 \SI{3.66}{mm} versus \SI{5.73}{mm}, $p=0.046$). The strongest association (clDice versus connected-component count) is shown in figure~\ref{fig:cldice-components}. These results convert the ``coupled segmentation-to-geometry'' framing of the Introduction from a claim into a measured relationship.
+
+\begin{figure}[!t]
+    \centering
+    \safeinclude[width=0.62\textwidth]{figure11_cldice_vs_components.png}
+    \caption{Per-case topology-aware segmentation accuracy (clDice@0.5) versus the number of connected mesh components after Phase~B reconstruction, across the 250-case held-out test set. Higher centerline overlap is associated with less mesh fragmentation (Spearman $\rho=-0.49$, $p=1.2\times10^{-16}$), the strongest segmentation-to-mesh relationship observed and stronger than for volumetric Dice.}
+    \label{fig:cldice-components}
+\end{figure}
 
 % =========================================================
 \section{Results}
@@ -450,20 +453,22 @@ A paired segmentation-to-mesh analysis is also needed so that fabrication-orient
 The strongest exported validation-history record is the A40 run \texttt{bioprint\_v11\_a40\_roi96\_posneg3to1\_lr2e5}. In this run, validation Dice@0.5 improved from 0.7146 at epoch 62 to a best exported value of 0.7542 at epoch 73, with a corresponding validation soft Dice of 0.7080. The same run used the verified 700/50/250 split, Attention U-Net architecture with 23,625,953 trainable parameters, $96\times192\times192$ voxel patches, foreground-biased patch sampling, and capped positive weighting for class imbalance. Figure~\ref{fig:training-curves} summarizes the exported training and validation trajectory.
 
 % CHANGED: document the v14 soup as unrecoverable, with explicit remediation.
-The final held-out evaluation configuration records a checkpoint-soup path, \texttt{/tmp/train\_runs/bioprint\_v14\_tversky\_fn/checkpoints/soup\_ep75-80.pt}, evaluated on the test partition. The naming indicates a weight-averaged ensemble of epoch-75 through epoch-80 checkpoints from a Tversky--Dice run sharing the architecture in Section~3.3. This checkpoint resided on ephemeral cloud storage (\texttt{/tmp}) and was not retained; a search of the cloud run directory, the local repository, and the download archive did not locate the soup file, its epoch-75--80 ingredient checkpoints, or a soup-construction script. The evaluation record nonetheless documents what was run: the configuration specifies \texttt{model\_type: attention\_unet} and the load diagnostics report a strict checkpoint load with empty missing- and unexpected-key lists, so the evaluation provably used the 23,625,953-parameter Attention U-Net of Section~3.3 even though the averaged weights themselves are no longer retained. The manuscript therefore reports the held-out test result directly from the saved per-case and summary evaluation files, which remain available and auditable, and avoids unsupported claims about the detailed construction of the checkpoint soup.
-\TODOBLOCK{The evaluated \emph{architecture} is now established (the load diagnostics show a strict load with zero key mismatches, see above); what remains unreconstructable is the averaged \emph{weights} and the soup recipe. Resolve before final deposition, in order of preference: (a) recover the soup or its epoch-75--80 ingredient checkpoints from any surviving backup of the A40/cloud environment and document the averaging recipe in Appendix~\ref{app:provenance}; (b) if only ingredients survive, re-create the soup (uniform average of epochs 75--80) and confirm it reproduces the reported metrics; (c) if nothing survives, re-evaluate the 250-case test set once from an accountable checkpoint (e.g. the best-by-validation v11 checkpoint, or a documented v11 soup) and replace the headline metrics throughout. In all three cases, enable \texttt{save\_case\_outputs}, \texttt{compute\_cldice}, and \texttt{run\_phase\_b\_qc} so the re-run also unblocks clDice and the cohort Phase~B QC.}
+An earlier held-out evaluation configuration had recorded a checkpoint-soup path, \texttt{/tmp/train\_runs/bioprint\_v14\_tversky\_fn/checkpoints/soup\_ep75-80.pt}, whose naming indicated a weight-averaged ensemble of epoch-75 through epoch-80 checkpoints from a Tversky--Dice run sharing the architecture in Section~3.3. That checkpoint resided on ephemeral cloud storage (\texttt{/tmp}) and was not retained; a search of the cloud run directory, the local repository, and the download archive did not locate the soup file, its epoch-75--80 ingredient checkpoints, or a soup-construction script. Because the averaged weights are unrecoverable, the headline metrics in this manuscript are \emph{not} taken from that lost run. Instead, the 250-case held-out test set was re-evaluated from the retained, accountable checkpoint \texttt{checkpoints/best\_dice05.pt} (epoch 79; 23{,}631{,}875-parameter Attention U-Net; validation Dice@0.5 0.7889), which carries complete optimizer, scheduler, configuration, and git-commit metadata. The re-evaluation enabled \texttt{save\_case\_outputs}, \texttt{compute\_cldice}, and \texttt{run\_phase\_b\_qc}, and reported a strict state-dict load with empty missing- and unexpected-key lists; all per-case and summary evaluation files used in this manuscript derive from this auditable run. As an artifact of re-evaluating from a different (accountable) checkpoint, the headline test Dice@0.5 is 0.7878 rather than the 0.7953 recorded for the lost soup.
+The provenance gap was resolved by remediation option~(c): because neither the soup nor its epoch-75--80 ingredient checkpoints survived, the 250-case held-out test set was re-evaluated once from the accountable checkpoint \texttt{best\_dice05.pt}, with \texttt{save\_case\_outputs}, \texttt{compute\_cldice}, and \texttt{run\_phase\_b\_qc} enabled, and the headline metrics, clDice, cohort Phase~B QC, and paired analysis throughout this manuscript are taken from that run.
 
 \begin{figure}[!t]
     \centering
     \safeinclude[width=0.86\textwidth]{figure4_training_curves.png}
     \caption{Validation Dice@0.5 trajectory across A40 fine-tuning. The plot shows the logged per-epoch validation Dice@0.5, a smoothed selected-validation curve and a running-best curve, the best validation checkpoint, and, for reference, the held-out 250-case test mean with its 95\% confidence band.}
     \label{fig:training-curves}
-    \TODO{the best validation value shown in this figure ($\approx$0.797) was generated from a run that differs from the v11 history quoted in Section~\ref{subsec:training-convergence} (best 0.7542 at epoch 73). After re-evaluating from the accountable checkpoint, regenerate this figure and reconcile the validation numbers across the text and this caption.}
+    \TODO{this figure must be regenerated before submission so that (i) the reference test-mean band reads the accountable value 0.7878 (95\% CI 0.7820--0.7935) rather than the retired 0.7953, and (ii) the plotted validation trajectory corresponds to the \texttt{best\_dice05.pt} training run (epoch 79, best validation Dice@0.5 0.7889) that produced the reported test metrics. The currently exported curve is from a different run and does not match either this checkpoint or the v11 history in Section~\ref{subsec:training-convergence}; the full per-epoch history for \texttt{best\_dice05.pt} is not in the local archive.}
 \end{figure}
 
 \subsection{Full 250-case held-out test performance}
 
-The completed held-out test evaluation included all 250 test cases in \texttt{splits.json} and recorded zero failed cases. The primary metric, Dice@0.5, had a mean of 0.7953 (95\% CI 0.7896--0.8009), median 0.7985, standard deviation 0.0457, IQR 0.0599, and range 0.6143--0.8715. The mean soft Dice was 0.7886 (95\% CI 0.7830--0.7942). Precision@0.5 and recall@0.5 were balanced, with mean precision 0.7961 (95\% CI 0.7880--0.8041; median 0.8081) and mean recall 0.8008 (95\% CI 0.7924--0.8093; median 0.8097). Mean HD95@0.5 was \SI{4.92}{mm} (median \SI{3.52}{mm}); the HD95 distribution was strongly right-skewed (SD \SI{5.66}{mm}, maximum \SI{46.09}{mm}), indicating that although most cases achieved close boundary agreement, a small number exhibited large boundary errors consistent with distal-branch or thin-vessel failures. Predicted and ground-truth foreground volumes were closely matched on average (mean 31,450 versus 31,629 voxels), and false-positive and false-negative voxels were of comparable magnitude (means 6,280 and 6,459), consistent with the balanced precision and recall. Mean per-case inference runtime was \SI{5.39}{s} (median \SI{5.64}{s}, range 1.69--10.69\,s); because Phase B mesh QC was not run during this evaluation, this runtime reflects Phase A inference only. The held-out partition comprises ImageCAS cases 751--1000. Full per-metric distributions are summarized in table~\ref{tab:full-metrics}, and the per-case Dice@0.5 distribution is shown in figure~\ref{fig:test-dice-distribution}.
+The accountable held-out test evaluation (re-evaluated from \texttt{checkpoints/best\_dice05.pt}; see Section~\ref{subsec:training-convergence}) included all 250 test cases in \texttt{splits.json} and recorded zero failed cases. The primary metric, Dice@0.5, had a mean of 0.7878 (95\% CI 0.7820--0.7935), median 0.7934, standard deviation 0.0461, IQR 0.0630, and range 0.6174--0.8696. The mean soft Dice was 0.7795 (95\% CI 0.7738--0.7852). Recall@0.5 modestly exceeded precision@0.5, with mean precision 0.7636 (95\% CI 0.7554--0.7719; median 0.7734) and mean recall 0.8205 (95\% CI 0.8120--0.8290; median 0.8305); the corresponding voxel counts (mean false positives 7{,}791 versus false negatives 5{,}824) indicate mild over-segmentation, with predicted foreground (mean 33{,}596 voxels) slightly exceeding ground-truth foreground (mean 31{,}629 voxels). Mean HD95@0.5 was \SI{5.01}{mm} (median \SI{3.69}{mm}); the HD95 distribution was strongly right-skewed (SD \SI{4.39}{mm}, maximum \SI{37.20}{mm}), indicating that although most cases achieved close boundary agreement, a small number exhibited large boundary errors consistent with distal-branch or thin-vessel failures. The topology-aware clDice@0.5 had a mean of 0.8695 (95\% CI 0.8629--0.8761; median 0.8753), exceeding volumetric Dice and consistent with predictions that preserve vessel centerlines more reliably than they capture full vessel calibre (Section~\ref{subsec:metrics}). The held-out partition comprises ImageCAS cases 751--1000. Full per-metric distributions are summarized in table~\ref{tab:full-metrics}, and the per-case Dice@0.5 distribution is shown in figure~\ref{fig:test-dice-distribution}.
+
+This evaluation was produced on Apple M4 Pro (MPS) hardware with the sliding-window aggregation buffer placed on the CPU; mean per-case Phase~A inference-plus-metrics runtime was \SI{196.7}{s} (median \SI{199.2}{s}). This consumer-hardware figure is reported for reproducibility and is not a deployment benchmark: the original A40 GPU evaluation logged approximately \SI{5.4}{s} per case for Phase~A inference alone. Because the metrics are deterministic, the reported overlap and topology statistics are independent of this hardware choice.
 
 \begin{table}[!t]
 \centering
@@ -476,21 +481,22 @@ The completed held-out test evaluation included all 250 test cases in \texttt{sp
 \toprule
 \textbf{Metric} & \textbf{Mean (95\% CI)} & \textbf{Median} & \textbf{SD} & \textbf{Range (min--max)} \\
 \midrule
-Dice@0.5 & 0.7953 (0.7896--0.8009) & 0.7985 & 0.0457 & 0.6143--0.8715 \\
-Soft Dice & 0.7886 (0.7830--0.7942) & 0.7927 & 0.0455 & 0.6035--0.8649 \\
-Precision@0.5 & 0.7961 (0.7880--0.8041) & 0.8081 & 0.0650 & 0.5385--0.9322 \\
-Recall@0.5 & 0.8008 (0.7924--0.8093) & 0.8097 & 0.0684 & 0.5898--0.9402 \\
-HD95@0.5 (mm) & 4.92 (4.22--5.62) & 3.52 & 5.66 & 0.50--46.09 \\
-Inference runtime (s/case) & 5.39 (5.17--5.61) & 5.64 & 1.77 & 1.69--10.69 \\
+Dice@0.5 & 0.7878 (0.7820--0.7935) & 0.7934 & 0.0461 & 0.6174--0.8696 \\
+Soft Dice & 0.7795 (0.7738--0.7852) & 0.7856 & 0.0461 & 0.6034--0.8617 \\
+clDice@0.5 & 0.8695 (0.8629--0.8761) & 0.8753 & 0.0531 & 0.5764--0.9744 \\
+Precision@0.5 & 0.7636 (0.7554--0.7719) & 0.7734 & 0.0665 & 0.5380--0.9371 \\
+Recall@0.5 & 0.8205 (0.8120--0.8290) & 0.8305 & 0.0686 & 0.6190--0.9505 \\
+HD95@0.5 (mm) & 5.01 (4.47--5.56) & 3.69 & 4.39 & 0.50--37.20 \\
+Inference runtime (s/case, MPS) & 196.7 (187.9--205.5) & 199.2 & 71.0 & 51.3--554.7 \\
 \midrule
 GT foreground (voxels) & 31,629 (30,423--32,835) & 30,485 & 9,728 & 8,783--64,439 \\
-Predicted (voxels) & 31,450 (30,412--32,489) & 30,623 & 8,376 & 9,266--57,976 \\
-False positive (voxels) & 6,280 (5,998--6,563) & 5,919 & 2,278 & 1,936--14,870 \\
-False negative (voxels) & 6,459 (6,035--6,884) & 5,802 & 3,424 & 968--21,247 \\
+Predicted (voxels) & 33,596 (32,496--34,696) & 32,695 & 8,872 & 9,334--61,567 \\
+False positive (voxels) & 7,791 (7,467--8,114) & 7,403 & 2,613 & 1,598--17,894 \\
+False negative (voxels) & 5,824 (5,419--6,229) & 5,087 & 3,268 & 801--19,737 \\
 \bottomrule
 \end{tabularx}
 \begin{tablenotes}\footnotesize
-\item clDice is intentionally absent: it was not computed in this evaluation (\texttt{compute\_cldice:false}) and requires the re-run noted in the text.
+\item Metrics are from the accountable re-evaluation of the 250-case test set from \texttt{best\_dice05.pt} with \texttt{compute\_cldice}, \texttt{save\_case\_outputs}, and \texttt{run\_phase\_b\_qc} enabled. Runtime is Phase~A inference plus metrics on Apple M4 Pro (MPS) hardware and is not a deployment benchmark (see text).
 \end{tablenotes}
 \end{threeparttable}
 \end{table}
@@ -508,7 +514,7 @@ Validation logs contained threshold sweeps from 0.1 to 0.9. In the exported v11 
 
 \subsection{Case-level variability}
 
-Per-case Dice@0.5 varied across the held-out cohort, with a minimum of 0.6143, maximum of 0.8715, and IQR of 0.0599. The worst cases therefore remained substantially below the cohort mean even though the median approached 0.80. This variability is expected in coronary CTA segmentation because distal branches, reduced contrast, motion artifacts, and annotation uncertainty can disproportionately affect thin vessels. Ranked per-case Dice and the relationship between ground-truth foreground volume and Dice are shown in figures~\ref{fig:ranked-dice} and~\ref{fig:volume-dice}.
+Per-case Dice@0.5 varied across the held-out cohort, with a minimum of 0.6174, maximum of 0.8696, and IQR of 0.0630. The worst cases therefore remained substantially below the cohort mean even though the median approached 0.80. This variability is expected in coronary CTA segmentation because distal branches, reduced contrast, motion artifacts, and annotation uncertainty can disproportionately affect thin vessels. Ranked per-case Dice and the relationship between ground-truth foreground volume and Dice are shown in figures~\ref{fig:ranked-dice} and~\ref{fig:volume-dice}.
 
 \begin{figure}[!t]
     \centering
@@ -520,7 +526,7 @@ Per-case Dice@0.5 varied across the held-out cohort, with a minimum of 0.6143, m
 \begin{figure}[!t]
     \centering
     \safeinclude[width=0.70\textwidth]{figure9_foreground_volume_vs_dice.png}
-    \caption{Ground-truth vessel foreground volume versus Dice@0.5 across the held-out test set. This diagnostic plot is included to show whether segmentation performance is associated with vessel-label volume.}
+    \caption{Ground-truth vessel foreground volume versus Dice@0.5 across the held-out test set. Segmentation accuracy is modestly but significantly higher for larger-volume vessel labels (Spearman $\rho=0.28$, $p=5.6\times10^{-6}$), consistent with thin distal branches being the dominant residual failure mode.}
     \label{fig:volume-dice}
 \end{figure}
 
@@ -551,7 +557,7 @@ Reported Dice 0.8082, sensitivity 0.7946, precision 0.8471, and HD95 \SI{9.77}{m
 \addlinespace[0.25em]
 This work &
 ImageCAS-derived 700/50/250 split; full 250-case held-out test set &
-Mean Dice@0.5 0.7953 (95\% CI 0.7896--0.8009), median 0.7985, zero failed cases. This supports near-0.80 computational segmentation performance but is not presented as a direct state-of-the-art comparison. \\
+Mean Dice@0.5 0.7878 (95\% CI 0.7820--0.7935), median 0.7934, clDice@0.5 0.8695, zero failed cases. This supports near-0.80 computational segmentation performance but is not presented as a direct state-of-the-art comparison. \\
 \bottomrule
 \end{tabularx}
 \end{threeparttable}
@@ -562,12 +568,12 @@ Mean Dice@0.5 0.7953 (95\% CI 0.7896--0.8009), median 0.7985, zero failed cases.
 
 A representative postprocessing example for mesh smoothing is shown in figure~\ref{fig:taubin}. In that example, maximum roughness decreases from \SI{0.237}{mm} to \SI{0.120}{mm} and mean roughness decreases from \SI{0.070}{mm} to \SI{0.044}{mm}, corresponding to a 37.1\% improvement in mean roughness after Taubin smoothing. Because cohort-level mesh-quality distributions are not reported, this result is interpreted only as an illustrative demonstration of the mesh-processing stage.
 
-The automated full-pipeline script supports Phase A inference followed by Phase B mesh generation. The completed 250-case evaluation quantified segmentation performance and per-case Phase A inference runtime (mean \SI{5.39}{s} per case; table~\ref{tab:full-metrics}) but did not run cohort-level Phase B mesh QC, so Phase B runtime is not yet available. \TODO{report cohort Phase~B QC and Phase~B runtime after the GPU re-run, alongside the Phase~A runtime already recorded.}
+The automated full-pipeline script supports Phase A inference followed by Phase B mesh generation. The accountable 250-case evaluation quantified both segmentation performance and cohort-level Phase~B mesh QC on the saved per-case predictions; the cohort mesh-quality results are reported in Section~\ref{subsec:phaseb-plan} and Table~\ref{tab:phaseb-qc}. Per-case Phase~A inference-plus-metrics runtime is reported in Table~\ref{tab:full-metrics} (mean \SI{196.7}{s} per case on Apple M4 Pro MPS hardware; not a deployment benchmark, see Section~\ref{subsec:training-convergence}).
 
 % CHANGED: honest verified case-720 result, reframed as scale mismatch.
-A representative computational fabrication-readiness panel was generated from the Phase B outputs for case~720 (figure~\ref{fig:fabrication-readiness-qc}). The input to this Phase~B demonstration was a binary mask thresholded at 0.4 (the Phase~B mesh-generation threshold, set independently of the 0.5 threshold used for the reported segmentation metrics), yielding a single mask component. The reconstructed geometry was watertight both before and after repair and consisted of a single connected mesh component, with a reconstructed surface area of 7854.84\,mm$^2$ and volume of 7071.36\,mm$^3$. The overall computational QC status for this case was reported as a failure, driven entirely by the radius-based printability proxy: the minimum mesh radius was \SI{0.355}{mm} and 39.94\% of sampled radii fell below the configured \SI{0.6}{mm} minimum-radius criterion. Because coronary arteries, and distal branches in particular, are intrinsically sub-millimeter, this outcome is better interpreted as evidence that coronary vascular geometry falls below a generic extrusion-printability threshold than as a loss of mesh integrity; the same artifact remained watertight and single-component after repair. This single-case result is interpreted as a representative computational demonstration and not as cohort-level fabrication validation. \TODO{after the cohort Phase~B run, report the distribution of the below-radius fraction across all 250 cases; if most cases fall below the 0.6\,mm proxy, state that the proxy threshold is mismatched to coronary caliber and consider reporting it as a radius distribution rather than a binary pass/fail.}
+A representative computational fabrication-readiness panel was generated from the Phase B outputs for case~720 (figure~\ref{fig:fabrication-readiness-qc}). The input to this Phase~B demonstration was a binary mask thresholded at 0.4 (the Phase~B mesh-generation threshold, set independently of the 0.5 threshold used for the reported segmentation metrics), yielding a single mask component. The reconstructed geometry was watertight both before and after repair and consisted of a single connected mesh component, with a reconstructed surface area of 7854.84\,mm$^2$ and volume of 7071.36\,mm$^3$. The overall computational QC status for this case was reported as a failure, driven entirely by the radius-based printability proxy: the minimum mesh radius was \SI{0.355}{mm} and 39.94\% of sampled radii fell below the configured \SI{0.6}{mm} minimum-radius criterion. Because coronary arteries, and distal branches in particular, are intrinsically sub-millimeter, this outcome is better interpreted as evidence that coronary vascular geometry falls below a generic extrusion-printability threshold than as a loss of mesh integrity; the same artifact remained watertight and single-component after repair. This single-case result is interpreted as a representative computational demonstration and not as cohort-level fabrication validation. The cohort Phase~B run (Section~\ref{subsec:phaseb-plan}, Table~\ref{tab:phaseb-qc}) corroborates this interpretation: across all 250 test cases only 8.8\% of mesh surface, on average, met a \SI{3}{mm} wall-thickness threshold, confirming that the printability shortfall is a systematic consequence of sub-millimeter coronary calibre relative to a generic extrusion-oriented criterion rather than a per-case mesh defect. The specific below-\SI{0.6}{mm}-radius fraction reported here for case~720 was a single-case diagnostic and was not recomputed cohort-wide; wall-thickness compliance serves as the cohort-level printability proxy.
 
-A representative vessel-network STL rendering from the geometry stage is shown in figure~\ref{fig:vessel-stl}, and a representative case-level Phase~B quality-control summary is shown in figure~\ref{fig:heart-stl}.
+A representative vessel-network STL rendering from the geometry stage is shown in figure~\ref{fig:vessel-stl}, and repaired vessel STLs from three held-out test cases spanning the cohort range of topology-aware accuracy are shown in figure~\ref{fig:heart-stl}.
 
 \begin{table}[!t]
 \centering
@@ -588,7 +594,7 @@ Reconstructed volume & 7071.36\,mm$^3$ \\
 Minimum mesh radius & \SI{0.355}{mm} (criterion \SI{0.6}{mm}) \\
 Below-radius fraction (printability proxy) & 39.94\% of sampled radii below \SI{0.6}{mm} \\
 Overall computational QC status & Fail (driven by the radius proxy; see text) \\
-Manifold topology, slicability, wall-thickness, spatial-fidelity & \TODO{re-run Phase~B with QC enabled to record these for case~720 and across the cohort; the exported panel for this case reports the rows above only} \\
+Manifold topology, slicability, wall-thickness, spatial-fidelity & Reported at cohort scale in Table~\ref{tab:phaseb-qc} (250 cases): 91.2\% watertight after repair, median 0 non-manifold edges, 91.2\% slicer-import proxy pass, and mean \SI{3}{mm} wall-thickness compliance 8.8\%. The single exported case-720 panel reports the rows above only. \\
 \bottomrule
 \end{tabularx}
 \end{threeparttable}
@@ -616,15 +622,15 @@ Training / validation / held-out test split & 700 / 50 / 250 \\
 Final held-out test cases evaluated & 250 \\
 Failed held-out test cases & 0 \\
 Primary test metric & Dice@0.5 \\
-Test Dice@0.5, mean (95\% CI) & 0.7953 (0.7896--0.8009) \\
-Test Dice@0.5, median / SD / IQR & 0.7985 / 0.0457 / 0.0599 \\
-Test Dice@0.5, min--max & 0.6143--0.8715 \\
-Test soft Dice, mean (95\% CI) & 0.7886 (0.7830--0.7942) \\
-Test precision@0.5, mean (95\% CI) & 0.7961 (0.7880--0.8041) \\
-Test recall@0.5, mean (95\% CI) & 0.8008 (0.7924--0.8093) \\
-Test HD95@0.5, mean / median & \SI{4.92}{mm} / \SI{3.52}{mm} \\
-Test runtime, mean / median & \SI{5.3883}{s} / \SI{5.6350}{s} per case \\
-clDice (250-case test) & \TODO{compute and report mean/median/95\% CI} \\ % CHANGED
+Test Dice@0.5, mean (95\% CI) & 0.7878 (0.7820--0.7935) \\
+Test Dice@0.5, median / SD / IQR & 0.7934 / 0.0461 / 0.0630 \\
+Test Dice@0.5, min--max & 0.6174--0.8696 \\
+Test soft Dice, mean (95\% CI) & 0.7795 (0.7738--0.7852) \\
+Test precision@0.5, mean (95\% CI) & 0.7636 (0.7554--0.7719) \\
+Test recall@0.5, mean (95\% CI) & 0.8205 (0.8120--0.8290) \\
+Test HD95@0.5, mean / median & \SI{5.01}{mm} / \SI{3.69}{mm} \\
+Test runtime, mean / median (MPS) & \SI{196.7}{s} / \SI{199.2}{s} per case \\
+Test clDice@0.5, mean / median (95\% CI) & 0.8695 / 0.8753 (0.8629--0.8761) \\
 Submitted Attention U-Net parameter count & 23,625,953 trainable parameters \\
 Training class imbalance & 78,936,341 positive voxels vs. 47,202,404,075 negative voxels \\
 Corrected negative-to-positive ratio & Approximately 598:1 \\
@@ -633,8 +639,10 @@ Representative mean roughness change & \SI{0.070}{mm} to \SI{0.044}{mm} \\
 Representative mean roughness improvement & 37.1\% \\
 % CHANGED: verified case-720 fabrication-readiness row
 Representative Phase B result (case 720) & Watertight and single-component after repair; surface area 7854.84\,mm$^2$; volume 7071.36\,mm$^3$; minimum radius \SI{0.355}{mm}; 39.94\% of radii below the \SI{0.6}{mm} proxy; overall computational QC fail \\
-Final test files & \texttt{outputs/final\_test\_250/per\_case\_metrics.csv}, \texttt{summary\_metrics.csv}, \texttt{summary\_metrics.json} \\
-Not reported as final metrics & clDice, external-dataset performance, cohort-level Phase B mesh QC statistics, slicer-export success logs, physical printing, perfusion, and biological validation \\
+Cohort Phase B mesh QC (250 cases) & 91.2\% watertight after repair; mean 10.2 connected components; mean wall-thickness compliance 8.8\% at \SI{3}{mm}; 91.2\% slicer-import proxy pass \\
+Strongest segmentation--mesh association & clDice@0.5 vs.\ connected-component count, Spearman $\rho=-0.49$ ($p_\mathrm{FDR}=2.3\times10^{-15}$) \\
+Final test files & \texttt{outputs/final\_test\_250/per\_case\_metrics.csv}, \texttt{summary\_metrics.json}, \texttt{seg\_to\_mesh\_correlations.csv}; \texttt{outputs/phase\_b\_mesh\_qc/summary\_mesh\_qc.json} \\
+Not reported as final metrics & External-dataset performance, slicer-export success logs from production software, physical printing, perfusion, and biological validation \\
 \bottomrule
 \end{tabularx}
 \end{threeparttable}
@@ -649,13 +657,10 @@ Not reported as final metrics & clDice, external-dataset performance, cohort-lev
 
 \begin{figure}[htbp]
     \centering
-    \safeinclude[width=0.62\textwidth]{figure6_heart_stl_views.png}
-    \caption{Representative Phase~B quality-control summary for case~720. The left panel shows geometry and topology checks (connected components after cleanup, watertight mesh, and median radius in mm) and the right panel shows the printability flag (percentage of skeleton-sample radii below the \SI{0.6}{mm} proxy). This is a single-case computational demonstration and is not presented as evidence of physical printing, perfusion, or biological validation.}
+    \safeinclude[width=0.92\textwidth]{figure6_vessel_stl_cohort.png}
+    \caption{Representative repaired coronary vessel STLs from three held-out test cases spanning the cohort range of topology-aware accuracy (higher, median, and lower clDice@0.5). Higher centerline overlap corresponds to cleaner, less fragmented vessel trees, consistent with the paired analysis (Section~\ref{subsec:paired}, figure~\ref{fig:cldice-components}). These are computational geometry reconstructions and are not presented as evidence of physical printing, perfusion, or biological validation.}
     \label{fig:heart-stl}
 \end{figure}
-
-% Figure anonymity/legibility verified for the STL render (figure5); figure6 image is a QC bar chart, not a heart/shell STL.
-\TODO{figure~\ref{fig:vessel-stl} (vessel STL) was verified to carry no baked-in file paths, usernames, or identifying text; figure~\ref{fig:heart-stl} likewise carries none. Note that figure~\ref{fig:heart-stl} currently shows a Phase~B QC bar chart, not the heart/shell STL rendering originally intended for this slot, and is largely redundant with figure~\ref{fig:fabrication-readiness-qc}: either regenerate a shell/heart STL render from data or drop this figure. Re-confirm legibility at final print size.}
 
 \FloatBarrier
 
@@ -665,7 +670,7 @@ Not reported as final metrics & clDice, external-dataset performance, cohort-lev
 
 \subsection{Principal findings}
 
-This study is best understood as a computational bridge between coronary CTA segmentation and fabrication-oriented mesh generation. The completed full held-out 250-case ImageCAS test evaluation strengthens the evidence for the segmentation stage compared with the earlier pilot framing. The primary Dice@0.5 result was 0.7953 with a 95\% CI of 0.7896--0.8009, median 0.7985, and zero failed cases. Because the confidence interval narrowly spans 0.80, the most accurate wording is near-0.80 segmentation performance rather than a categorical claim that the system exceeds 0.80.
+This study is best understood as a computational bridge between coronary CTA segmentation and fabrication-oriented mesh generation. The completed full held-out 250-case ImageCAS test evaluation strengthens the evidence for the segmentation stage compared with the earlier pilot framing. The primary Dice@0.5 result was 0.7878 with a 95\% CI of 0.7820--0.7935, median 0.7934, and zero failed cases, with a topology-aware clDice@0.5 of 0.8695. Because the mean sits just below 0.80, the most accurate wording is near-0.80 segmentation performance rather than a categorical claim that the system exceeds 0.80. Beyond segmentation accuracy, the paired analysis provides direct evidence that centerline-aware accuracy, not voxel overlap alone, governs downstream mesh connectivity.
 
 The main implication is that image-to-fabrication pipelines should not terminate at segmentation metrics. For coronary and vascular structures, distal branch dropout, false bridges, and local discontinuities may have limited effect on Dice while substantially affecting downstream geometry. This is especially important for biofabrication, where a disconnected or non-manifold vascular model may fail as a perfusable blueprint even if its voxel overlap is numerically acceptable. The representative Phase~B result makes a related point in the opposite direction: a mesh can be geometrically clean (watertight and single-component) yet still fall outside a generic printability criterion because coronary calibre is intrinsically sub-millimeter. Both observations argue that segmentation accuracy and fabrication readiness must be reported as distinct objectives. The present pipeline begins to address that gap by generating STL artifacts and QC summaries, but the current manuscript stops short of claiming validated printability.
 
@@ -701,14 +706,14 @@ For translational relevance, the most realistic next fabrication-oriented valida
 
 This manuscript presents a computational framework that links cardiac CTA to print-oriented vascular model generation. The completed full held-out 250-case ImageCAS test evaluation supports a cautious feasibility claim: volumetric deep learning can automate coronary vascular extraction with near-0.80 Dice@0.5 performance and no failed test cases, and the Phase B workflow provides a structured route from segmentation output to repaired STL geometry and QC artifacts.
 
-The primary held-out test result was a mean Dice@0.5 of 0.7953 (95\% CI 0.7896--0.8009), with median 0.7985 across 250 cases. A representative Phase~B artifact was watertight and single-component after repair, while a radius-based printability proxy flagged its sub-millimeter features, illustrating that geometric integrity and deposition-scale printability are distinct properties for coronary geometry. The contribution is therefore best understood not as a claim of printed organ function, but as a patient-specific image-to-mesh workflow addressing a real bottleneck at the interface of AI, medical imaging, and biofabrication. Topology-aware metrics, cohort-level mesh QC, the paired segmentation-to-mesh analysis, baseline comparisons, external validation, formal slicer validation, physical printing, perfusion testing, and biological validation will be required before stronger translational biofabrication claims can be made.
+The primary held-out test result was a mean Dice@0.5 of 0.7878 (95\% CI 0.7820--0.7935), with median 0.7934 and a topology-aware clDice@0.5 of 0.8695 across 250 cases. Cohort Phase~B mesh QC produced surfaces that were watertight after repair in 91.2\% of cases, while wall-thickness compliance against a \SI{3}{mm} threshold was low (mean 8.8\%), illustrating that geometric integrity and deposition-scale printability are distinct properties for sub-millimeter coronary geometry. A paired segmentation-to-mesh analysis showed that topology-aware accuracy predicts mesh connectivity more strongly than voxel overlap (clDice versus connected-component count, $\rho=-0.49$). The contribution is therefore best understood not as a claim of printed organ function, but as a patient-specific image-to-mesh workflow addressing a real bottleneck at the interface of AI, medical imaging, and biofabrication. Baseline comparisons, external validation, formal slicer validation, physical printing, perfusion testing, and biological validation will be required before stronger translational biofabrication claims can be made.
 
 \section*{Data and code availability}
 
 This study used the public ImageCAS coronary CTA dataset for supervised training and evaluation. The dataset is available from the original ImageCAS source cited in this manuscript. The completed final held-out test artifacts are retained in \texttt{outputs/final\_test\_250/}, including \texttt{per\_case\_metrics.csv}, \texttt{summary\_metrics.csv}, \texttt{summary\_metrics.json}, \texttt{used\_config.yaml}, \texttt{eval\_command.txt}, \texttt{progress.json}, and \texttt{test\_console.log}. These files support verification of the reported 250-case held-out test results. Training and validation artifacts are retained under \texttt{outputs/train\_runs/}, and the representative Phase~B geometry-integrity artifacts for case~720 are retained with the exported Phase~B outputs.
 
 % CHANGED: describe what IS anonymized; honest provenance caveat.
-The implementation was developed in Python using PyTorch, MONAI, NumPy, SciPy, NiBabel, pandas, and related medical image-processing libraries. The manuscript text, tables, and figures have been anonymized for double-anonymous review, and an anonymized code and derived-results archive will be provided during review or upon reasonable request, subject to dataset-use restrictions. A partial anonymity scrub has been performed: the username \texttt{prade} and absolute home paths have been removed from the training logs and from the dataset splits file (paths relativized to \texttt{Data/all/}), the manuscript figures were inspected and carry no baked-in file paths or usernames, and no author email addresses or institutional names remain in the manuscript text or in the source code. \TODO{before camera-ready/deposition: (i) regenerate figure~\ref{fig:preprocessing} to remove its authoring ``poster tip'' note and debug text; (ii) restore/replace the author names that remain in \texttt{LICENSE} and \texttt{CITATION.cff} as appropriate post-review; and (iii) re-run the grep (names, institution, emails, usernames, absolute home paths) over the full code/results archive, confirm zero hits, and update this paragraph to state that the deposited archive is fully anonymized.}
+The implementation was developed in Python using PyTorch, MONAI, NumPy, SciPy, NiBabel, pandas, and related medical image-processing libraries. The manuscript text, tables, and figures have been anonymized for double-anonymous review, and an anonymized code and derived-results archive will be provided during review or upon reasonable request, subject to dataset-use restrictions. A partial anonymity scrub has been performed: the username \texttt{prade} and absolute home paths have been removed from the training logs and from the dataset splits file (paths relativized to \texttt{Data/all/}), the manuscript figures were inspected and carry no baked-in file paths or usernames, and no author email addresses or institutional names remain in the manuscript text or in the source code. \TODO{before camera-ready/deposition: (i) restore/replace the author names that remain in \texttt{LICENSE} and \texttt{CITATION.cff} as appropriate post-review; and (ii) re-run the grep (names, institution, emails, usernames, absolute home paths) over the full code/results archive, confirm zero hits, and update this paragraph to state that the deposited archive is fully anonymized. (Figure~\ref{fig:preprocessing} has been regenerated without its earlier ``poster tip'' note and debug text.)}
 
 \section*{Declarations}
 
@@ -762,7 +767,7 @@ Per-case held-out test results are provided as \texttt{outputs/final\_test\_250/
 \section{Model-provenance record}
 \label{app:provenance}
 
-The held-out test metrics were produced by the evaluation command recorded in \texttt{outputs/final\_test\_250/eval\_command.txt}, which loaded the checkpoint \texttt{soup\_ep75-80.pt} and ran sliding-window inference (ROI $96\times192\times192$, overlap 0.625, threshold 0.5) over the 250-case test partition, reporting 0 failed cases and a mean Dice@0.5 of 0.7953. The exported test console log records the loaded model as a MONAI Attention U-Net with channels $(32,64,128,256,512)$, three residual units, dropout 0.1, and 23,625,953 trainable parameters; an independent reconstruction reproduced this parameter count. The evaluation load diagnostics report \texttt{model\_type: attention\_unet} and a strict state-dict load with empty missing- and unexpected-key lists, confirming the evaluated weights matched this architecture. The averaged checkpoint and its epoch-75--80 ingredients were not retained (Section~\ref{subsec:training-convergence}). An accountable, fully retained checkpoint is, however, available for re-evaluation: \texttt{checkpoints/best\_dice05.pt} is an epoch-79 Attention U-Net with 23{,}631{,}875 parameters (matching the architecture above), recorded validation Dice@0.5 $=0.7889$ and soft Dice $=0.7811$, and complete optimizer, scheduler, configuration, and git-commit metadata. The planned resolution is to re-evaluate the 250-case held-out test set from this checkpoint (with \texttt{save\_case\_outputs}, \texttt{compute\_cldice}, and \texttt{run\_phase\_b\_qc} enabled) and replace the headline metrics throughout; the orchestration for this run is provided as \texttt{run\_full\_revision.sh} in the code archive. \TODO{after the re-evaluation, replace the soup path above with \texttt{best\_dice05.pt}, update all per-case metrics/figures, and confirm the strict-load diagnostics for the new run.}
+The held-out test metrics reported in this manuscript were produced by re-evaluating the 250-case test partition from the accountable checkpoint \texttt{checkpoints/best\_dice05.pt}, an epoch-79 Attention U-Net with 23{,}631{,}875 parameters, recorded validation Dice@0.5 $=0.7889$ and soft Dice $=0.7811$, and complete optimizer, scheduler, configuration, and git-commit metadata. The run was orchestrated by \texttt{run\_full\_revision.sh} (recorded in \texttt{outputs/final\_test\_250/eval\_command.txt}) with sliding-window inference (ROI $96\times192\times192$, overlap 0.625, threshold 0.5) and with \texttt{save\_case\_outputs}, \texttt{compute\_cldice}, and \texttt{run\_phase\_b\_qc} enabled; it reported 0 failed cases, a mean Dice@0.5 of 0.7878, and a strict state-dict load (\texttt{model\_type: attention\_unet}) with empty missing- and unexpected-key lists, confirming the evaluated weights matched the architecture (MONAI Attention U-Net, channels $(32,64,128,256,512)$, three residual units, dropout 0.1). This re-evaluation replaces an earlier evaluation that had loaded a weight-averaged checkpoint \texttt{soup\_ep75-80.pt} (mean Dice@0.5 0.7953); that averaged checkpoint and its epoch-75--80 ingredients were not retained (Section~\ref{subsec:training-convergence}), so the accountable \texttt{best\_dice05.pt} run is the sole source of the reported metrics. The re-evaluation was executed on Apple M4 Pro (MPS) hardware; because inference and the reported metrics are deterministic, the overlap and topology statistics are independent of this hardware choice, though small numerical differences from a CUDA execution are possible. \TODO{regenerate figure~\ref{fig:training-curves} (training curves) from the \texttt{best\_dice05.pt} run and update its reference test-mean band; this is the only headline figure not yet reconciled to the accountable checkpoint.}
 
 \newpage
 % WHO reference (references.bib, key `who`) now has a full @misc entry

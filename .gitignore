@@ -19,3 +19,7 @@ outputs/full_run.log
 
 # pre-dedup raw backups (local provenance only)
 outputs/**/*.raw.csv
+
+# trivial self-join paired outputs (clean table is seg_to_mesh_correlations.csv)
+outputs/final_test_250/paired_scatter/
+outputs/final_test_250/paired_correlations.csv
