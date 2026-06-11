@@ -9,3 +9,13 @@ env/
 # Python cache
 __pycache__/
 *.pyc
+Data/
+
+# Heavy, regenerable per-case run artifacts (summary CSV/JSON are committed)
+outputs/final_test_250/case_outputs/
+outputs/phase_b_mesh_qc/case_outputs/
+outputs/eval_logs/
+outputs/full_run.log
+
+# pre-dedup raw backups (local provenance only)
+outputs/**/*.raw.csv

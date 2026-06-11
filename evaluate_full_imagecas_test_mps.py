@@ -62,9 +62,13 @@ from scipy import ndimage as ndi
 from tqdm import tqdm
 
 try:
-    from skimage.morphology import skeletonize, skeletonize_3d  # type: ignore
+    from skimage.morphology import skeletonize  # type: ignore
 except Exception:
     skeletonize = None  # type: ignore
+try:
+    # Removed in scikit-image >=0.25; modern skeletonize handles 3D directly.
+    from skimage.morphology import skeletonize_3d  # type: ignore
+except Exception:
     skeletonize_3d = None  # type: ignore
 
 
