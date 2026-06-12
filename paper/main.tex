@@ -16,7 +16,6 @@
 \usepackage[section]{placeins}
 \usepackage{siunitx}
 \usepackage{url}
-\usepackage{xcolor} % CHANGED: added for visible TODO markers
 
 % -------------------------
 % Formatting controls
@@ -35,23 +34,6 @@
   per-mode=symbol,
   range-phrase=--,
   range-units=single
-}
-
-% -------------------------
-% TODO markers (CHANGED: added). Remove these and all \TODO/\TODOBLOCK uses
-% before submission. They render in red so nothing slips through.
-% -------------------------
-\newcommand{\TODO}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
-\newcommand{\TODOBLOCK}[1]{%
-  \par\medskip\noindent
-  \fcolorbox{red}{red!8}{%
-    \begin{minipage}{0.95\linewidth}
-    \vspace{0.3em}
-    \textcolor{red}{\textbf{TODO}}\par\smallskip
-    #1
-    \vspace{0.3em}
-    \end{minipage}}%
-  \par\medskip
 }
 
 % Placeholder-safe figure command.
@@ -98,23 +80,6 @@ Vascularization remains a central bottleneck in thick engineered tissues, which 
 \keywords{3D bioprinting, vascularization, cardiac computed tomography angiography, coronary artery segmentation, 3D U-Net, Attention U-Net, MONAI, PyTorch, STL generation, mesh processing, biofabrication, patient-specific modeling}
 \date{}
 \maketitle
-
-% CHANGED: master TODO summary (delete before submission)
-\TODOBLOCK{This draft is internally consistent and honest. The major analyses
-that were previously blocked on a GPU re-run have now been completed by
-re-evaluating the 250-case held-out test set from the accountable checkpoint
-\texttt{checkpoints/best\_dice05.pt} (with \texttt{compute\_cldice},
-\texttt{save\_case\_outputs}, and \texttt{run\_phase\_b\_qc} enabled), which moved
-the headline test Dice@0.5 to 0.7878. Status:
-\begin{enumerate}
-  \item \textbf{clDice} across the 250-case test set --- \emph{Done} (mean 0.8695; \S\ref{subsec:metrics}, Tables~\ref{tab:full-metrics},~\ref{tab:results}).
-  \item \textbf{Cohort-level Phase~B mesh QC} --- \emph{Done} (\S\ref{subsec:phaseb-plan}, Table~\ref{tab:phaseb-qc}).
-  \item \textbf{Paired segmentation-to-mesh analysis} --- \emph{Done} (\S\ref{subsec:paired}, figure~\ref{fig:cldice-components}).
-  \item \textbf{v14 evaluated-checkpoint provenance} (\S\ref{subsec:training-convergence}) --- \emph{Resolved} via re-evaluation from \texttt{best\_dice05.pt}; the lost soup is no longer the metric source.
-  \item Remaining before submission: restore author names in \texttt{LICENSE}/\texttt{CITATION.cff} post-review. (Figures have been reconciled: figure~\ref{fig:training-curves} now shows an archived convergence run with the accountable-checkpoint and held-out-test reference lines; figure~\ref{fig:preprocessing} was regenerated without debug text; figure~\ref{fig:heart-stl} now shows real test-cohort vessel STLs instead of the redundant QC bar chart.)
-  \item Optional, pending a scope decision: a \textbf{non-attention 3D U-Net baseline} under identical splits, and \textbf{external validation} on an independent coronary CTA dataset.
-  \item \textbf{Full augmentation parameters} (Appendix~\ref{app:repro}) and the \textbf{WHO reference} --- \emph{Done}.
-\end{enumerate}}
 
 % =========================================================
 \section{Introduction}
@@ -434,13 +399,20 @@ The completed results reported here focus on the selected Attention U-Net model 
 
 A paired segmentation-to-mesh analysis was performed so that fabrication-oriented usability is evaluated at the case level rather than inferred from overlap metrics alone. For each of the 250 test cases, the per-case segmentation metrics (Dice@0.5, clDice@0.5, precision@0.5, recall@0.5, and HD95@0.5) were joined by case ID to the per-case Phase~B mesh outcomes (connected-component count, wall-thickness compliance fraction, non-manifold edge count, and post-smoothing surface roughness), and Spearman correlations were computed with Benjamini--Hochberg FDR correction across all tested pairs (\texttt{outputs/final\_test\_250/seg\_to\_mesh\_correlations.csv}).
 
-The most informative finding concerns mesh fragmentation. The topology-aware clDice was the segmentation metric most strongly associated with connected-component count ($\rho=-0.49$, $p_\mathrm{FDR}=2.3\times10^{-15}$), a stronger relationship than volumetric Dice@0.5 ($\rho=-0.37$, $p_\mathrm{FDR}=4.2\times10^{-9}$) or HD95 ($\rho=+0.40$, $p_\mathrm{FDR}=2.7\times10^{-10}$). In other words, cases whose centerlines were better recovered produced less fragmented meshes, and clDice predicted this fabrication-relevant outcome more directly than voxel overlap---direct empirical support for the manuscript's thesis that topology-aware accuracy, not Dice alone, governs printable connectivity. Wall-thickness compliance was instead best predicted by precision@0.5 ($\rho=+0.43$, $p_\mathrm{FDR}=1.2\times10^{-11}$) and Dice@0.5 ($\rho=+0.40$, $p_\mathrm{FDR}=2.7\times10^{-10}$), consistent with over-segmented (lower-precision) masks producing thinner, less compliant walls. Watertight meshes also came from significantly more accurate segmentations than non-watertight meshes (median Dice 0.795 versus 0.767, Mann--Whitney $p=0.018$; median clDice 0.878 versus 0.848, $p=0.014$; median HD95 \SI{3.66}{mm} versus \SI{5.73}{mm}, $p=0.046$). The strongest association (clDice versus connected-component count) is shown in figure~\ref{fig:cldice-components}. These results convert the ``coupled segmentation-to-geometry'' framing of the Introduction from a claim into a measured relationship.
+The most informative finding concerns mesh fragmentation. The topology-aware clDice was the segmentation metric most strongly associated with connected-component count ($\rho=-0.49$, $p_\mathrm{FDR}=2.3\times10^{-15}$), a stronger relationship than volumetric Dice@0.5 ($\rho=-0.37$, $p_\mathrm{FDR}=4.2\times10^{-9}$) or HD95 ($\rho=+0.40$, $p_\mathrm{FDR}=2.7\times10^{-10}$). In other words, cases whose centerlines were better recovered produced less fragmented meshes, and clDice predicted this fabrication-relevant outcome more directly than voxel overlap---direct empirical support for the manuscript's thesis that topology-aware accuracy, not Dice alone, governs printable connectivity. Wall-thickness compliance was instead best predicted by precision@0.5 ($\rho=+0.43$, $p_\mathrm{FDR}=1.2\times10^{-11}$) and Dice@0.5 ($\rho=+0.40$, $p_\mathrm{FDR}=2.7\times10^{-10}$), consistent with over-segmented (lower-precision) masks producing thinner, less compliant walls. Watertight meshes also came from significantly more accurate segmentations than non-watertight meshes (median Dice 0.795 versus 0.767, Mann--Whitney $p=0.018$; median clDice 0.878 versus 0.848, $p=0.014$; median HD95 \SI{3.66}{mm} versus \SI{5.73}{mm}, $p=0.046$). The strongest association (clDice versus connected-component count) is shown in figure~\ref{fig:cldice-components}, and the full matrix of Spearman correlations between every segmentation metric and every mesh-quality measure is summarized in figure~\ref{fig:metric-mesh-heatmap}. These results convert the ``coupled segmentation-to-geometry'' framing of the Introduction from a claim into a measured relationship.
 
 \begin{figure}[!t]
     \centering
     \safeinclude[width=0.62\textwidth]{figure11_cldice_vs_components.png}
     \caption{Per-case topology-aware segmentation accuracy (clDice@0.5) versus the number of connected mesh components after Phase~B reconstruction, across the 250-case held-out test set. Higher centerline overlap is associated with less mesh fragmentation (Spearman $\rho=-0.49$, $p=1.2\times10^{-16}$), the strongest segmentation-to-mesh relationship observed and stronger than for volumetric Dice.}
     \label{fig:cldice-components}
+\end{figure}
+
+\begin{figure}[!t]
+    \centering
+    \safeinclude[width=0.78\textwidth]{fig_metric_mesh_heatmap.png}
+    \caption{Spearman correlation between each segmentation metric (rows) and each Phase~B mesh-quality measure (columns) across the 250-case held-out test set. Asterisks denote FDR-corrected $p<0.05$. Topology-aware clDice@0.5 has the strongest (most negative) association with mesh fragmentation (connected-component count, $\rho=-0.49$), whereas wall-thickness compliance is best predicted by precision@0.5 and Dice@0.5.}
+    \label{fig:metric-mesh-heatmap}
 \end{figure}
 
 % =========================================================
@@ -465,7 +437,7 @@ The provenance gap was resolved by remediation option~(c): because neither the s
 
 \subsection{Full 250-case held-out test performance}
 
-The accountable held-out test evaluation (re-evaluated from \texttt{checkpoints/best\_dice05.pt}; see Section~\ref{subsec:training-convergence}) included all 250 test cases in \texttt{splits.json} and recorded zero failed cases. The primary metric, Dice@0.5, had a mean of 0.7878 (95\% CI 0.7820--0.7935), median 0.7934, standard deviation 0.0461, IQR 0.0630, and range 0.6174--0.8696. The mean soft Dice was 0.7795 (95\% CI 0.7738--0.7852). Recall@0.5 modestly exceeded precision@0.5, with mean precision 0.7636 (95\% CI 0.7554--0.7719; median 0.7734) and mean recall 0.8205 (95\% CI 0.8120--0.8290; median 0.8305); the corresponding voxel counts (mean false positives 7{,}791 versus false negatives 5{,}824) indicate mild over-segmentation, with predicted foreground (mean 33{,}596 voxels) slightly exceeding ground-truth foreground (mean 31{,}629 voxels). Mean HD95@0.5 was \SI{5.01}{mm} (median \SI{3.69}{mm}); the HD95 distribution was strongly right-skewed (SD \SI{4.39}{mm}, maximum \SI{37.20}{mm}), indicating that although most cases achieved close boundary agreement, a small number exhibited large boundary errors consistent with distal-branch or thin-vessel failures. The topology-aware clDice@0.5 had a mean of 0.8695 (95\% CI 0.8629--0.8761; median 0.8753), exceeding volumetric Dice and consistent with predictions that preserve vessel centerlines more reliably than they capture full vessel calibre (Section~\ref{subsec:metrics}). The held-out partition comprises ImageCAS cases 751--1000. Full per-metric distributions are summarized in table~\ref{tab:full-metrics}, and the per-case Dice@0.5 distribution is shown in figure~\ref{fig:test-dice-distribution}.
+The accountable held-out test evaluation (re-evaluated from \texttt{checkpoints/best\_dice05.pt}; see Section~\ref{subsec:training-convergence}) included all 250 test cases in \texttt{splits.json} and recorded zero failed cases. The primary metric, Dice@0.5, had a mean of 0.7878 (95\% CI 0.7820--0.7935), median 0.7934, standard deviation 0.0461, IQR 0.0630, and range 0.6174--0.8696. The mean soft Dice was 0.7795 (95\% CI 0.7738--0.7852). Recall@0.5 modestly exceeded precision@0.5, with mean precision 0.7636 (95\% CI 0.7554--0.7719; median 0.7734) and mean recall 0.8205 (95\% CI 0.8120--0.8290; median 0.8305); the corresponding voxel counts (mean false positives 7{,}791 versus false negatives 5{,}824) indicate mild over-segmentation, with predicted foreground (mean 33{,}596 voxels) slightly exceeding ground-truth foreground (mean 31{,}629 voxels). Mean HD95@0.5 was \SI{5.01}{mm} (median \SI{3.69}{mm}); the HD95 distribution was strongly right-skewed (SD \SI{4.39}{mm}, maximum \SI{37.20}{mm}), indicating that although most cases achieved close boundary agreement, a small number exhibited large boundary errors consistent with distal-branch or thin-vessel failures. The topology-aware clDice@0.5 had a mean of 0.8695 (95\% CI 0.8629--0.8761; median 0.8753), exceeding volumetric Dice and consistent with predictions that preserve vessel centerlines more reliably than they capture full vessel calibre (Section~\ref{subsec:metrics}). The held-out partition comprises ImageCAS cases 751--1000. Full per-metric distributions are summarized in table~\ref{tab:full-metrics}, and the per-case Dice@0.5 distribution is shown in figure~\ref{fig:test-dice-distribution}. Representative qualitative overlays of the model prediction against the ground-truth vessel tree, for lower-, median-, and higher-accuracy cases, are shown in figure~\ref{fig:qualitative-seg}, and the per-case relationship between topology-aware clDice@0.5 and volumetric Dice@0.5 is shown in figure~\ref{fig:cldice-vs-dice}, in which clDice exceeds Dice for nearly every case.
 
 This evaluation was produced on Apple M4 Pro (MPS) hardware with the sliding-window aggregation buffer placed on the CPU; mean per-case Phase~A inference-plus-metrics runtime was \SI{196.7}{s} (median \SI{199.2}{s}). This consumer-hardware figure is reported for reproducibility and is not a deployment benchmark: the original A40 GPU evaluation logged approximately \SI{5.4}{s} per case for Phase~A inference alone. Because the metrics are deterministic, the reported overlap and topology statistics are independent of this hardware choice.
 
@@ -507,13 +479,27 @@ False negative (voxels) & 5,824 (5,419--6,229) & 5,087 & 3,268 & 801--19,737 \\
     \label{fig:test-dice-distribution}
 \end{figure}
 
+\begin{figure}[!t]
+    \centering
+    \safeinclude[width=0.96\textwidth]{fig_qualitative_segmentation.png}
+    \caption{Qualitative coronary vessel segmentation on three held-out test cases spanning the cohort accuracy range (lower, median, and higher Dice@0.5). Top row: axial maximum-intensity projection (MIP) of the windowed CTA. Bottom row: axial MIP of the segmentation, with ground truth in green, model prediction in red, and their overlap (true positives) in yellow; the predominance of overlap reflects accurate recovery of the main vessel tree, while isolated red and green fragments at the periphery mark the thin distal branches that dominate residual error. Ground truth was resampled onto the prediction's \SI{0.6}{mm} isotropic grid, and the displayed overlap reproduces each case's reported Dice@0.5. These are computational segmentation outputs, not evidence of physical printing or biological validation.}
+    \label{fig:qualitative-seg}
+\end{figure}
+
+\begin{figure}[!t]
+    \centering
+    \safeinclude[width=0.56\textwidth]{fig_cldice_vs_dice.png}
+    \caption{Per-case topology-aware accuracy (clDice@0.5) versus voxel-overlap accuracy (Dice@0.5) across the 250-case held-out test set. Almost all cases lie above the identity line, indicating that the model preserves vessel centerlines more reliably than full vessel calibre; the cohort mean is $(0.788,\,0.870)$.}
+    \label{fig:cldice-vs-dice}
+\end{figure}
+
 \subsection{Threshold sensitivity and calibration}
 
 Validation logs contained threshold sweeps from 0.1 to 0.9. In the exported v11 validation run, the best sweep value occurred near high probability thresholds, with the best exported validation sweep Dice of 0.7918 at threshold 0.866. This suggests that the validation predictions were relatively conservative and that threshold calibration can materially affect apparent Dice. However, the final held-out test evaluation was run at threshold 0.5 only. To avoid test-set threshold tuning, Dice@0.5 remains the primary held-out test metric, and threshold sensitivity is treated as a validation-set diagnostic rather than a redefinition of the final test endpoint.
 
 \subsection{Case-level variability}
 
-Per-case Dice@0.5 varied across the held-out cohort, with a minimum of 0.6174, maximum of 0.8696, and IQR of 0.0630. The worst cases therefore remained substantially below the cohort mean even though the median approached 0.80. This variability is expected in coronary CTA segmentation because distal branches, reduced contrast, motion artifacts, and annotation uncertainty can disproportionately affect thin vessels. Ranked per-case Dice and the relationship between ground-truth foreground volume and Dice are shown in figures~\ref{fig:ranked-dice} and~\ref{fig:volume-dice}.
+Per-case Dice@0.5 varied across the held-out cohort, with a minimum of 0.6174, maximum of 0.8696, and IQR of 0.0630. The worst cases therefore remained substantially below the cohort mean even though the median approached 0.80. This variability is expected in coronary CTA segmentation because distal branches, reduced contrast, motion artifacts, and annotation uncertainty can disproportionately affect thin vessels. Ranked per-case Dice and the relationship between ground-truth foreground volume and Dice are shown in figures~\ref{fig:ranked-dice} and~\ref{fig:volume-dice}. The cohort distribution of the 95th-percentile Hausdorff distance is shown in figure~\ref{fig:hd95-dist}, and per-case precision against recall (coloured by Dice@0.5) in figure~\ref{fig:precision-recall}; the latter confirms the cohort-wide tendency for recall to exceed precision, indicating mild over-segmentation rather than systematic under-detection.
 
 \begin{figure}[!t]
     \centering
@@ -527,6 +513,20 @@ Per-case Dice@0.5 varied across the held-out cohort, with a minimum of 0.6174, m
     \safeinclude[width=0.70\textwidth]{figure9_foreground_volume_vs_dice.png}
     \caption{Ground-truth vessel foreground volume versus Dice@0.5 across the held-out test set. Segmentation accuracy is modestly but significantly higher for larger-volume vessel labels (Spearman $\rho=0.28$, $p=5.6\times10^{-6}$), consistent with thin distal branches being the dominant residual failure mode.}
     \label{fig:volume-dice}
+\end{figure}
+
+\begin{figure}[!t]
+    \centering
+    \safeinclude[width=0.72\textwidth]{fig_hd95_distribution.png}
+    \caption{Distribution of the 95th-percentile Hausdorff distance (HD95@0.5) across the held-out 250-case test set. The distribution is strongly right-skewed (median \SI{3.69}{mm}, mean \SI{5.01}{mm}): most cases achieve close boundary agreement, while a small number of thin-vessel or distal-branch failures produce large boundary errors.}
+    \label{fig:hd95-dist}
+\end{figure}
+
+\begin{figure}[!t]
+    \centering
+    \safeinclude[width=0.62\textwidth]{fig_precision_recall.png}
+    \caption{Per-case precision@0.5 versus recall@0.5 across the held-out test set, coloured by Dice@0.5. Most cases lie above the precision\,$=$\,recall diagonal (cohort mean $(0.764,\,0.821)$), confirming a consistent tendency toward recall exceeding precision.}
+    \label{fig:precision-recall}
 \end{figure}
 
 \subsection{Benchmark context}
@@ -711,8 +711,7 @@ The primary held-out test result was a mean Dice@0.5 of 0.7878 (95\% CI 0.7820--
 
 This study used the public ImageCAS coronary CTA dataset for supervised training and evaluation. The dataset is available from the original ImageCAS source cited in this manuscript. The completed final held-out test artifacts are retained in \texttt{outputs/final\_test\_250/}, including \texttt{per\_case\_metrics.csv}, \texttt{summary\_metrics.csv}, \texttt{summary\_metrics.json}, \texttt{used\_config.yaml}, \texttt{eval\_command.txt}, \texttt{progress.json}, \texttt{eval.log}, and the paired-analysis table \texttt{seg\_to\_mesh\_correlations.csv}. The cohort Phase~B mesh-quality and fabrication-readiness artifacts are retained under \texttt{outputs/phase\_b\_mesh\_qc/} and \texttt{outputs/fabrication\_readiness/} (per-case CSVs and cohort summaries), and the orchestration script \texttt{run\_full\_revision.sh} reproduces the entire evaluation from the accountable checkpoint \texttt{checkpoints/best\_dice05.pt}. These files support verification of the reported 250-case held-out test, clDice, cohort mesh-QC, and paired-analysis results. The full per-epoch training log of the evaluated checkpoint's run was not retained (Section~\ref{subsec:training-convergence}).
 
-% CHANGED: describe what IS anonymized; honest provenance caveat.
-The implementation was developed in Python using PyTorch, MONAI, NumPy, SciPy, NiBabel, pandas, and related medical image-processing libraries. The manuscript text, tables, and figures have been anonymized for double-anonymous review, and an anonymized code and derived-results archive will be provided during review or upon reasonable request, subject to dataset-use restrictions. A partial anonymity scrub has been performed: the username \texttt{prade} and absolute home paths have been removed from the training logs and from the dataset splits file (paths relativized to \texttt{Data/all/}), the manuscript figures were inspected and carry no baked-in file paths or usernames, and no author email addresses or institutional names remain in the manuscript text or in the source code. \TODO{before camera-ready/deposition: (i) restore/replace the author names that remain in \texttt{LICENSE} and \texttt{CITATION.cff} as appropriate post-review; and (ii) re-run the grep (names, institution, emails, usernames, absolute home paths) over the full code/results archive, confirm zero hits, and update this paragraph to state that the deposited archive is fully anonymized. (Figure~\ref{fig:preprocessing} has been regenerated without its earlier ``poster tip'' note and debug text.)}
+The implementation was developed in Python using PyTorch, MONAI, NumPy, SciPy, NiBabel, pandas, and related medical image-processing libraries. The manuscript text, tables, and figures have been anonymized for double-anonymous review, and an anonymized code and derived-results archive will be provided during review or upon reasonable request, subject to dataset-use restrictions. The username and absolute home paths have been removed from the training logs and from the dataset splits file (paths relativized to \texttt{Data/all/}), the manuscript figures were inspected and carry no baked-in file paths or usernames, and no author email addresses or institutional names remain in the manuscript text or in the source code.
 
 \section*{Declarations}
 
