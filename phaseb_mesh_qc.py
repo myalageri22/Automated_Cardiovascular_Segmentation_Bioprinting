@@ -277,6 +277,56 @@ def main(argv: Optional[List[str]] = None) -> int:
     if args.summarize:
         summarize_mesh_qc(args.output_root)
     return 0
+def slicability_plane_check(mesh, n_planes: int = 50, inset_frac: float = 0.02):
+    """
+    Multi-plane cross-sectional continuity (slicer-readiness proxy).
+    Slices `mesh` with `n_planes` evenly spaced planes along its longest
+    bounding-box axis; a slice passes if its cross-section is composed
+    entirely of closed contours. Reports per-case QC fields.
+    """
+    import numpy as np
+    out = {
+        "slicability_planes_total": int(n_planes),
+        "slicability_planes_intersecting": 0,
+        "slicability_planes_closed": 0,
+        "slicability_closed_fraction": float("nan"),
+        "slicable": False,
+    }
+    if mesh is None or getattr(mesh, "faces", None) is None or len(mesh.faces) == 0:
+        return out
+    extents = mesh.bounds[1] - mesh.bounds[0]
+    axis = int(np.argmax(extents))                      # 50 planes ⟂ longest axis
+    normal = np.zeros(3); normal[axis] = 1.0
+    lo, hi = float(mesh.bounds[0][axis]), float(mesh.bounds[1][axis])
+    span = hi - lo
+    if span <= 0:
+        return out
+    lo += inset_frac * span; hi -= inset_frac * span    # inset off the caps
+    inter = closed = 0
+    for level in np.linspace(lo, hi, n_planes):
+        origin = mesh.bounds[0].copy(); origin[axis] = level
+        try:
+            section = mesh.section(plane_origin=origin, plane_normal=normal)
+        except Exception:
+            continue
+        if section is None:
+            continue
+        inter += 1
+        try:
+            planar = section.to_2D()[0] if hasattr(section, "to_2D") else section.to_planar()[0]
+        except Exception:
+            continue                                    # exists but won't close → fail
+        ents = getattr(planar, "entities", [])
+        polys = getattr(planar, "polygons_full", [])
+        all_closed = len(ents) > 0 and all(bool(getattr(e, "closed", False)) for e in ents)
+        if len(polys) > 0 and all_closed:
+            closed += 1
+    out["slicability_planes_intersecting"] = int(inter)
+    out["slicability_planes_closed"] = int(closed)
+    if inter:
+        out["slicability_closed_fraction"] = float(closed / inter)
+        out["slicable"] = bool(closed == inter)
+    return out
 
 
 if __name__ == "__main__":
