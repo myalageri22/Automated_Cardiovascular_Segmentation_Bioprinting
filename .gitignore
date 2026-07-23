@@ -23,3 +23,9 @@ outputs/**/*.raw.csv
 # trivial self-join paired outputs (clean table is seg_to_mesh_correlations.csv)
 outputs/final_test_250/paired_scatter/
 outputs/final_test_250/paired_correlations.csv
+
+# Large, reproducible production-slicer payloads (retain compact results/logs/profile)
+outputs/production_slicer_validation/gcode/*.gcode
+outputs/production_slicer_validation/gcode/*.bgcode
+outputs/production_slicer_validation/**/gcode/*.gcode
+outputs/production_slicer_validation/**/gcode/*.bgcode

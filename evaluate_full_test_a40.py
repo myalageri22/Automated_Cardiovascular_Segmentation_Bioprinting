@@ -189,16 +189,26 @@ def build_model(train_mod: Any, device: torch.device, model_type: str):
     return train_mod.build_model(cfg, logger)
 
 
-def run_phaseb_and_fabrication(case_id: str, mask_path: Path) -> Dict[str, Any]:
+def run_phaseb_and_fabrication(
+    case_id: str,
+    mask_path: Path,
+    minimal_mesh_qc: bool = False,
+    run_fabrication: bool = True,
+) -> Dict[str, Any]:
     out: Dict[str, Any] = {}
     try:
         import phaseb_mesh_qc
         import fabrication_readiness_validation as fab
 
-        mesh_row = phaseb_mesh_qc.run_phaseb_for_case(case_id, mask_path, "outputs/phase_b_mesh_qc")
+        mesh_row = phaseb_mesh_qc.run_phaseb_for_case(
+            case_id,
+            mask_path,
+            "outputs/phase_b_mesh_qc",
+            minimal=minimal_mesh_qc,
+        )
         out.update({f"mesh_{k}": v for k, v in mesh_row.items() if k in {"status", "repaired_stl", "watertight", "non_manifold_edge_count"}})
         stl = mesh_row.get("repaired_stl")
-        if stl:
+        if stl and run_fabrication:
             fab_row = fab.validate_stl(
                 stl,
                 case_id=case_id,
@@ -326,9 +336,10 @@ def evaluate(args: argparse.Namespace) -> int:
                 if args.save_case_outputs or args.smoke_test:
                     case_dir.mkdir(parents=True, exist_ok=True)
                     affine = affine_from_batch(batch)
-                    prob_path = case_dir / "seg_prob.nii.gz"
-                    nib.Nifti1Image(probs, affine).to_filename(str(prob_path))
-                    row["seg_prob_path"] = str(prob_path)
+                    if not args.skip_probability_outputs:
+                        prob_path = case_dir / "seg_prob.nii.gz"
+                        nib.Nifti1Image(probs, affine).to_filename(str(prob_path))
+                        row["seg_prob_path"] = str(prob_path)
                     for threshold in thresholds:
                         mask_path = case_dir / f"seg_mask_{threshold:.1f}.nii.gz"
                         nib.Nifti1Image((probs > threshold).astype(np.uint8), affine).to_filename(str(mask_path))
@@ -336,7 +347,14 @@ def evaluate(args: argparse.Namespace) -> int:
                             mask05_path = mask_path
                     (case_dir / "metadata.json").write_text(json.dumps({"case_id": case_id, "spacing": spacing}, indent=2))
                 if args.run_phase_b_qc and mask05_path:
-                    row.update(run_phaseb_and_fabrication(case_id, mask05_path))
+                    row.update(
+                        run_phaseb_and_fabrication(
+                            case_id,
+                            mask05_path,
+                            minimal_mesh_qc=args.minimal_phase_b_qc,
+                            run_fabrication=not args.skip_fabrication_qc,
+                        )
+                    )
                 append_row(per_case_csv, row)
                 done.add(case_id)
                 progress["completed"] = len(done)
@@ -389,7 +407,22 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--skip_existing", action="store_true")
     parser.add_argument("--case_start", type=int, default=0)
     parser.add_argument("--save_case_outputs", action="store_true")
+    parser.add_argument(
+        "--skip_probability_outputs",
+        action="store_true",
+        help="save thresholded masks but omit large float probability NIfTI files",
+    )
     parser.add_argument("--run_phase_b_qc", action="store_true")
+    parser.add_argument(
+        "--minimal_phase_b_qc",
+        action="store_true",
+        help="export the repaired affine-correct mesh but skip unrelated smoothing and thickness metrics",
+    )
+    parser.add_argument(
+        "--skip_fabrication_qc",
+        action="store_true",
+        help="skip fabrication proxy calculations when only mesh alignment checks are required",
+    )
     parser.add_argument("--smoke_test", action="store_true")
     parser.add_argument("--val_output_device", default="same", choices=["same", "cpu"])
     parser.add_argument("--model_type", default="attention_unet", choices=["attention_unet", "plain_unet"])

@@ -1,0 +1,39 @@
+{
+  "scope": "single representative computational demonstration",
+  "case_id": "720",
+  "case_partition": "validation",
+  "physical_print_performed": false,
+  "slicer": "PrusaSlicer 2.9.6",
+  "reference_configuration": {
+    "printer_model": "Original Prusa MK4S",
+    "filament_profile": "Generic PLA",
+    "nozzle_diameter_mm": 0.4,
+    "print_preset": "0.20mm STRUCTURAL @MK4S 0.4",
+    "native_scale_percent": 100.0,
+    "support_material": true,
+    "support_material_auto": true,
+    "support_style": "organic"
+  },
+  "source_stl": {
+    "sha256": "55571aa0675dc02b0e2f8fd7b894761c8faa737999c6ac2b9015daca63cae78c",
+    "size_bytes": 6632784,
+    "triangle_count": 132654,
+    "binary_complete": true,
+    "dimensions_mm": [95.62109375, 92.06640625, 108.5]
+  },
+  "build_volume_mm": [250.0, 210.0, 220.0],
+  "complete_build_volume_fit": true,
+  "toolpath_generation_success": true,
+  "textual_gcode": true,
+  "gcode_sha256": "37eb07dddc18304abfc2e18e0d467b99c6b34dc475bb57a4fe3872a2b2d551e4",
+  "layer_count": 542,
+  "positive_extrusion_movements": 205672,
+  "positive_object_extrusion_movements": 141682,
+  "positive_support_material_extrusion_movements": 58360,
+  "positive_support_interface_extrusion_movements": 5626,
+  "unclassified_positive_extrusion_movements": 4,
+  "support_layers": 527,
+  "estimated_time_seconds": 6986.0,
+  "estimated_time_display": "1 h 56 min 26 s",
+  "warnings": []
+}

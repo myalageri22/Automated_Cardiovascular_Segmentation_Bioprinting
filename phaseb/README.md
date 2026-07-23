@@ -1,6 +1,6 @@
 # Phase B: Postprocessing, Meshing, and QC
 
-Phase B converts vascular segmentations (probability maps or masks) into bioprint/manufacturing-ready meshes and generates QC/printability reports. It consumes a CT volume and a segmentation volume, cleans and thresholds the mask, extracts meshes in real-world millimeters, repairs them, and produces human-readable and machine-readable QC artifacts.
+Phase B converts vascular segmentations (probability maps or masks) into fabrication-oriented meshes and generates computational QC reports. It consumes a CT volume and a segmentation volume, cleans and thresholds the mask, extracts meshes in real-world millimeters, repairs them, and produces human-readable and machine-readable QC artifacts. These outputs do not by themselves establish physical printability.
 
 ## Inputs
 - CT volume: DICOM directory or NIfTI (.nii/.nii.gz).
@@ -76,7 +76,7 @@ Key knobs:
 - **Empty or tiny mask**: check segmentation path/type; adjust threshold or lower `min_component_mm3`.
 - **Mesh not watertight**: ensure probability map quality; try enabling `pymeshfix` or lowering closing radius to avoid gaps.
 - **Vessel breakage**: reduce closing radius, ensure resampling spacing is not too coarse, consider seed-based keeping to avoid losing branches.
-- **Orientation/spacing mismatch**: SimpleITK preserves direction/origin; ensure segmentation aligns with CT before running Phase B.
+- **Orientation/spacing mismatch**: mesh vertices use the complete SimpleITK physical transform (direction, origin, and spacing); ensure segmentation aligns with CT before running Phase B. Mesh repair must not recenter the result.
 
 ## Tests
 `pytest phaseb/tests` runs small synthetic checks for IO, postprocessing invariants, physical scaling, and mesh/QC smoke coverage.

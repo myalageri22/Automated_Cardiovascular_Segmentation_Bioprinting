@@ -124,6 +124,7 @@ def run_phaseb_for_case(
     mask_path: str | Path,
     output_root: str | Path = "outputs/phase_b_mesh_qc",
     target_wall_thickness_mm: float = 3.0,
+    minimal: bool = False,
 ) -> Dict[str, Any]:
     imports = _optional_imports()
     output_root = Path(output_root)
@@ -152,11 +153,18 @@ def run_phaseb_for_case(
         row["connected_component_count"] = int(n_comp)
         if arr.sum() == 0:
             raise ValueError("empty mask")
-        verts, faces, _, _ = measure.marching_cubes(arr.astype(np.float32), level=0.5, spacing=spacing)
-        mesh = trimesh.Trimesh(vertices=verts, faces=faces, process=False)
+        # marching_cubes returns voxel indices in nibabel's x,y,z array order.
+        # Apply the complete affine so the STL retains the mask's RAS world
+        # frame, including origin, orientation/reflection, and voxel spacing.
+        verts_vox, faces, _, _ = measure.marching_cubes(
+            arr.astype(np.float32), level=0.5
+        )
+        verts_world = nib.affines.apply_affine(img.affine, verts_vox)
+        mesh = trimesh.Trimesh(vertices=verts_world, faces=faces, process=False)
         raw_path = case_dir / "segmentation_raw.stl"
-        mesh.export(raw_path)
-        rough_pre = _roughness_proxy(mesh)
+        if not minimal:
+            mesh.export(raw_path)
+        rough_pre = _roughness_proxy(mesh) if not minimal else None
         repaired = mesh.copy()
         repair_success = True
         try:
@@ -166,37 +174,62 @@ def run_phaseb_for_case(
             repair_success = False
         repaired_path = case_dir / "segmentation_repaired.stl"
         repaired.export(repaired_path)
-        smoothed = repaired.copy()
-        try:
-            trimesh.smoothing.filter_taubin(smoothed, iterations=10)
-        except Exception:
-            pass
-        smooth_path = case_dir / "segmentation_smoothed.stl"
-        smoothed.export(smooth_path)
-        rough_post = _roughness_proxy(smoothed)
-        volume_pre = float(repaired.volume) if repaired.is_watertight else np.nan
-        volume_post = float(smoothed.volume) if smoothed.is_watertight else np.nan
-        dt = ndi.distance_transform_edt(arr, sampling=spacing)
-        diameters = dt[arr > 0] * 2.0
-        compliance = float(np.mean(diameters >= target_wall_thickness_mm)) if diameters.size else "missing_dependency"
         row.update(_mesh_summary(repaired))
-        row.update(
-            {
-                "raw_stl": str(raw_path),
-                "repaired_stl": str(repaired_path),
-                "smoothed_stl": str(smooth_path),
-                "repair_success": bool(repair_success),
-                "surface_roughness_pre_mean": rough_pre["mean"],
-                "surface_roughness_pre_max": rough_pre["max"],
-                "surface_roughness_post_mean": rough_post["mean"],
-                "surface_roughness_post_max": rough_post["max"],
-                "smoothing_volume_change_relative": (
-                    float((volume_post - volume_pre) / volume_pre) if np.isfinite(volume_pre) and volume_pre else "not_watertight"
-                ),
-                "wall_thickness_compliance_fraction": compliance,
-                "slicer_compatibility_proxy": bool(repaired.faces.size and non_manifold_edge_count(repaired) == 0),
-            }
-        )
+        if minimal:
+            row.update(
+                {
+                    "raw_stl": "not_exported_minimal_qc",
+                    "repaired_stl": str(repaired_path),
+                    "smoothed_stl": "not_computed_minimal_qc",
+                    "repair_success": bool(repair_success),
+                    "smoothing_volume_change_relative": "not_computed_minimal_qc",
+                    "wall_thickness_compliance_fraction": "not_computed_minimal_qc",
+                    "slicer_compatibility_proxy": bool(
+                        repaired.faces.size and non_manifold_edge_count(repaired) == 0
+                    ),
+                }
+            )
+        else:
+            smoothed = repaired.copy()
+            try:
+                trimesh.smoothing.filter_taubin(
+                    smoothed, lamb=0.5, nu=0.5, iterations=10
+                )
+            except Exception:
+                pass
+            smooth_path = case_dir / "segmentation_smoothed.stl"
+            smoothed.export(smooth_path)
+            rough_post = _roughness_proxy(smoothed)
+            volume_pre = float(repaired.volume) if repaired.is_watertight else np.nan
+            volume_post = float(smoothed.volume) if smoothed.is_watertight else np.nan
+            dt = ndi.distance_transform_edt(arr, sampling=spacing)
+            diameters = dt[arr > 0] * 2.0
+            compliance = (
+                float(np.mean(diameters >= target_wall_thickness_mm))
+                if diameters.size
+                else "missing_dependency"
+            )
+            row.update(
+                {
+                    "raw_stl": str(raw_path),
+                    "repaired_stl": str(repaired_path),
+                    "smoothed_stl": str(smooth_path),
+                    "repair_success": bool(repair_success),
+                    "surface_roughness_pre_mean": rough_pre["mean"],
+                    "surface_roughness_pre_max": rough_pre["max"],
+                    "surface_roughness_post_mean": rough_post["mean"],
+                    "surface_roughness_post_max": rough_post["max"],
+                    "smoothing_volume_change_relative": (
+                        float((volume_post - volume_pre) / volume_pre)
+                        if np.isfinite(volume_pre) and volume_pre
+                        else "not_watertight"
+                    ),
+                    "wall_thickness_compliance_fraction": compliance,
+                    "slicer_compatibility_proxy": bool(
+                        repaired.faces.size and non_manifold_edge_count(repaired) == 0
+                    ),
+                }
+            )
     except Exception as exc:
         row["status"] = "failed"
         row["error"] = repr(exc)

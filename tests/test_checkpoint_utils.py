@@ -6,8 +6,13 @@ from scripts.checkpoint_utils import load_checkpoint_for_model, normalize_state_
 
 
 def test_normalize_state_dict_keys():
-    state = {"module.model.conv.weight": torch.ones(1)}
-    assert "conv.weight" in normalize_state_dict_keys(state)
+    state = {
+        "module.model.conv.weight": torch.ones(1),
+        "model.model.0.conv.weight": torch.ones(1),
+    }
+    normalized = normalize_state_dict_keys(state)
+    assert "model.conv.weight" in normalized
+    assert "model.0.conv.weight" in normalized
 
 
 def test_checkpoint_roundtrip(tmp_path: Path):
