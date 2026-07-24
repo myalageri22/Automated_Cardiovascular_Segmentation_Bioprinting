@@ -140,11 +140,23 @@ python run_missing_checks.py \
 
 The primary slicability definition requires every plane that intersects a mesh to contain only closed contours. The strict definition additionally requires all 50 requested planes to intersect and close. These definitions must not be interchanged.
 
-## Representative production-slicer demonstration
+## Production-slicer cohort validation
 
-`production_slicer_validation.py` automates PrusaSlicer invocation and verifies textual G-code, layer markers, positive-extrusion movements, support roles, warnings, and build-volume fit. The retained case-720 result is a single representative computational toolpath demonstration, not a cohort success rate or physical, bioprinter, bioink, or biological validation. See `outputs/production_slicer_validation/README.md` and `case720_verified_summary.json`.
+`production_slicer_validation.py` automates PrusaSlicer invocation and verifies textual G-code, layer markers, positive-extrusion movements, support roles, warnings, complete-STL processing, and reference build-volume fit. The authoritative publication result is the complete 250-case held-out test cohort in `outputs/production_slicer_validation/cohort_250_real/`.
 
-Large/private artifacts are intentionally excluded: ImageCAS images and labels, predictions, checkpoints beyond those already tracked, case-level NIfTI/STL payloads, generated G-code, caches, and temporary LaTeX products.
+The fixed computational reference profile is PrusaSlicer 2.9.6, Original Prusa MK4S, Generic PLA, a 0.4 mm nozzle, `0.20mm STRUCTURAL @MK4S 0.4`, 0.20 mm layers, two perimeters, 15% infill, native scale, retained source orientation, and automatic organic supports everywhere. Success requires exit status zero, nonempty textual G-code, at least one printed layer, and at least one spatial movement with positive extrusion.
+
+Recheck the retained CSV, summary, manifest, profile hash, cohort identity, warnings, and Phase B join with:
+
+```bash
+python verify_production_slicer_cohort.py
+```
+
+The earlier case-720 result remains an illustrative validation-partition example at threshold 0.4. It is not part of the 250-case held-out cohort, whose segmentation threshold is 0.5. See `outputs/production_slicer_validation/README.md` for the retained-artifact index and scope boundary.
+
+Large/private artifacts are intentionally excluded: ImageCAS images and labels, predictions, checkpoints beyond those already tracked, case-level NIfTI/STL payloads, generated G-code, caches, and temporary LaTeX products. Their compact derived results, provenance, and available hashes are retained.
+
+This is software-level production-slicer execution under one fixed computational profile. It is not physical printing, bioprinter or bioink validation, print-fidelity validation, biological validation, or evidence of clinical readiness.
 
 ## Utility Scripts:
 

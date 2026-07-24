@@ -1,0 +1,1 @@
+python production_slicer_validation.py --input-glob 'outputs/phase_b_mesh_qc/case_outputs/*/segmentation_repaired.stl' --prusaslicer /path/to/PrusaSlicer --profile outputs/production_slicer_validation/reference_profile_mk4s_0.4_pla_0.20_organic_auto.ini --output-dir outputs/production_slicer_validation/cohort_250_real --expected-cohort-size 250 --timeout-seconds 600

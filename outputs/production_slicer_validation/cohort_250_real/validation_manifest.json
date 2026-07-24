@@ -1,0 +1,1563 @@
+{
+  "case_filter": null,
+  "created_utc": "2026-07-24T07:04:13Z",
+  "discovered_inputs": [
+    {
+      "case_id": "1000",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/1000/segmentation_repaired.stl",
+      "sha256": "e59ce6bf6202dcd365ec761ffc7afa090d68be548581e5646763427ca07580f7",
+      "size_bytes": 3170384
+    },
+    {
+      "case_id": "751",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/751/segmentation_repaired.stl",
+      "sha256": "4f945c7497586368b04869771efde25275a07397daa6bc23446a58a71b9752fe",
+      "size_bytes": 3396884
+    },
+    {
+      "case_id": "752",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/752/segmentation_repaired.stl",
+      "sha256": "4987cd55f77e5a873ed004d7983a4ecc62c622ec28aa1bef4b4ed2ea19c41035",
+      "size_bytes": 3933384
+    },
+    {
+      "case_id": "753",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/753/segmentation_repaired.stl",
+      "sha256": "79630df096269fde4ad0cf4b8e7ef67c4738b22ca720a441692db9fc2e9b914b",
+      "size_bytes": 2073384
+    },
+    {
+      "case_id": "754",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/754/segmentation_repaired.stl",
+      "sha256": "766ecaf4ecba286dba72906548b19f6cd59d0340eafa617a539f72f03cde8c82",
+      "size_bytes": 2763684
+    },
+    {
+      "case_id": "755",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/755/segmentation_repaired.stl",
+      "sha256": "26b5a37b47c0a2d94c2b007f5682c4134321dcadb541c6f7774bbaa0839e4aa4",
+      "size_bytes": 2893784
+    },
+    {
+      "case_id": "756",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/756/segmentation_repaired.stl",
+      "sha256": "a3b84e335eaa2f83c1dbc2e494dd68cb28433cc398cf11c6bdc063e641c766b1",
+      "size_bytes": 2155984
+    },
+    {
+      "case_id": "757",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/757/segmentation_repaired.stl",
+      "sha256": "a92a40a7e065e60409fcf49359d4e33ef9517b1e874d8209cd54f4edc6bbabf4",
+      "size_bytes": 3321884
+    },
+    {
+      "case_id": "758",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/758/segmentation_repaired.stl",
+      "sha256": "88069a664402febdb1e2dfae3d987e5d0b0b39788b4e850724934c50c1c54ff6",
+      "size_bytes": 2638284
+    },
+    {
+      "case_id": "759",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/759/segmentation_repaired.stl",
+      "sha256": "c8ceab78d635b600b50807370905a63c52eb5ae2b9469590ed3d10364b133c62",
+      "size_bytes": 1920784
+    },
+    {
+      "case_id": "760",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/760/segmentation_repaired.stl",
+      "sha256": "7730fcc45962f213d5b4200d1a735aaea70b83c624b21084860e343711496d15",
+      "size_bytes": 3482884
+    },
+    {
+      "case_id": "761",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/761/segmentation_repaired.stl",
+      "sha256": "b89484118995ee59db868cd2216d95306b07fc6e13c23e07861f8acc43fa215b",
+      "size_bytes": 3747484
+    },
+    {
+      "case_id": "762",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/762/segmentation_repaired.stl",
+      "sha256": "082288c847e0d83b0d6b0b0b328316c91a50caf772201766108d061dd1ee87ae",
+      "size_bytes": 3844584
+    },
+    {
+      "case_id": "763",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/763/segmentation_repaired.stl",
+      "sha256": "0012d81ebc31dd4f629f1b3b7a699ecd67a76175b7c85ae1621be127b33ff195",
+      "size_bytes": 3858484
+    },
+    {
+      "case_id": "764",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/764/segmentation_repaired.stl",
+      "sha256": "ecc04b4f0cbcd77b1d5bc0662e8884ceb03b987e28eaafb5511fe2e8b084e942",
+      "size_bytes": 4801084
+    },
+    {
+      "case_id": "765",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/765/segmentation_repaired.stl",
+      "sha256": "58d5248ca5b5c659976e2c1b79618d5ea66a636b6cb0d8523ae9cdec95b5f394",
+      "size_bytes": 2903484
+    },
+    {
+      "case_id": "766",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/766/segmentation_repaired.stl",
+      "sha256": "5b9af3a8a8966120d4ece81626285cedbff3cec06278d23d46e019dfdb7806d5",
+      "size_bytes": 5367684
+    },
+    {
+      "case_id": "767",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/767/segmentation_repaired.stl",
+      "sha256": "a566c7aa8491029314f494b84c454de7984a9d119bd6ca95fe799be624ec1644",
+      "size_bytes": 2411784
+    },
+    {
+      "case_id": "768",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/768/segmentation_repaired.stl",
+      "sha256": "a5add6194a3d125da93d30a83e33eae15d2130273dc5306fab31143d8731111b",
+      "size_bytes": 2841884
+    },
+    {
+      "case_id": "769",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/769/segmentation_repaired.stl",
+      "sha256": "d1f804d378d5f3a16907864475b854a44a981884403778892d640e60f07e24a4",
+      "size_bytes": 3679184
+    },
+    {
+      "case_id": "770",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/770/segmentation_repaired.stl",
+      "sha256": "7ea19cabab906803c8d6e6c9ae5c69b060a1e44835232b9106e8bf660ce8da9d",
+      "size_bytes": 5031484
+    },
+    {
+      "case_id": "771",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/771/segmentation_repaired.stl",
+      "sha256": "507e63cb705d173861dc18a2686a7c7436a0d286d9d0e8612d4d2ce4930b25a8",
+      "size_bytes": 2999684
+    },
+    {
+      "case_id": "772",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/772/segmentation_repaired.stl",
+      "sha256": "c0443faf23b9dac0195c53d24996d18b8d0c934ae6a6d69bbe88b5be0e8efa68",
+      "size_bytes": 3243784
+    },
+    {
+      "case_id": "773",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/773/segmentation_repaired.stl",
+      "sha256": "3658618103fe0a381b98b089e87b1d3d99686d5b2d8d5c0e5d91d2c0362e8347",
+      "size_bytes": 2774484
+    },
+    {
+      "case_id": "774",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/774/segmentation_repaired.stl",
+      "sha256": "e06dcb724c934fb2a034eb0edbf3399259591338cdef93983b79842a1f44a32a",
+      "size_bytes": 2816284
+    },
+    {
+      "case_id": "775",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/775/segmentation_repaired.stl",
+      "sha256": "5a68b17e56c5fed459e0b1d22216e7e511c4932de5c6973c2c6e20f33611ee85",
+      "size_bytes": 2427484
+    },
+    {
+      "case_id": "776",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/776/segmentation_repaired.stl",
+      "sha256": "5716c96804780c09fef560872b75fb88bcd7849d8436fd681c1ab9d48e590e03",
+      "size_bytes": 3435684
+    },
+    {
+      "case_id": "777",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/777/segmentation_repaired.stl",
+      "sha256": "4e841b91d0a6d25336fb5077b00f6a319ab15b7dfd7e92705abd52f2b2006cb0",
+      "size_bytes": 2813984
+    },
+    {
+      "case_id": "778",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/778/segmentation_repaired.stl",
+      "sha256": "22efee6935941ed2ae0e0657581b82b74004bde8fd463ad024b8fcd8f63588df",
+      "size_bytes": 2821484
+    },
+    {
+      "case_id": "779",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/779/segmentation_repaired.stl",
+      "sha256": "2e15b44585a631caf5322eacfc450afbd77d060b09ba7f09da5bed6aa2975e2f",
+      "size_bytes": 3554984
+    },
+    {
+      "case_id": "780",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/780/segmentation_repaired.stl",
+      "sha256": "7096a303bbe30b0c87ad91206687e1ff6311e0177cc6e05f317f801a345f5abc",
+      "size_bytes": 3988584
+    },
+    {
+      "case_id": "781",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/781/segmentation_repaired.stl",
+      "sha256": "68a12434e281bf0f8b4eb472c63f1e0563f16919e3e42112e44657436bc77ab6",
+      "size_bytes": 2719084
+    },
+    {
+      "case_id": "782",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/782/segmentation_repaired.stl",
+      "sha256": "6575b72b3d558635c3d3a19d82121258eacc3478095f69132b71816cb0651972",
+      "size_bytes": 3873684
+    },
+    {
+      "case_id": "783",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/783/segmentation_repaired.stl",
+      "sha256": "8e0c29d66e6a4cfdfc69a6bbfabaa5a0ad6ce8664bdb3047537a1cc599551edc",
+      "size_bytes": 2587184
+    },
+    {
+      "case_id": "784",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/784/segmentation_repaired.stl",
+      "sha256": "8f9ca6001005761db21b24856cb08a80e7efab5bf015a45e795600e3bc99e696",
+      "size_bytes": 2645284
+    },
+    {
+      "case_id": "785",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/785/segmentation_repaired.stl",
+      "sha256": "994592692bac28e76103055e93f92590309894a5a36aac26383b0c23440c7581",
+      "size_bytes": 1904884
+    },
+    {
+      "case_id": "786",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/786/segmentation_repaired.stl",
+      "sha256": "bd840e6ba65e671fd34b83c3db1d14a1ed66ae842a7d6e4f1b7449aba7288695",
+      "size_bytes": 2806884
+    },
+    {
+      "case_id": "787",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/787/segmentation_repaired.stl",
+      "sha256": "7f8313cc09c9413521093a691f1f105d530c49255e4f5c650eacf492042075bc",
+      "size_bytes": 2584284
+    },
+    {
+      "case_id": "788",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/788/segmentation_repaired.stl",
+      "sha256": "d10c4988d155d1f2f666fae59bc09af880be354751c23142cbba5245d31d2072",
+      "size_bytes": 3893084
+    },
+    {
+      "case_id": "789",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/789/segmentation_repaired.stl",
+      "sha256": "633e1b0946b95df8bb88cfdba391eb147936945588c0e7e8c1c611767e6dfd28",
+      "size_bytes": 3206084
+    },
+    {
+      "case_id": "790",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/790/segmentation_repaired.stl",
+      "sha256": "594ecac9d3c008fc3f0fb84cda8a446a2428a135c3040685d127425f078ff06d",
+      "size_bytes": 3120084
+    },
+    {
+      "case_id": "791",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/791/segmentation_repaired.stl",
+      "sha256": "470925971a70423a58f6c3cf1d8ebb6a75a8f1fe71ec00aa28d1a36b46be4bad",
+      "size_bytes": 4215284
+    },
+    {
+      "case_id": "792",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/792/segmentation_repaired.stl",
+      "sha256": "474ecf966a4505a8fc376a9e445ae08717db836b565c5e1a5ed6684c61656bc7",
+      "size_bytes": 2444384
+    },
+    {
+      "case_id": "793",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/793/segmentation_repaired.stl",
+      "sha256": "537f6c7d275fb329fb8e0ae65001261e5598d43c2d7ba2584ff2ec39cd1a7c0e",
+      "size_bytes": 2126084
+    },
+    {
+      "case_id": "794",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/794/segmentation_repaired.stl",
+      "sha256": "950965c7c0fe1b393d60c42f5575a02b16699066cee80c29eb01280447a06e61",
+      "size_bytes": 4391884
+    },
+    {
+      "case_id": "795",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/795/segmentation_repaired.stl",
+      "sha256": "d2901290c6ec0b469b490335113a37335c8944974ef1454f48a5f51d4adcf00c",
+      "size_bytes": 2573084
+    },
+    {
+      "case_id": "796",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/796/segmentation_repaired.stl",
+      "sha256": "5bc65a2a4404bb2ec1fe060d6da8e28bd929015d2736d0e94f2adc8409ff98b5",
+      "size_bytes": 3021084
+    },
+    {
+      "case_id": "797",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/797/segmentation_repaired.stl",
+      "sha256": "b65403ad4a0a0c87592d4bce66cb490daa519e45575ade514885db3a5078ec81",
+      "size_bytes": 3153584
+    },
+    {
+      "case_id": "798",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/798/segmentation_repaired.stl",
+      "sha256": "20917e8c182145d9c2fa27e153379de568fa9b9628ce33f066ffec1e848d3797",
+      "size_bytes": 4276184
+    },
+    {
+      "case_id": "799",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/799/segmentation_repaired.stl",
+      "sha256": "5af3779c1cd5b610a358225a7c7bee4c9007c654876b8477371e9e55841c1291",
+      "size_bytes": 3670984
+    },
+    {
+      "case_id": "800",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/800/segmentation_repaired.stl",
+      "sha256": "7e3a94b4289434233b16a851dbec6fd164ee85fe69d2079f84293ed05f7bc53f",
+      "size_bytes": 4122884
+    },
+    {
+      "case_id": "801",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/801/segmentation_repaired.stl",
+      "sha256": "75632e54425e437adb4265f80b48bded246049e1e178790425fed2d921da5f23",
+      "size_bytes": 3954684
+    },
+    {
+      "case_id": "802",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/802/segmentation_repaired.stl",
+      "sha256": "ca8255ac54b5c6b529462c196036f685689222744323d6cd5af3ce85d62061f2",
+      "size_bytes": 2666684
+    },
+    {
+      "case_id": "803",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/803/segmentation_repaired.stl",
+      "sha256": "d223452d97ae82ff4b9ea44a51c282e6e75702e15f6055a7a697a6ca184dbaa4",
+      "size_bytes": 3384784
+    },
+    {
+      "case_id": "804",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/804/segmentation_repaired.stl",
+      "sha256": "aac53ee70f4129ba3480caf5db7f5d8a0644eae433969fc60b288d75ca08a9b2",
+      "size_bytes": 2520584
+    },
+    {
+      "case_id": "805",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/805/segmentation_repaired.stl",
+      "sha256": "643daf20e52de3d8fe8ad64a1584bb9d9d91df5a7ad329f2d5b986b0bb913232",
+      "size_bytes": 3509084
+    },
+    {
+      "case_id": "806",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/806/segmentation_repaired.stl",
+      "sha256": "a67da9c7258e64e034681a98b6c296ddcfe1df267d762feac107aa0c797fcee4",
+      "size_bytes": 3330084
+    },
+    {
+      "case_id": "807",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/807/segmentation_repaired.stl",
+      "sha256": "367e77098fadb7d2c038621c5c47336f9906e3b0a9c04b9e9093ba3a26e69141",
+      "size_bytes": 3512784
+    },
+    {
+      "case_id": "808",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/808/segmentation_repaired.stl",
+      "sha256": "a4ca8f5c594b1ec1dfd132b81d6f227271fb092096b7471d7494236affd7a17e",
+      "size_bytes": 3283084
+    },
+    {
+      "case_id": "809",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/809/segmentation_repaired.stl",
+      "sha256": "eaa56b17c7c9c1331c4bdc0bef29fbe164dc12e4c529752a30c6917a5d78d0bb",
+      "size_bytes": 841084
+    },
+    {
+      "case_id": "810",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/810/segmentation_repaired.stl",
+      "sha256": "5c699ac06933595c0032b531972a7795f531e0f51cbabff5c96eafdaff643c22",
+      "size_bytes": 3105884
+    },
+    {
+      "case_id": "811",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/811/segmentation_repaired.stl",
+      "sha256": "cccfdaa84ef10ba8d4a40c32c92ef109710d217fc508fd42db88f202dc01c6a1",
+      "size_bytes": 2817884
+    },
+    {
+      "case_id": "812",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/812/segmentation_repaired.stl",
+      "sha256": "f85fcd7e5a14c74a9443ebe8af1294b0e4caf53da6529b496dcf481e0e6c5675",
+      "size_bytes": 4058084
+    },
+    {
+      "case_id": "813",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/813/segmentation_repaired.stl",
+      "sha256": "54e9f23bba42e00e3b9e71d145b670d43d10594f53f8a0e9b8373b560b4ded35",
+      "size_bytes": 2380884
+    },
+    {
+      "case_id": "814",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/814/segmentation_repaired.stl",
+      "sha256": "974b92ee53d7e86d76adcb713c445022aca8e603395781249a0a674151d26e56",
+      "size_bytes": 3914584
+    },
+    {
+      "case_id": "815",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/815/segmentation_repaired.stl",
+      "sha256": "233e463de741d99dfbaa1f689895d01a6451fb516eec97344f3167a25c365186",
+      "size_bytes": 4015184
+    },
+    {
+      "case_id": "816",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/816/segmentation_repaired.stl",
+      "sha256": "143900b406f78d5fd92731a8920c18edf4c5ddd97ff9cb780921e32494e57ba9",
+      "size_bytes": 2277184
+    },
+    {
+      "case_id": "817",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/817/segmentation_repaired.stl",
+      "sha256": "a3d86307d7b3bff99877beca6b13c092599422593943b3a13a1ef9c53c868f87",
+      "size_bytes": 3316084
+    },
+    {
+      "case_id": "818",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/818/segmentation_repaired.stl",
+      "sha256": "97be6e4fa87cfeff55e95a0314a4a526134a0e69829389ae64457e77f7433a81",
+      "size_bytes": 2815684
+    },
+    {
+      "case_id": "819",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/819/segmentation_repaired.stl",
+      "sha256": "06de3a6912d39ee310d7094a444ba456c385a361be99e4ff4748668abcd43f84",
+      "size_bytes": 3630884
+    },
+    {
+      "case_id": "820",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/820/segmentation_repaired.stl",
+      "sha256": "f37517478eb7f1e504f8d725a7718e3c927c66844b5597010e6926298e900156",
+      "size_bytes": 2916084
+    },
+    {
+      "case_id": "821",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/821/segmentation_repaired.stl",
+      "sha256": "4c2def22a1f31e0028810d617c76c17a831faa56c5ff3f1bf3f4947920417547",
+      "size_bytes": 2295884
+    },
+    {
+      "case_id": "822",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/822/segmentation_repaired.stl",
+      "sha256": "65d088a841e0ad490330114adb5edce3e5c40d7ebfdd70b53ab56b3cc2b1f1c9",
+      "size_bytes": 4077184
+    },
+    {
+      "case_id": "823",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/823/segmentation_repaired.stl",
+      "sha256": "6e40174965fbeda8e2125bca67879071f8a7b82f2e60f233911cf229d902ea7f",
+      "size_bytes": 2985884
+    },
+    {
+      "case_id": "824",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/824/segmentation_repaired.stl",
+      "sha256": "41a4df0739098815533bf68d8b0b748ff5ff6fe131dd60edee296a49aced2c04",
+      "size_bytes": 2456884
+    },
+    {
+      "case_id": "825",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/825/segmentation_repaired.stl",
+      "sha256": "631ecc4a0f468fc172abb084b94e67a01d5a280645238f74b18879bbfef5f98f",
+      "size_bytes": 2718584
+    },
+    {
+      "case_id": "826",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/826/segmentation_repaired.stl",
+      "sha256": "ad53dfc46dd9220374bc826b1669bb473584417cda3da39c6d5169c46342ded4",
+      "size_bytes": 4683284
+    },
+    {
+      "case_id": "827",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/827/segmentation_repaired.stl",
+      "sha256": "279cfc9be98f22dc0be0ab7121336132357189a6e07a9c08acfbc7d98ee17989",
+      "size_bytes": 3456084
+    },
+    {
+      "case_id": "828",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/828/segmentation_repaired.stl",
+      "sha256": "360222d029491c48c8b1ea51e315247b93a4ae0f2567b0999d2ed942a8b716a8",
+      "size_bytes": 4072884
+    },
+    {
+      "case_id": "829",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/829/segmentation_repaired.stl",
+      "sha256": "c9e428a8052ca4d726c9457d5afde39698eb66758283f91a103c6528578e574e",
+      "size_bytes": 3964584
+    },
+    {
+      "case_id": "830",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/830/segmentation_repaired.stl",
+      "sha256": "089a84b5251b074582fd17c2fb066914fc90bec7a23dffa4d2465e07db0b18f9",
+      "size_bytes": 2848584
+    },
+    {
+      "case_id": "831",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/831/segmentation_repaired.stl",
+      "sha256": "157ed1929b1cfd0d5d36373bb396b72af1302ecfb23f5b0c207ed04af0332963",
+      "size_bytes": 3643984
+    },
+    {
+      "case_id": "832",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/832/segmentation_repaired.stl",
+      "sha256": "51c8723cae8b503b3d65c2c17d48db7b77d7bf5aec56b1b9cd5d48ec3cbe964a",
+      "size_bytes": 3802684
+    },
+    {
+      "case_id": "833",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/833/segmentation_repaired.stl",
+      "sha256": "fb787304876bc4b2948bfaa197ed555f3541d0d608047a3f6d51c72e910f0419",
+      "size_bytes": 3094684
+    },
+    {
+      "case_id": "834",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/834/segmentation_repaired.stl",
+      "sha256": "137791b43eb72bf1c03d580027c901ead7f7c3efeb4dac37ca8726bdf084920d",
+      "size_bytes": 3749384
+    },
+    {
+      "case_id": "835",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/835/segmentation_repaired.stl",
+      "sha256": "0d274d16359e7626fed6d24c6c2833190ea3ff5aec864e3bd03e9a6f2bf0d1e8",
+      "size_bytes": 2644584
+    },
+    {
+      "case_id": "836",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/836/segmentation_repaired.stl",
+      "sha256": "5eb7cd453a653441df30f6cb2ef0c88dc84badd8480cbba4047d960e0608adbe",
+      "size_bytes": 2435284
+    },
+    {
+      "case_id": "837",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/837/segmentation_repaired.stl",
+      "sha256": "9f7581e34cd7a69919a7de5285b94e0cc8f9ff0e149fa0c8549b798f4d28a729",
+      "size_bytes": 3523284
+    },
+    {
+      "case_id": "838",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/838/segmentation_repaired.stl",
+      "sha256": "9475060cf486e56b5543cfdb27b8b738b414a21480838e00126732c9fe8063bd",
+      "size_bytes": 3064184
+    },
+    {
+      "case_id": "839",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/839/segmentation_repaired.stl",
+      "sha256": "7463f8ee5cefa2fd29261d7d441c481f5f997af055a85bea20253e52820254cd",
+      "size_bytes": 2852884
+    },
+    {
+      "case_id": "840",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/840/segmentation_repaired.stl",
+      "sha256": "a6a410cadec11302d1d74c8af08fc89561674ff54d07b7ecf295a0713240927f",
+      "size_bytes": 3292484
+    },
+    {
+      "case_id": "841",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/841/segmentation_repaired.stl",
+      "sha256": "350c8bd6d47a868878ed74ce8a0ac6e46135113b50bd0298680f416841b201c7",
+      "size_bytes": 2352684
+    },
+    {
+      "case_id": "842",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/842/segmentation_repaired.stl",
+      "sha256": "a76ae3234ba24893bfd7e06a271923d40152e95289369bc85a2af024be9581c8",
+      "size_bytes": 3241284
+    },
+    {
+      "case_id": "843",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/843/segmentation_repaired.stl",
+      "sha256": "8d6647d38c6fc19dc5fe895eb95e00251281aaa70c21ae6bc6297dd508a07f96",
+      "size_bytes": 2556284
+    },
+    {
+      "case_id": "844",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/844/segmentation_repaired.stl",
+      "sha256": "8bd0426bb1158f2ed03105364c230ad8b873ab5b56f7adc5a49c26015c9cdd49",
+      "size_bytes": 2970284
+    },
+    {
+      "case_id": "845",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/845/segmentation_repaired.stl",
+      "sha256": "55605da61ea7cd94396f57d4feae0b1bef0c9e37a9640484455268cac6c2c339",
+      "size_bytes": 3495284
+    },
+    {
+      "case_id": "846",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/846/segmentation_repaired.stl",
+      "sha256": "3881467767680e0c026ee777ad74c4a5ab6ebb20138151e180a271cb2aa14295",
+      "size_bytes": 2889984
+    },
+    {
+      "case_id": "847",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/847/segmentation_repaired.stl",
+      "sha256": "a9f363d35cdd27d2ba2d60643ec03ec4b26588c6289dd3f841e551c2660736cc",
+      "size_bytes": 2867284
+    },
+    {
+      "case_id": "848",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/848/segmentation_repaired.stl",
+      "sha256": "d4525d5b4e45c28577a40ae27553bb4544c4cc4b844b6fa37551f4e40a4214c5",
+      "size_bytes": 1793484
+    },
+    {
+      "case_id": "849",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/849/segmentation_repaired.stl",
+      "sha256": "e2d313b8fa432dd43ad786b2276c3acc76013990d97a5adb45cfc3b15293a372",
+      "size_bytes": 4118284
+    },
+    {
+      "case_id": "850",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/850/segmentation_repaired.stl",
+      "sha256": "2ceed1fd2c4a07a8e5af789b921af90c041cc9c3820b57373ea01346499bc2bd",
+      "size_bytes": 2223284
+    },
+    {
+      "case_id": "851",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/851/segmentation_repaired.stl",
+      "sha256": "bbe2b9857ac66463e507c9666c41529d7fb4e568d6110f1e289449fe431a9ce2",
+      "size_bytes": 2939784
+    },
+    {
+      "case_id": "852",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/852/segmentation_repaired.stl",
+      "sha256": "e819d9df9db398cce7f58226d364b7d55b6940d0253f4c147fb7b5c039ae0fbc",
+      "size_bytes": 4031084
+    },
+    {
+      "case_id": "853",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/853/segmentation_repaired.stl",
+      "sha256": "26617c2d6903bbb338c851cebb226563789991ba5a0e1a523b7fc65480913e33",
+      "size_bytes": 2413184
+    },
+    {
+      "case_id": "854",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/854/segmentation_repaired.stl",
+      "sha256": "581a48fbb31fadcd4aa846462328e8ec0b7598b7efe29fee209d6590160bb893",
+      "size_bytes": 2728484
+    },
+    {
+      "case_id": "855",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/855/segmentation_repaired.stl",
+      "sha256": "5b7dbbf0ac397336ee0954e686f3546c693faaad130aaa768e2db8cbbd185612",
+      "size_bytes": 4014584
+    },
+    {
+      "case_id": "856",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/856/segmentation_repaired.stl",
+      "sha256": "1452a73fbbe241e6625b6f68e25845e70cbcdfa755a98ce1c0a88efe84b0d094",
+      "size_bytes": 3476684
+    },
+    {
+      "case_id": "857",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/857/segmentation_repaired.stl",
+      "sha256": "de34ff4d7d011d31e13ddcf83aeebd1ce8aec5e66741850d1453b1b47bce9534",
+      "size_bytes": 4948584
+    },
+    {
+      "case_id": "858",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/858/segmentation_repaired.stl",
+      "sha256": "91b8db8d94eb39d93a2d4593d5d9d74ece3c82a159a100d45c4f9766a82ad4ed",
+      "size_bytes": 2763584
+    },
+    {
+      "case_id": "859",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/859/segmentation_repaired.stl",
+      "sha256": "42e9ace45e4b9160b5ec9bd30b144f73df4ef0a026b511eb462c7174991a875c",
+      "size_bytes": 4123184
+    },
+    {
+      "case_id": "860",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/860/segmentation_repaired.stl",
+      "sha256": "f5b1416eff649dd6e027d69fbe017b0d10b398f7acb681486ece824d11a5e264",
+      "size_bytes": 3103384
+    },
+    {
+      "case_id": "861",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/861/segmentation_repaired.stl",
+      "sha256": "c025aae6a8fb26efd530aa407549549679c4fe19e6ce02d618963b91fa252800",
+      "size_bytes": 1616284
+    },
+    {
+      "case_id": "862",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/862/segmentation_repaired.stl",
+      "sha256": "04919fa4189b66789abfd703743b74294701a8cd67a87b9c6e0dbc06b884613e",
+      "size_bytes": 3761484
+    },
+    {
+      "case_id": "863",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/863/segmentation_repaired.stl",
+      "sha256": "f350f979cd23b27275aef13657d51bebb1120a3655ec88b4c8ae9d61f3e556eb",
+      "size_bytes": 3047984
+    },
+    {
+      "case_id": "864",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/864/segmentation_repaired.stl",
+      "sha256": "3d4e2bb228aabdbf44547de38b52049e94af2969148fd1cd63e3f6e7a92e1cd7",
+      "size_bytes": 3891384
+    },
+    {
+      "case_id": "865",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/865/segmentation_repaired.stl",
+      "sha256": "34999283515deac8be78b2509fcbf428644ff12689c8130082154cf53bbc616b",
+      "size_bytes": 2528284
+    },
+    {
+      "case_id": "866",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/866/segmentation_repaired.stl",
+      "sha256": "b338d7c6258efe0cd4bae7ff1d958d0b1f75c2696262485654e724033e285400",
+      "size_bytes": 3648484
+    },
+    {
+      "case_id": "867",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/867/segmentation_repaired.stl",
+      "sha256": "9e04d583e2366759a001596f48b2e50942b80f3f1df8b0cb13a2acb9474863e8",
+      "size_bytes": 4651384
+    },
+    {
+      "case_id": "868",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/868/segmentation_repaired.stl",
+      "sha256": "8b2531035c50d3402dc94bb05760eef18641c4f4406fe25c7b5fd0c7f7dc2f14",
+      "size_bytes": 1718384
+    },
+    {
+      "case_id": "869",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/869/segmentation_repaired.stl",
+      "sha256": "ef19d704d07252acf94659e56f49f2dda3920b85b0fb1db52c1e6ed1329fb032",
+      "size_bytes": 3403884
+    },
+    {
+      "case_id": "870",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/870/segmentation_repaired.stl",
+      "sha256": "cc192fa95048f16b8b394c3588e567662b0652a75d451a356aaf6936bdae3792",
+      "size_bytes": 2687384
+    },
+    {
+      "case_id": "871",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/871/segmentation_repaired.stl",
+      "sha256": "7bc37ae100d4583d4451a8305c5a186af37aabdd8dbc486c8a92a74b8bd53c5b",
+      "size_bytes": 3028384
+    },
+    {
+      "case_id": "872",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/872/segmentation_repaired.stl",
+      "sha256": "fd736e65fc6eb894875ef00f0c5e2243a614ce23f9b012525cd4904aa61869a6",
+      "size_bytes": 2708784
+    },
+    {
+      "case_id": "873",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/873/segmentation_repaired.stl",
+      "sha256": "360f21d8f9f38a6a2348d97415729656472acbb9abc345f9c4c68305aae10488",
+      "size_bytes": 3405884
+    },
+    {
+      "case_id": "874",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/874/segmentation_repaired.stl",
+      "sha256": "cc27cc14614ff2309fddfc5dd76f8588e6d860e28d800bbf6d8ab8b2bef7ac88",
+      "size_bytes": 2748784
+    },
+    {
+      "case_id": "875",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/875/segmentation_repaired.stl",
+      "sha256": "d68bea6d0bedabe251b6b112baea320cc89dfb8caaf5596eb9d1b4855734fbca",
+      "size_bytes": 3788484
+    },
+    {
+      "case_id": "876",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/876/segmentation_repaired.stl",
+      "sha256": "042049806b557abea275183353f1d3874769fb1c787a47af18132cd91ca289fc",
+      "size_bytes": 2720984
+    },
+    {
+      "case_id": "877",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/877/segmentation_repaired.stl",
+      "sha256": "a66ae764b21b8308c67323800c920c6d80b2fc3da65431e4468a1d2a91dabaaa",
+      "size_bytes": 3154184
+    },
+    {
+      "case_id": "878",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/878/segmentation_repaired.stl",
+      "sha256": "b6bf61f6e0644944f99ce76214256bd4f97de238f3029c98f24c7cbf064c93e3",
+      "size_bytes": 2864684
+    },
+    {
+      "case_id": "879",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/879/segmentation_repaired.stl",
+      "sha256": "a97ab101126a9353a539cae615a50b045b65891d921a3a6a20e8983b0ebe5d77",
+      "size_bytes": 3219884
+    },
+    {
+      "case_id": "880",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/880/segmentation_repaired.stl",
+      "sha256": "46f313f9f120436aa08dafc3e7ace81e85aba44c463139f9e4d73a200cd579f4",
+      "size_bytes": 2265284
+    },
+    {
+      "case_id": "881",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/881/segmentation_repaired.stl",
+      "sha256": "f6fc0b5bc7d13a136ea0099fb7799a001d1a4efdc8977832e31cd66e3cfc400b",
+      "size_bytes": 3032784
+    },
+    {
+      "case_id": "882",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/882/segmentation_repaired.stl",
+      "sha256": "25e3d5b48c8a47a5ef033ead12adfe71fc4ad3ea62d84094aa3d0c34be3a803d",
+      "size_bytes": 3970884
+    },
+    {
+      "case_id": "883",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/883/segmentation_repaired.stl",
+      "sha256": "57c52b16014f458138e59510f581594e6bc3357b1fdad1373152b55c5a6f12e5",
+      "size_bytes": 3025084
+    },
+    {
+      "case_id": "884",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/884/segmentation_repaired.stl",
+      "sha256": "03d3d8808739943feaf7dd0822bf2aafbc52a2c4cecaeed7c00e0f8b814950c4",
+      "size_bytes": 1881684
+    },
+    {
+      "case_id": "885",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/885/segmentation_repaired.stl",
+      "sha256": "0a3eca2d4fd784a14bd9f3a039c06f6d29554e4b2f0b2091bf29cc87914704c8",
+      "size_bytes": 2725584
+    },
+    {
+      "case_id": "886",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/886/segmentation_repaired.stl",
+      "sha256": "1e2d71995e2c84b92a95862306a08ea9201632cad7646862617c1cdfc51361fb",
+      "size_bytes": 4386484
+    },
+    {
+      "case_id": "887",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/887/segmentation_repaired.stl",
+      "sha256": "a7d058b84aa260fc7988b13b40d5b2bc876a45742800d4ea24684da27c253064",
+      "size_bytes": 3438584
+    },
+    {
+      "case_id": "888",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/888/segmentation_repaired.stl",
+      "sha256": "4bb57373a7e8dccddfb6b9fc4062df0a55932deae437aedbe60d9279a25b4daf",
+      "size_bytes": 2131684
+    },
+    {
+      "case_id": "889",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/889/segmentation_repaired.stl",
+      "sha256": "25de69926247078c45fe9b509aa34232727f50d3a986abd5e6d047dd644ae788",
+      "size_bytes": 2312384
+    },
+    {
+      "case_id": "890",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/890/segmentation_repaired.stl",
+      "sha256": "0ac059893189e1230ea5a10eb2986c730d65bfe977be81101bc474da8442d89b",
+      "size_bytes": 2288284
+    },
+    {
+      "case_id": "891",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/891/segmentation_repaired.stl",
+      "sha256": "ea5acbd77f4bf526cb5e487b027920bfbaba90ced78e24f44f263b27976d2746",
+      "size_bytes": 2418284
+    },
+    {
+      "case_id": "892",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/892/segmentation_repaired.stl",
+      "sha256": "760d46084223bc0f606e3e271988156d38daa0be26ba12b107474c87d756ed7d",
+      "size_bytes": 3873784
+    },
+    {
+      "case_id": "893",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/893/segmentation_repaired.stl",
+      "sha256": "c472434b951e80234b376cb89b42bc027b05dac95f89e018144914c2a4b620dc",
+      "size_bytes": 3076184
+    },
+    {
+      "case_id": "894",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/894/segmentation_repaired.stl",
+      "sha256": "5741680a820fb138a5026cb0b571f2885f4749e7ad9be22bc1fcfdeb1a0dfa06",
+      "size_bytes": 3496284
+    },
+    {
+      "case_id": "895",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/895/segmentation_repaired.stl",
+      "sha256": "352a411123418187d40951cd91bcaf5bc7366f3c43353a563563e4f9beddea6e",
+      "size_bytes": 3659984
+    },
+    {
+      "case_id": "896",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/896/segmentation_repaired.stl",
+      "sha256": "1f15e24dd8976e8b1cb12ee70caad4f202a3fe06802f0c3320f61f182ea65670",
+      "size_bytes": 1964684
+    },
+    {
+      "case_id": "897",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/897/segmentation_repaired.stl",
+      "sha256": "950ce8ef9f1f669728d0b4bc68883bd3fde35d802b88ca5bce97aab5b8537701",
+      "size_bytes": 3365984
+    },
+    {
+      "case_id": "898",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/898/segmentation_repaired.stl",
+      "sha256": "8353b095ca8297c64cd97d6577a01fd215d5dd17bcc39edd40987a6c9f1ba6d5",
+      "size_bytes": 3784784
+    },
+    {
+      "case_id": "899",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/899/segmentation_repaired.stl",
+      "sha256": "236d2e1cd7be3aeafa20851ca72c3a0bdd0be9eb8f2df502fca14b95b827c881",
+      "size_bytes": 2704484
+    },
+    {
+      "case_id": "900",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/900/segmentation_repaired.stl",
+      "sha256": "32271f7561fad1d34274b9c0e19ce07a874c01983f30e05933f276bbf47927e2",
+      "size_bytes": 2714184
+    },
+    {
+      "case_id": "901",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/901/segmentation_repaired.stl",
+      "sha256": "f7235f3a5613c01ef66cf2fc7bf3394fe2187401e37881631759e404e89bd202",
+      "size_bytes": 3171984
+    },
+    {
+      "case_id": "902",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/902/segmentation_repaired.stl",
+      "sha256": "6e939e88743f22349ce2ea8874d444a948bf6dc31909ed7bc83f40586e5672c9",
+      "size_bytes": 3940584
+    },
+    {
+      "case_id": "903",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/903/segmentation_repaired.stl",
+      "sha256": "b7f1545a8469de1ee7f9dd9e1bc1b7f4571e69917255dfd34f48e758b051f2e8",
+      "size_bytes": 2917884
+    },
+    {
+      "case_id": "904",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/904/segmentation_repaired.stl",
+      "sha256": "94bee1a2e755b06d0d38a5aacb6bc1f494de720538a11cd58357ca8eb0cb20e8",
+      "size_bytes": 3391184
+    },
+    {
+      "case_id": "905",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/905/segmentation_repaired.stl",
+      "sha256": "18b9ab553351ddd5ca09ec3d819e1c3a2569eb667f17b965a69c6095c2dd2486",
+      "size_bytes": 3146684
+    },
+    {
+      "case_id": "906",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/906/segmentation_repaired.stl",
+      "sha256": "0a4cfd74455770c998fa5df316afd8af3095465b2d3901784c827a064a6c0137",
+      "size_bytes": 2531384
+    },
+    {
+      "case_id": "907",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/907/segmentation_repaired.stl",
+      "sha256": "bbbdb03f006bd99dcc9a60ccbcc70632312172aff61ec85de3620618a49ac4d9",
+      "size_bytes": 2696584
+    },
+    {
+      "case_id": "908",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/908/segmentation_repaired.stl",
+      "sha256": "5ab672e0d5067da023d042f9e6549184121e0a9c394a5e2642b57337672299d6",
+      "size_bytes": 3173084
+    },
+    {
+      "case_id": "909",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/909/segmentation_repaired.stl",
+      "sha256": "3dcd64620df9fdb6c3723c2a41d92bc4557e3c5ce53c74eb422c04c2fad2f41e",
+      "size_bytes": 2586984
+    },
+    {
+      "case_id": "910",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/910/segmentation_repaired.stl",
+      "sha256": "2ef3329298dbd615f55273b9af24613205fbad25268d5344884effa18372e50b",
+      "size_bytes": 3895384
+    },
+    {
+      "case_id": "911",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/911/segmentation_repaired.stl",
+      "sha256": "484fe04880b4389c9907b0359550e73cae0cf44e847b1cbd5270756eaa8e6d1f",
+      "size_bytes": 2799784
+    },
+    {
+      "case_id": "912",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/912/segmentation_repaired.stl",
+      "sha256": "c48343318cc55acf2de5c847087e9574ddf5da485e73cd96cfe41bb7c9fa7c8d",
+      "size_bytes": 3156384
+    },
+    {
+      "case_id": "913",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/913/segmentation_repaired.stl",
+      "sha256": "6a1c15442a84e2397f9181e12449e9c2ac65e2760ea9d39fd328ddb5f42e6e38",
+      "size_bytes": 3498684
+    },
+    {
+      "case_id": "914",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/914/segmentation_repaired.stl",
+      "sha256": "d101eb6e1b0257e031c6534135f88218de6957f435ab203b9f77a48ac392aa91",
+      "size_bytes": 2224684
+    },
+    {
+      "case_id": "915",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/915/segmentation_repaired.stl",
+      "sha256": "5c30b74d00b517cd7f97f40cb5b0f8e0ae82810879cc712887877b0f7bf220cf",
+      "size_bytes": 4114284
+    },
+    {
+      "case_id": "916",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/916/segmentation_repaired.stl",
+      "sha256": "e9c1400fd7f9d4fca66a55e1767475635764f7dc6f82a809ba86ceeaa556e605",
+      "size_bytes": 3144384
+    },
+    {
+      "case_id": "917",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/917/segmentation_repaired.stl",
+      "sha256": "87ce2a544e690317058312f10a8b261704f8229fc1857ddda2268111b2e53cbd",
+      "size_bytes": 3797584
+    },
+    {
+      "case_id": "918",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/918/segmentation_repaired.stl",
+      "sha256": "27b3ae7ec063ec92c3a00567a963677176648116864bbe8a90a3114d18b29f14",
+      "size_bytes": 2613784
+    },
+    {
+      "case_id": "919",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/919/segmentation_repaired.stl",
+      "sha256": "30301fb672364498649617d240e132326593e0a58f1702c85704d90dd2446478",
+      "size_bytes": 2996684
+    },
+    {
+      "case_id": "920",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/920/segmentation_repaired.stl",
+      "sha256": "43934d0b7e720fd482176d85efffef0554723243acdfe0e05e950dd82342cca0",
+      "size_bytes": 3207684
+    },
+    {
+      "case_id": "921",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/921/segmentation_repaired.stl",
+      "sha256": "5f1a1dfdaa8e5ed2c6b7da9fe23829786f7efb3aa8d46be8a0e0ed78bc076f12",
+      "size_bytes": 3201284
+    },
+    {
+      "case_id": "922",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/922/segmentation_repaired.stl",
+      "sha256": "fd6a534b9c0c2a7f039bf9d930d9af198204e05694e276147e5237639f8a559e",
+      "size_bytes": 1665884
+    },
+    {
+      "case_id": "923",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/923/segmentation_repaired.stl",
+      "sha256": "53740b2e1c4a6082a82d578ed4aa74347f42800f2c5a8a94c6c4c71f89ad9704",
+      "size_bytes": 3626084
+    },
+    {
+      "case_id": "924",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/924/segmentation_repaired.stl",
+      "sha256": "3dc57c28204ef3855f59aa609c21491ba0cd954bdf56fe80c3f6eb5cd8e994f4",
+      "size_bytes": 3759284
+    },
+    {
+      "case_id": "925",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/925/segmentation_repaired.stl",
+      "sha256": "85a657b2a0b86c79df1327046ad92b72d806e99df05f3f5a4bdc9969c5ebde83",
+      "size_bytes": 3263484
+    },
+    {
+      "case_id": "926",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/926/segmentation_repaired.stl",
+      "sha256": "e73856cf14bb7e0d8a48be6dc570eb59803d6278fd7a3d5a2acc24214637cf48",
+      "size_bytes": 2309484
+    },
+    {
+      "case_id": "927",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/927/segmentation_repaired.stl",
+      "sha256": "8eb2bcd9d1e0a740360bb61a1c12056bcbda9868f643391af4432027dd15e1ae",
+      "size_bytes": 2999984
+    },
+    {
+      "case_id": "928",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/928/segmentation_repaired.stl",
+      "sha256": "a137cc2793eb140267eb2d29ec051b00c85c14cfb02b0cd68b904f335f0319e7",
+      "size_bytes": 2932884
+    },
+    {
+      "case_id": "929",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/929/segmentation_repaired.stl",
+      "sha256": "e2469876e9ac158ebf2cd103cadb3c850bb94a744ac2921d860ff377874a7f8a",
+      "size_bytes": 2697884
+    },
+    {
+      "case_id": "930",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/930/segmentation_repaired.stl",
+      "sha256": "4ba2d181ab69e472f37d2f5e198f3d4ce4a40955a134d766c3216ed8cd13d614",
+      "size_bytes": 3079084
+    },
+    {
+      "case_id": "931",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/931/segmentation_repaired.stl",
+      "sha256": "922d6f415babb8a349952228dfa3b36c25ef8b3c67cddda9eee3822932ac61f9",
+      "size_bytes": 1906684
+    },
+    {
+      "case_id": "932",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/932/segmentation_repaired.stl",
+      "sha256": "312a00fe30c13faa6952dbf2d62b4685977ca78a1539dd8e1cb27c8f11442450",
+      "size_bytes": 2848684
+    },
+    {
+      "case_id": "933",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/933/segmentation_repaired.stl",
+      "sha256": "219cb180e59c7824119c0635e88801a09bdad978baefebc8f5bf1f6e8bc78f34",
+      "size_bytes": 3221784
+    },
+    {
+      "case_id": "934",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/934/segmentation_repaired.stl",
+      "sha256": "b63544a1370026040ee2f97004c41828011c16cdf8ff638fa50483e8f611c4dc",
+      "size_bytes": 3187384
+    },
+    {
+      "case_id": "935",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/935/segmentation_repaired.stl",
+      "sha256": "9a2d8852c8d0c1d25b2a1afcaefa4818947cdb4e790f18abcc37ba70a12ccd02",
+      "size_bytes": 3187884
+    },
+    {
+      "case_id": "936",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/936/segmentation_repaired.stl",
+      "sha256": "bea23f80f276daed62e1ca3b727e1c6f3d674c4e9f3743dad870acaa720ea3d0",
+      "size_bytes": 2577784
+    },
+    {
+      "case_id": "937",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/937/segmentation_repaired.stl",
+      "sha256": "dc5e4799bb2d5cae3ff15784e6b14c8fe426e15938c9ae8d873be0e08ea7412b",
+      "size_bytes": 2751484
+    },
+    {
+      "case_id": "938",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/938/segmentation_repaired.stl",
+      "sha256": "4a9cf924af847df827264aa0cc1868c2604ac1982506394f73d9d23f363c16a9",
+      "size_bytes": 3723684
+    },
+    {
+      "case_id": "939",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/939/segmentation_repaired.stl",
+      "sha256": "0be7abba8a6347467516521b166ec54547cc14d6c5141efbd5736824a4a660ba",
+      "size_bytes": 3363084
+    },
+    {
+      "case_id": "940",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/940/segmentation_repaired.stl",
+      "sha256": "9dc48a4982610ab384687248b33f5f63c5563abcf536c5b8a99031c425850362",
+      "size_bytes": 2655084
+    },
+    {
+      "case_id": "941",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/941/segmentation_repaired.stl",
+      "sha256": "556d190609f7bf21dcd74e63599a8b86b2563082775182ee82078e613a09f6c6",
+      "size_bytes": 2217684
+    },
+    {
+      "case_id": "942",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/942/segmentation_repaired.stl",
+      "sha256": "2a101885c77018803c0d23fd906cea618dbe24e476c49905f8815bc3d20a91ff",
+      "size_bytes": 2339684
+    },
+    {
+      "case_id": "943",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/943/segmentation_repaired.stl",
+      "sha256": "410297458a32472423de05683d43e1d74f493cdc000c03458ea20575519e67c6",
+      "size_bytes": 2731884
+    },
+    {
+      "case_id": "944",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/944/segmentation_repaired.stl",
+      "sha256": "1a403aa4789c9edef1e757f47ff88bb1b231b55039ae6834bb95a65d1e0ada6e",
+      "size_bytes": 4106984
+    },
+    {
+      "case_id": "945",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/945/segmentation_repaired.stl",
+      "sha256": "50d1047b43366377af096149e3c4f140a69b0f0179082b45371827afc0f96e51",
+      "size_bytes": 3279384
+    },
+    {
+      "case_id": "946",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/946/segmentation_repaired.stl",
+      "sha256": "7cf09cd6f956d6505e8bdc8f18f89201b625eaa7cff2bcb8b048043eed7a9348",
+      "size_bytes": 2255484
+    },
+    {
+      "case_id": "947",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/947/segmentation_repaired.stl",
+      "sha256": "50e55415dfc5fe3558e10f8c755ae9053345e62ab3b999c62d4a405ea05a7e4c",
+      "size_bytes": 4218284
+    },
+    {
+      "case_id": "948",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/948/segmentation_repaired.stl",
+      "sha256": "322f6898daa41b579462efbca33a7c0bc6e55c0ef2c1ca4838571f8fdb05d354",
+      "size_bytes": 4086084
+    },
+    {
+      "case_id": "949",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/949/segmentation_repaired.stl",
+      "sha256": "de0d32cc14042bfa0687c2dda01c5043bd64c74e9f9e921719d1cc95d6c2cddb",
+      "size_bytes": 2656284
+    },
+    {
+      "case_id": "950",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/950/segmentation_repaired.stl",
+      "sha256": "bd168a89228dccb2023865f68a07fc8186997d6b1ddbc77977414fb0e1ad105c",
+      "size_bytes": 2639984
+    },
+    {
+      "case_id": "951",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/951/segmentation_repaired.stl",
+      "sha256": "72ed718b0cd9c747fc8a14670710412db63c5590db8b3747e96548835b186efc",
+      "size_bytes": 3868384
+    },
+    {
+      "case_id": "952",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/952/segmentation_repaired.stl",
+      "sha256": "b4ca9260165f88f12287de550da21b545fe52f6914012e9d8f6394346e9dd581",
+      "size_bytes": 2856084
+    },
+    {
+      "case_id": "953",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/953/segmentation_repaired.stl",
+      "sha256": "4bd7fdfaa2eeb0a5c5e074c80f117b4926a9869e135b50f9579428f71125347e",
+      "size_bytes": 4584484
+    },
+    {
+      "case_id": "954",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/954/segmentation_repaired.stl",
+      "sha256": "67acf5e44467031a7d505c23eee83f2eb37d84c3c198695d1a6dce00de7a64f9",
+      "size_bytes": 2829684
+    },
+    {
+      "case_id": "955",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/955/segmentation_repaired.stl",
+      "sha256": "aeb25c0d5394e9e526ed2f317d10713f219e450928ef15ad66a0f143f06d9498",
+      "size_bytes": 3124684
+    },
+    {
+      "case_id": "956",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/956/segmentation_repaired.stl",
+      "sha256": "f04089d9ee159327beb0694a5e604f7bd433323adcd512f6162918433cc4c1d3",
+      "size_bytes": 2455684
+    },
+    {
+      "case_id": "957",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/957/segmentation_repaired.stl",
+      "sha256": "f1d17c24d5298327bd271c9606e1c30f7da40f6e917f6f8769a3f1c3b91facee",
+      "size_bytes": 3957284
+    },
+    {
+      "case_id": "958",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/958/segmentation_repaired.stl",
+      "sha256": "1dbdb641faac0b311a6336c8f90adddfcc88bc7ddf18086f1d388cf4598f76af",
+      "size_bytes": 3660084
+    },
+    {
+      "case_id": "959",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/959/segmentation_repaired.stl",
+      "sha256": "06ab7b9a2b5c179cc0cc843b792aad05b054d0e9ce00276653e1640d63167ee5",
+      "size_bytes": 2971284
+    },
+    {
+      "case_id": "960",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/960/segmentation_repaired.stl",
+      "sha256": "7539f6b9d9a9c2931d3f91b81220ec2c0eed25b635f8ae1f4528825cafe88f71",
+      "size_bytes": 3851884
+    },
+    {
+      "case_id": "961",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/961/segmentation_repaired.stl",
+      "sha256": "e75b0cf13ff62e477755803b1f7a80d42ecefc79ee9c8877edb0de07cc9211b2",
+      "size_bytes": 2779484
+    },
+    {
+      "case_id": "962",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/962/segmentation_repaired.stl",
+      "sha256": "e8650b96c6a421bc6b67ccdb588d9a01a40a491db58f43c435a44d5f21a98530",
+      "size_bytes": 4076784
+    },
+    {
+      "case_id": "963",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/963/segmentation_repaired.stl",
+      "sha256": "a60b17c24427b47008233cdd82635a5e64f1388f2b9e179e8f4fed2da70d5fbc",
+      "size_bytes": 5145884
+    },
+    {
+      "case_id": "964",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/964/segmentation_repaired.stl",
+      "sha256": "a46a5aaf7db2a9f978f9b5aed500ce34f3dff279461128df9293e468b1b347c6",
+      "size_bytes": 3700084
+    },
+    {
+      "case_id": "965",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/965/segmentation_repaired.stl",
+      "sha256": "2d61d7a11db6e911dc330965401a5cc1093d12e0746ac7b1173400e417cd542e",
+      "size_bytes": 3519684
+    },
+    {
+      "case_id": "966",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/966/segmentation_repaired.stl",
+      "sha256": "68d33e7fb5be424c31a1900bbc63f22211d79e3cc07cde1cc0734f7fd24cea69",
+      "size_bytes": 4090484
+    },
+    {
+      "case_id": "967",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/967/segmentation_repaired.stl",
+      "sha256": "6c578abcfb088d06d1ab5423145bba86e4557052d72a569476a9265c64abb9da",
+      "size_bytes": 3453384
+    },
+    {
+      "case_id": "968",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/968/segmentation_repaired.stl",
+      "sha256": "da69e0dbc535bd629bbae953337cc1e205e209a49ba8721f069d1d5c46ba5259",
+      "size_bytes": 2285484
+    },
+    {
+      "case_id": "969",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/969/segmentation_repaired.stl",
+      "sha256": "276ee1cf60cec0bd6e0c44c4a4d61d9157a234f55822dce21500a243827995b7",
+      "size_bytes": 3678784
+    },
+    {
+      "case_id": "970",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/970/segmentation_repaired.stl",
+      "sha256": "557c38bb97940b6bc389f25b5663a931fa44b59ce0f9609b80e9d877380e0b27",
+      "size_bytes": 2117284
+    },
+    {
+      "case_id": "971",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/971/segmentation_repaired.stl",
+      "sha256": "e157563a15010dc6ecc3a4e47623def895b2991f65bd9db17ac4d6a471ba397c",
+      "size_bytes": 2701484
+    },
+    {
+      "case_id": "972",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/972/segmentation_repaired.stl",
+      "sha256": "d48075f20d6039b80a245dc6d5c9d722004080ee59877547233f3b5d85cb57d8",
+      "size_bytes": 2720884
+    },
+    {
+      "case_id": "973",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/973/segmentation_repaired.stl",
+      "sha256": "d513b8d350de662fabccd9367e691bac02a22499dd42553452bbac680ee29123",
+      "size_bytes": 3467784
+    },
+    {
+      "case_id": "974",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/974/segmentation_repaired.stl",
+      "sha256": "21922f0fc130e2dedfbb694af16bfa6c66da655b4f91db501dba8524af985d04",
+      "size_bytes": 5122684
+    },
+    {
+      "case_id": "975",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/975/segmentation_repaired.stl",
+      "sha256": "b01bf92d9ad479a0bad01843b8ffbc5d18fc443acc7f681d538fc44b97030db5",
+      "size_bytes": 4196284
+    },
+    {
+      "case_id": "976",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/976/segmentation_repaired.stl",
+      "sha256": "92566bd5182cebb2292f1b6f3e7eabbfb14f80326bbfc1583b73eda273933a1b",
+      "size_bytes": 2673784
+    },
+    {
+      "case_id": "977",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/977/segmentation_repaired.stl",
+      "sha256": "6b4623c447403b39ca5a6f012f371592f3a24eaa20a7fddbd14ec43953171002",
+      "size_bytes": 2827684
+    },
+    {
+      "case_id": "978",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/978/segmentation_repaired.stl",
+      "sha256": "a586f1f8380b4cd80e5f02817ab4bd3f5f58c6f2cd96ee12fe04b3f8f14760b7",
+      "size_bytes": 3488784
+    },
+    {
+      "case_id": "979",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/979/segmentation_repaired.stl",
+      "sha256": "3e00459f2643c50b0d46983348f73294d0846f5eb7d51595be1d50524892ebe3",
+      "size_bytes": 2979484
+    },
+    {
+      "case_id": "980",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/980/segmentation_repaired.stl",
+      "sha256": "eec5830689a3de2cd0202c3836706373d3321d0f85d9b18c0bbe65bb65d536b6",
+      "size_bytes": 2975184
+    },
+    {
+      "case_id": "981",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/981/segmentation_repaired.stl",
+      "sha256": "03ec0b828618310d7c0374eb252d2d15a2f715e0ee52d403e83efe6a31775834",
+      "size_bytes": 1857384
+    },
+    {
+      "case_id": "982",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/982/segmentation_repaired.stl",
+      "sha256": "663fe289bac13cc5e544ad87b90f55be93509af3023aabff377aa79340a93e89",
+      "size_bytes": 2248684
+    },
+    {
+      "case_id": "983",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/983/segmentation_repaired.stl",
+      "sha256": "e463f76781592fd55ff46062865c2554da33e9a6affdf0bee7ad5fdd70146914",
+      "size_bytes": 3902084
+    },
+    {
+      "case_id": "984",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/984/segmentation_repaired.stl",
+      "sha256": "a8b23d7b2de7e2b53238fa0271d99132d211a99a14f87ca1253999652e0d6096",
+      "size_bytes": 3934084
+    },
+    {
+      "case_id": "985",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/985/segmentation_repaired.stl",
+      "sha256": "d309519c6f5caa107106ea8e3c7d7ca83bd772440a1886453c2f4a36aef0da65",
+      "size_bytes": 3195284
+    },
+    {
+      "case_id": "986",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/986/segmentation_repaired.stl",
+      "sha256": "d34808ae3213ed9bc72151f9e9b493acc1beeee54c7d50420ddf659ac0e93237",
+      "size_bytes": 3260584
+    },
+    {
+      "case_id": "987",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/987/segmentation_repaired.stl",
+      "sha256": "094f77aa446bfb01d7b9312915cfd49f4a89c73144fb9691524709632921b97d",
+      "size_bytes": 4208684
+    },
+    {
+      "case_id": "988",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/988/segmentation_repaired.stl",
+      "sha256": "97cf5cc15ee5676cb816bbf6bed12d9e3bbe0a499a152c533974cf3079518951",
+      "size_bytes": 2699984
+    },
+    {
+      "case_id": "989",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/989/segmentation_repaired.stl",
+      "sha256": "54d1c4ae71bb21506e6430413d7c1234fc0efa7d414dc22f9069b5ccc6f711c6",
+      "size_bytes": 3471384
+    },
+    {
+      "case_id": "990",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/990/segmentation_repaired.stl",
+      "sha256": "651c237fdd716071064512be4dc9764dc3c1817b524b6fe091dd61386432feef",
+      "size_bytes": 3068884
+    },
+    {
+      "case_id": "991",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/991/segmentation_repaired.stl",
+      "sha256": "99d3b323372e4252c1ad02e3fbb7d9b13916029120df0517f8f6143b28c2f40e",
+      "size_bytes": 3045284
+    },
+    {
+      "case_id": "992",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/992/segmentation_repaired.stl",
+      "sha256": "c9f67e6f4c6ff1acc3462f5ca126a1525c0c2d56a05939650ea44a696dcaf5d2",
+      "size_bytes": 2485884
+    },
+    {
+      "case_id": "993",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/993/segmentation_repaired.stl",
+      "sha256": "54dca4261995c3b4f739e4c1d7f68ae8b6042b5524e674968a6fbf83a689cfb8",
+      "size_bytes": 5220884
+    },
+    {
+      "case_id": "994",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/994/segmentation_repaired.stl",
+      "sha256": "6b0a6c75f69b22420a0dc5d764bad5ad0844a53133e37ff8c965b006c100e265",
+      "size_bytes": 3640384
+    },
+    {
+      "case_id": "995",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/995/segmentation_repaired.stl",
+      "sha256": "4c6661c192d3eab4ccd3c35c01212c324a1440f682ebb2470c38b340bce5030a",
+      "size_bytes": 3095184
+    },
+    {
+      "case_id": "996",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/996/segmentation_repaired.stl",
+      "sha256": "3d9010c8f13cb2fffa4deef248cf3bca4e32810c23a6bbfe0c70e7e99852e9e3",
+      "size_bytes": 2762884
+    },
+    {
+      "case_id": "997",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/997/segmentation_repaired.stl",
+      "sha256": "ab298fb30649ac1bd3307754374f34bbf184f04a5fb34f2231dce69634d9bab3",
+      "size_bytes": 3989084
+    },
+    {
+      "case_id": "998",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/998/segmentation_repaired.stl",
+      "sha256": "63ae6dfd4e2c3719b15bb2d7d09f54058e649863f385ecd9ec03350a500cc5c7",
+      "size_bytes": 3678684
+    },
+    {
+      "case_id": "999",
+      "path": "../outputs/phase_b_mesh_qc/case_outputs/999/segmentation_repaired.stl",
+      "sha256": "b4fb7dab591fcc267f2054c72bd6fd9b98df16353013518d2b7f7cc8be385b24",
+      "size_bytes": 2205484
+    }
+  ],
+  "dry_run": false,
+  "explicit_stls": [],
+  "git_commit_hash": "a8135a5cdca77b9dbb2eda31f9304bf6e7f0d7ca",
+  "git_dirty_working_tree": true,
+  "git_status_porcelain": [
+    "?? outputs/manuscript_production_slicer/",
+    "?? outputs/production_slicer_validation/COMMANDS_EXECUTED.md",
+    "?? outputs/production_slicer_validation/CORRECTED_VALIDATION_REPORT.md",
+    "?? outputs/production_slicer_validation/PRELIMINARY_RUN_NOTICE.md",
+    "?? outputs/production_slicer_validation/cohort_250/",
+    "?? outputs/production_slicer_validation/cohort_250_dry_run/",
+    "?? outputs/production_slicer_validation/cohort_artifact_audit.json",
+    "?? outputs/production_slicer_validation/gcode/",
+    "?? outputs/production_slicer_validation/logs/",
+    "?? outputs/production_slicer_validation/manuscript_conclusion_snippet.tex",
+    "?? outputs/production_slicer_validation/manuscript_discussion_snippet.tex",
+    "?? outputs/production_slicer_validation/manuscript_limitations_snippet.tex",
+    "?? outputs/production_slicer_validation/manuscript_methods_snippet.tex",
+    "?? outputs/production_slicer_validation/manuscript_results_snippet.tex",
+    "?? outputs/production_slicer_validation/per_case_slicer_results.csv",
+    "?? outputs/production_slicer_validation/printer_profile.ini",
+    "?? outputs/production_slicer_validation/printer_profile_text_gcode.ini",
+    "?? outputs/production_slicer_validation/profile_merge_provenance.json",
+    "?? outputs/production_slicer_validation/publication_artifact_status.json",
+    "?? outputs/production_slicer_validation/reference_profile_case720/",
+    "?? outputs/production_slicer_validation/reference_profile_dry_run/",
+    "?? outputs/production_slicer_validation/reference_profile_overrides.ini",
+    "?? outputs/production_slicer_validation/repository_audit.json",
+    "?? outputs/production_slicer_validation/representative_case/",
+    "?? outputs/production_slicer_validation/run_audit.json",
+    "?? outputs/production_slicer_validation/run_command.txt",
+    "?? outputs/production_slicer_validation/sensitivity_preset_audit.json",
+    "?? outputs/production_slicer_validation/slicer_validation_table.tex",
+    "?? outputs/production_slicer_validation/summary_slicer_results.json",
+    "?? outputs/production_slicer_validation/validation_manifest.json",
+    "?? outputs/smoke_logs/",
+    "?? prepare_representative_phantom.py"
+  ],
+  "input_globs": [
+    "../outputs/phase_b_mesh_qc/case_outputs/*/segmentation_repaired.stl"
+  ],
+  "platform": "macOS-26.5-arm64-arm-64bit",
+  "printer_profile": "outputs/production_slicer_validation/reference_profile_mk4s_0.4_pla_0.20_organic_auto.ini",
+  "printer_profile_sha256": "eb43615821fc138e5c6ec7f566b734a1492cf6aed62cabbc4b1139b78c7cf4dd",
+  "prusaslicer_executable": "PrusaSlicer",
+  "prusaslicer_version": "PrusaSlicer 2.9.6",
+  "prusaslicer_version_error": null,
+  "python_version": "3.9.6",
+  "schema_version": "1.0",
+  "success_definition": [
+    "PrusaSlicer exit code is zero",
+    "a nonempty textual G-code file is generated",
+    "at least one printed layer is detected",
+    "at least one motion with positive extrusion is detected"
+  ],
+  "validator_script": "production_slicer_validation.py",
+  "validator_script_sha256": "55f20cbcc6c4516bad9e5d0d4c6d18433b550a054ba6c6e0a7173ef0ba43478e"
+}

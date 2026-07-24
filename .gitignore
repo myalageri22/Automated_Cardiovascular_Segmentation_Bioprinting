@@ -29,3 +29,15 @@ outputs/production_slicer_validation/gcode/*.gcode
 outputs/production_slicer_validation/gcode/*.bgcode
 outputs/production_slicer_validation/**/gcode/*.gcode
 outputs/production_slicer_validation/**/gcode/*.bgcode
+outputs/production_slicer_validation/**/logs/*.log
+
+# LaTeX build products (the canonical source and final PDF are retained explicitly)
+manuscript/*.aux
+manuscript/*.bbl
+manuscript/*.blg
+manuscript/*.fls
+manuscript/*.fdb_latexmk
+manuscript/*.log
+manuscript/*.out
+manuscript/*.toc
+manuscript/*.synctex.gz

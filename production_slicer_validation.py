@@ -757,6 +757,11 @@ def aggregate_summary(
     attempted_rows = [row for row in rows if row["status"] not in {"dry_run"}]
     successful_rows = [row for row in attempted_rows if row["toolpath_generation_success"] is True]
     failed_rows = [row for row in attempted_rows if row["toolpath_generation_success"] is not True]
+    warned_rows = [
+        row
+        for row in successful_rows
+        if json.loads(row.get("slicer_warnings_json") or "[]")
+    ]
     aggregate_runtime = sum(float(row["runtime_seconds"] or 0.0) for row in attempted_rows)
     if expected_cohort_size is not None and discovered_count == expected_cohort_size and len(attempted_rows) == expected_cohort_size:
         scope = "full_cohort"
@@ -783,11 +788,24 @@ def aggregate_summary(
         "number_attempted": len(attempted_rows),
         "number_successful": len(successful_rows),
         "number_failed": len(failed_rows),
+        "warning_free_cases": len(successful_rows) - len(warned_rows),
+        "warned_cases_count": len(warned_rows),
+        "warned_cases": [
+            {
+                "case_id": row["case_id"],
+                "warnings": json.loads(row.get("slicer_warnings_json") or "[]"),
+            }
+            for row in warned_rows
+        ],
+        "complete_stl_processed_count": sum(row.get("complete_stl_processed") is True for row in successful_rows),
+        "build_volume_fit_count": sum(row.get("build_volume_fit") is True for row in successful_rows),
+        "support_generation_count": sum(row.get("support_generation_result") == "generated" for row in successful_rows),
         "success_percentage": success_percentage,
         "prusaslicer_version": slicer_version,
         "printer_profile_sha256": profile_hash,
         "aggregate_runtime_seconds": aggregate_runtime,
         "layer_count_summary": numeric_summary(row["layer_count"] for row in successful_rows),
+        "positive_extrusion_move_count_summary": numeric_summary(row.get("extrusion_move_count") for row in successful_rows),
         "estimated_print_time_seconds_summary": numeric_summary(row["estimated_print_time_seconds"] for row in successful_rows),
         "filament_length_mm_summary": numeric_summary(row["filament_length_mm"] for row in successful_rows),
         "filament_volume_cm3_summary": numeric_summary(row["filament_volume_cm3"] for row in successful_rows),
@@ -798,6 +816,14 @@ def aggregate_summary(
         ],
         **git_info,
     }
+
+
+def duplicate_case_ids(paths: Sequence[Path]) -> list[str]:
+    counts: dict[str, int] = {}
+    for path in paths:
+        case_id = extract_case_id(path)
+        counts[case_id] = counts.get(case_id, 0) + 1
+    return sorted(case_id for case_id, count in counts.items() if count > 1)
 
 
 def write_csv(path: Path, rows: Sequence[dict[str, Any]]) -> None:
@@ -1088,15 +1114,15 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     profile_metadata = parse_prusa_profile(profile)
 
     rows: list[dict[str, Any]] = []
-    used_case_ids: dict[str, int] = {}
+    duplicates = duplicate_case_ids(stls)
+    if duplicates:
+        print(f"Duplicate case IDs discovered: {', '.join(duplicates)}", file=sys.stderr)
+        return 2
     for stl in stls:
-        extracted = extract_case_id(stl)
-        used_case_ids[extracted] = used_case_ids.get(extracted, 0) + 1
-        case_id = extracted if used_case_ids[extracted] == 1 else f"{extracted}_{used_case_ids[extracted]}"
         rows.append(
             run_case(
                 stl=stl,
-                case_id=case_id,
+                case_id=extract_case_id(stl),
                 executable=executable,
                 slicer_version=slicer_version,
                 profile=profile,
