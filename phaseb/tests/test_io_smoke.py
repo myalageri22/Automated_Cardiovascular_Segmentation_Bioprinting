@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 import SimpleITK as sitk
 
-sys.path.append(str(Path(__file__).resolve().parents[2] / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from phaseb import pipeline  # noqa: E402
 
@@ -31,7 +31,8 @@ def test_pipeline_smoke(tmp_path):
     sitk.WriteImage(ct_img, str(ct_path))
     sitk.WriteImage(seg_img, str(seg_path))
 
-    config_path = Path(__file__).resolve().parents[2] / "configs" / "default.yaml"
+    repo_root = Path(__file__).resolve().parents[2]
+    config_path = repo_root / "phaseb" / "configs" / "default.yaml"
     config = pipeline.load_config(str(config_path))
 
     outdir = tmp_path / "out"

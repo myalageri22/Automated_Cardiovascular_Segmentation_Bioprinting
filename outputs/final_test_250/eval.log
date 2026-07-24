@@ -1,8 +1,8 @@
-2026-06-10 23:24:39,342 [INFO] Using data root from --data-root: /Users/angadkumar16ak/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/Data/all
-2026-06-10 23:24:39,375 [INFO] Indexed 800 NIfTI filenames under /Users/angadkumar16ak/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/Data/all
-2026-06-10 23:24:39,378 [INFO] Loaded 250 cases from split='test' (/Users/angadkumar16ak/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/extra_information/data_information/dataset_splits.json)
+2026-06-10 23:24:39,342 [INFO] Using data root from --data-root: Data/all
+2026-06-10 23:24:39,375 [INFO] Indexed 800 NIfTI filenames under Data/all
+2026-06-10 23:24:39,378 [INFO] Loaded 250 cases from split='test' (extra_information/data_information/dataset_splits.json)
 2026-06-10 23:24:39,378 [INFO] Auto-remapped 250 cases using case_id lookup in data root index
-2026-06-10 23:33:45,968 [INFO] Using data root from --data-root: /Users/angadkumar16ak/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/Data/all
-2026-06-10 23:33:46,003 [INFO] Indexed 800 NIfTI filenames under /Users/angadkumar16ak/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/Data/all
-2026-06-10 23:33:46,007 [INFO] Loaded 250 cases from split='test' (/Users/angadkumar16ak/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/extra_information/data_information/dataset_splits.json)
+2026-06-10 23:33:45,968 [INFO] Using data root from --data-root: Data/all
+2026-06-10 23:33:46,003 [INFO] Indexed 800 NIfTI filenames under Data/all
+2026-06-10 23:33:46,007 [INFO] Loaded 250 cases from split='test' (extra_information/data_information/dataset_splits.json)
 2026-06-10 23:33:46,007 [INFO] Auto-remapped 250 cases using case_id lookup in data root index

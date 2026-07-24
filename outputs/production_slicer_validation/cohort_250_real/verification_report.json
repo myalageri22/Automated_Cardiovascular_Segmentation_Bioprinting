@@ -1,0 +1,119 @@
+{
+  "cohort": {
+    "attempted": 250,
+    "build_volume_fit": 250,
+    "case_720_present": false,
+    "case_id_max": 1000,
+    "case_id_min": 751,
+    "complete_stl_processed": 250,
+    "failed": 0,
+    "mesh_integrity_failure_case_ids": [
+      "767",
+      "768",
+      "769",
+      "772",
+      "786",
+      "798",
+      "808",
+      "821",
+      "845",
+      "855",
+      "856",
+      "861",
+      "867",
+      "868",
+      "870",
+      "873",
+      "904",
+      "925",
+      "944",
+      "959",
+      "962",
+      "995"
+    ],
+    "mesh_integrity_failures_succeeding": 22,
+    "organic_support_paths_generated": 250,
+    "rows": 250,
+    "successful": 250,
+    "unique_case_ids": 250,
+    "warned": 3,
+    "warning_details": {
+      "803": [
+        "print warning: Empty layer between 110.8 and 111.4."
+      ],
+      "821": [
+        "print warning: Empty layer between 129 and 130."
+      ],
+      "822": [
+        "print warning: Empty layer between 108.4 and 109."
+      ]
+    },
+    "warning_free": 247
+  },
+  "consistency": {
+    "held_out_case_ids_match": true,
+    "manifest_matches_per_case_csv": true,
+    "payload_hashes_checked": 500,
+    "phase_b_case_ids_match": true,
+    "required_null_or_placeholder_values": 0,
+    "summary_matches_per_case_csv": true
+  },
+  "inputs": {
+    "outputs/final_test_250/per_case_metrics.csv": {
+      "sha256": "16485207d864405882d7c2426dd0174cb4fc46bbe6c454e55cbc5e8f73afcc4f",
+      "size_bytes": 91125
+    },
+    "outputs/phase_b_mesh_qc/per_case_mesh_qc.csv": {
+      "sha256": "5e8855639beee385cd0309b678852a417ec1a80f7f988b698b9e771f24ebdd7d",
+      "size_bytes": 127084
+    },
+    "outputs/production_slicer_validation/cohort_250_real/per_case_slicer_results.csv": {
+      "sha256": "5b920ba63f2d29572207374b412dc958587088e2f047fb8de59167f5544b12a3",
+      "size_bytes": 402101
+    },
+    "outputs/production_slicer_validation/cohort_250_real/summary_slicer_results.json": {
+      "sha256": "8f9fa187608344ffb66a24581bb00845eb43484e22d5b6b57f4f3460fce9cb36",
+      "size_bytes": 5082
+    },
+    "outputs/production_slicer_validation/cohort_250_real/validation_manifest.json": {
+      "sha256": "9dde4f913025b2ac647ca2f638a45c92b1866d45c76c1e754cf232c4fdcce2e4",
+      "size_bytes": 62399
+    },
+    "outputs/production_slicer_validation/reference_profile_mk4s_0.4_pla_0.20_organic_auto.ini": {
+      "sha256": "eb43615821fc138e5c6ec7f566b734a1492cf6aed62cabbc4b1139b78c7cf4dd",
+      "size_bytes": 15491
+    }
+  },
+  "quartile_convention": "Python statistics.quantiles(n=4, method='inclusive')",
+  "software": {
+    "profile_sha256": "eb43615821fc138e5c6ec7f566b734a1492cf6aed62cabbc4b1139b78c7cf4dd",
+    "prusaslicer_version": "PrusaSlicer 2.9.6"
+  },
+  "statistics": {
+    "estimated_time_seconds": {
+      "max": 13419.0,
+      "median": 7488.5,
+      "min": 2568.0,
+      "n": 250,
+      "q1": 6307.25,
+      "q3": 8725.5
+    },
+    "layers": {
+      "max": 677.0,
+      "median": 450.0,
+      "min": 309.0,
+      "n": 250,
+      "q1": 423.0,
+      "q3": 489.0
+    },
+    "positive_extrusion_movements": {
+      "max": 317816.0,
+      "median": 174104.0,
+      "min": 45667.0,
+      "n": 250,
+      "q1": 146955.75,
+      "q3": 206327.75
+    }
+  },
+  "verdict": "verified"
+}

@@ -1,0 +1,148 @@
+{
+  "aggregate_runtime_seconds": 405.20336900000024,
+  "attempted_cases": 250,
+  "available_cases": 250,
+  "build_volume_fit_count": 250,
+  "complete_stl_processed_count": 250,
+  "estimated_print_time_seconds_summary": {
+    "max": 13419.0,
+    "median": 7488.5,
+    "min": 2568.0,
+    "n": 250,
+    "q1": 6307.25,
+    "q3": 8725.5
+  },
+  "expected_cohort_size": 250,
+  "failed_cases": [],
+  "failed_cases_count": 0,
+  "filament_length_mm_summary": {
+    "max": 14869.49,
+    "median": 7023.655,
+    "min": 1945.72,
+    "n": 250,
+    "q1": 6059.262500000001,
+    "q3": 8375.2025
+  },
+  "filament_mass_g_summary": {
+    "max": 44.35,
+    "median": 20.95,
+    "min": 5.8,
+    "n": 250,
+    "q1": 18.075,
+    "q3": 24.9775
+  },
+  "filament_volume_cm3_summary": {
+    "max": 35.77,
+    "median": 16.895,
+    "min": 4.68,
+    "n": 250,
+    "q1": 14.5725,
+    "q3": 20.145
+  },
+  "git_commit_hash": "a8135a5cdca77b9dbb2eda31f9304bf6e7f0d7ca",
+  "git_dirty_working_tree": true,
+  "git_status_porcelain": [
+    "?? outputs/manuscript_production_slicer/",
+    "?? outputs/production_slicer_validation/COMMANDS_EXECUTED.md",
+    "?? outputs/production_slicer_validation/CORRECTED_VALIDATION_REPORT.md",
+    "?? outputs/production_slicer_validation/PRELIMINARY_RUN_NOTICE.md",
+    "?? outputs/production_slicer_validation/cohort_250/",
+    "?? outputs/production_slicer_validation/cohort_250_dry_run/",
+    "?? outputs/production_slicer_validation/cohort_artifact_audit.json",
+    "?? outputs/production_slicer_validation/gcode/",
+    "?? outputs/production_slicer_validation/logs/",
+    "?? outputs/production_slicer_validation/manuscript_conclusion_snippet.tex",
+    "?? outputs/production_slicer_validation/manuscript_discussion_snippet.tex",
+    "?? outputs/production_slicer_validation/manuscript_limitations_snippet.tex",
+    "?? outputs/production_slicer_validation/manuscript_methods_snippet.tex",
+    "?? outputs/production_slicer_validation/manuscript_results_snippet.tex",
+    "?? outputs/production_slicer_validation/per_case_slicer_results.csv",
+    "?? outputs/production_slicer_validation/printer_profile.ini",
+    "?? outputs/production_slicer_validation/printer_profile_text_gcode.ini",
+    "?? outputs/production_slicer_validation/profile_merge_provenance.json",
+    "?? outputs/production_slicer_validation/publication_artifact_status.json",
+    "?? outputs/production_slicer_validation/reference_profile_case720/",
+    "?? outputs/production_slicer_validation/reference_profile_dry_run/",
+    "?? outputs/production_slicer_validation/reference_profile_overrides.ini",
+    "?? outputs/production_slicer_validation/repository_audit.json",
+    "?? outputs/production_slicer_validation/representative_case/",
+    "?? outputs/production_slicer_validation/run_audit.json",
+    "?? outputs/production_slicer_validation/run_command.txt",
+    "?? outputs/production_slicer_validation/sensitivity_preset_audit.json",
+    "?? outputs/production_slicer_validation/slicer_validation_table.tex",
+    "?? outputs/production_slicer_validation/summary_slicer_results.json",
+    "?? outputs/production_slicer_validation/validation_manifest.json",
+    "?? outputs/smoke_logs/",
+    "?? prepare_representative_phantom.py"
+  ],
+  "layer_count_summary": {
+    "max": 677.0,
+    "median": 450.0,
+    "min": 309.0,
+    "n": 250,
+    "q1": 423.0,
+    "q3": 489.0
+  },
+  "number_attempted": 250,
+  "number_discovered_stls": 250,
+  "number_failed": 0,
+  "number_successful": 250,
+  "positive_extrusion_move_count_summary": {
+    "max": 317816.0,
+    "median": 174104.0,
+    "min": 45667.0,
+    "n": 250,
+    "q1": 146955.75,
+    "q3": 206327.75
+  },
+  "printer_profile_metadata": {
+    "bed_shape": "0x0,250x0,250x210,0x210",
+    "binary_gcode": "0",
+    "brim_width": "0",
+    "filament_settings_id": "\"Generic PLA @MK4S\"",
+    "filament_type": "PLA",
+    "fill_density": "15%",
+    "layer_height": "0.2",
+    "max_print_height": "220",
+    "nozzle_diameter": "0.4",
+    "perimeters": "2",
+    "print_settings_id": "0.20mm STRUCTURAL @MK4S 0.4",
+    "printer_model": "MK4S",
+    "printer_settings_id": null,
+    "support_material": "1",
+    "support_material_auto": "1",
+    "support_material_buildplate_only": "0",
+    "support_material_style": "organic"
+  },
+  "printer_profile_sha256": "eb43615821fc138e5c6ec7f566b734a1492cf6aed62cabbc4b1139b78c7cf4dd",
+  "prusaslicer_version": "PrusaSlicer 2.9.6",
+  "result_scope": "full_cohort",
+  "schema_version": "1.0",
+  "success_denominator": 250,
+  "success_fraction": "250/250 intended cohort cases",
+  "success_percentage": 100.0,
+  "successful_cases": 250,
+  "support_generation_count": 250,
+  "warned_cases": [
+    {
+      "case_id": "803",
+      "warnings": [
+        "print warning: Empty layer between 110.8 and 111.4."
+      ]
+    },
+    {
+      "case_id": "821",
+      "warnings": [
+        "print warning: Empty layer between 129 and 130."
+      ]
+    },
+    {
+      "case_id": "822",
+      "warnings": [
+        "print warning: Empty layer between 108.4 and 109."
+      ]
+    }
+  ],
+  "warned_cases_count": 3,
+  "warning_free_cases": 247
+}

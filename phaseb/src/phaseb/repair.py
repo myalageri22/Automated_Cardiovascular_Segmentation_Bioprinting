@@ -39,7 +39,6 @@ def repair_mesh(mesh: trimesh.Trimesh, use_pymeshfix: bool = True) -> Tuple[trim
 
     _call_mesh_method(repaired, "remove_unreferenced_vertices")
     _call_mesh_method(repaired, "remove_infinite_values")
-    _call_mesh_method(repaired, "rezero")
     _call_mesh_method(repaired, "merge_vertices")
 
     if use_pymeshfix and pymeshfix is not None:
