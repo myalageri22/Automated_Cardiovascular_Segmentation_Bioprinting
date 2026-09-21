@@ -1,0 +1,27 @@
+{
+  "extra_information/data_information/dataset_splits.json": {
+    "mtime_iso": "2026-06-10T17:33:16.865750",
+    "sha256": "0c46dcb6e0b2e1e37f7053b9b780680ef13fd408b8ad0b69acd1474edab0e76a",
+    "size_bytes": 116729
+  },
+  "outputs/final_test_250/per_case_fabrication_readiness.csv": {
+    "mtime_iso": "2026-08-17T20:19:28.704292",
+    "sha256": "89400c4d710933b4dc25a139358c18f33f50f19cf08dc57d8e80187cc6994c1d",
+    "size_bytes": 94788
+  },
+  "outputs/final_test_250/per_case_metrics.csv": {
+    "mtime_iso": "2026-08-17T20:19:28.073575",
+    "sha256": "bc0bac797154991fa9dca68934fc6aea97259d4fe2522300eceb00562231b3c7",
+    "size_bytes": 91376
+  },
+  "outputs/final_test_250/summary_metrics.json": {
+    "mtime_iso": "2026-07-21T17:46:49.772543",
+    "sha256": "4579b16c0ba1e0511e8f4c22ca2b38c74422c10fa79127a6369cc2b0c7666eea",
+    "size_bytes": 3837
+  },
+  "outputs/phase_b_mesh_qc/per_case_mesh_qc.csv": {
+    "mtime_iso": "2026-08-29T07:18:03.888921",
+    "sha256": "3c40980049462164f3909794ccdb7200959ef46e9fd681a1dfe9d08c6a690a2b",
+    "size_bytes": 277316
+  }
+}

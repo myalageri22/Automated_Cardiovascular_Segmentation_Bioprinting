@@ -1,0 +1,7 @@
+{
+  "high_dice_high_fragmentation": "highest original component count among cases with original Dice above the cohort median",
+  "largest_component_reduction": "largest reduction in component count (original - corrected)",
+  "largest_fidelity_loss": "largest decrease in Dice (corrected - original), i.e. the worst anatomical cost",
+  "moderate_dice_good_topology": "original components <= 2 and original Dice closest to the cohort median",
+  "no_improvement": "zero change in component count, tie-broken by highest original component count"
+}

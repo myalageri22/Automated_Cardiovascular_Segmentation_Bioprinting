@@ -1,0 +1,12 @@
+{
+  "backend": "skimage.morphology.skeletonize",
+  "cylinder_components_preserved": true,
+  "cylinder_input_voxels": 260,
+  "cylinder_length_plausible": true,
+  "cylinder_skeleton_voxels": 20,
+  "gate_passed": true,
+  "note": "Installed scikit-image empties perfectly symmetric even-sided solid blocks. Does not affect tube-like coronary anatomy; affects synthetic box phantoms only. See KNOWN_ISSUES.md.",
+  "skimage_version": "0.25.2",
+  "symmetric_block_artifact_present": true,
+  "symmetric_block_skeleton_voxels": 0
+}

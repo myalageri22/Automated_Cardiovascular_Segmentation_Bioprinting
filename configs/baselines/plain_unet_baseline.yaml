@@ -1,0 +1,31 @@
+experiment: plain_unet_baseline
+architecture: conventional_3d_unet
+model_type: plain_unet
+checkpoint:
+  local_path: outputs/baselines/plain_unet/bioprint_v6_plain_unet_baseline/checkpoints/best_dice05.pt
+  sha256: f48269a225c20b0f1eb173b92308bd215d34a7dcded05fca46e21dfb2a9afba0
+  epoch: 30
+  selection_criterion: validation_dice_at_threshold_0.5
+  committed: false
+split:
+  file: splits.json
+  sha256: 70e847d64dc020cc8233016052772bc9b4d119c56685f6333dd4a1495b72d2db
+  train_cases: 700
+  validation_cases: 50
+  test_cases: 250
+evaluation:
+  threshold: 0.5
+  test_threshold_tuning: false
+  roi_size: [96, 192, 192]
+  sliding_window_overlap: 0.625
+  sliding_window_batch_size: 1
+  device: cpu
+preprocessing:
+  orientation: RAS
+  pixdim: [0.6, 0.6, 0.6]
+  ct_window: [-200, 700]
+  intensity_scale: [0, 1]
+  label_binarization: label > 0
+artifacts:
+  local_mask_pattern: outputs/final_baseline_comparison/plain_unet/mask_regeneration/case_outputs/{case_id}/seg_mask_0.5.nii.gz
+  masks_committed: false

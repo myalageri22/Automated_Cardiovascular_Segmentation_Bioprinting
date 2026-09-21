@@ -1,0 +1,89 @@
+{
+  "n": 3,
+  "tolerance": 1e-12,
+  "max_absolute_metric_difference": 0.0,
+  "all_match": true,
+  "cases": [
+    {
+      "case_id": "1000",
+      "metric_differences": {
+        "dice@0.5": 0.0,
+        "precision@0.5": 0.0,
+        "recall@0.5": 0.0,
+        "hd95@0.5": 0.0
+      },
+      "count_differences": {
+        "pred_voxels@0.5": 0,
+        "fp_voxels@0.5": 0,
+        "fn_voxels@0.5": 0,
+        "gt_voxels": 0
+      },
+      "mask": {
+        "path": "outputs/final_baseline_comparison/plain_unet/mask_regeneration/case_outputs/1000/seg_mask_0.5.nii.gz",
+        "shape": [
+          285,
+          285,
+          194
+        ],
+        "binary": true,
+        "readable": true,
+        "sha256": "0d243771bc58498b5fd6279d4ac60f00a806c900f551687f9fd3d242b3435474"
+      },
+      "cldice": 0.8825337431511426
+    },
+    {
+      "case_id": "751",
+      "metric_differences": {
+        "dice@0.5": 0.0,
+        "precision@0.5": 0.0,
+        "recall@0.5": 0.0,
+        "hd95@0.5": 0.0
+      },
+      "count_differences": {
+        "pred_voxels@0.5": 0,
+        "fp_voxels@0.5": 0,
+        "fn_voxels@0.5": 0,
+        "gt_voxels": 0
+      },
+      "mask": {
+        "path": "outputs/final_baseline_comparison/plain_unet/mask_regeneration/case_outputs/751/seg_mask_0.5.nii.gz",
+        "shape": [
+          295,
+          295,
+          191
+        ],
+        "binary": true,
+        "readable": true,
+        "sha256": "ac324ea7d94578c0e6160de6923eee5593efc6b3a359add6ac6f730e15e1f8a0"
+      },
+      "cldice": 0.8675463986075528
+    },
+    {
+      "case_id": "752",
+      "metric_differences": {
+        "dice@0.5": 0.0,
+        "precision@0.5": 0.0,
+        "recall@0.5": 0.0,
+        "hd95@0.5": 0.0
+      },
+      "count_differences": {
+        "pred_voxels@0.5": 0,
+        "fp_voxels@0.5": 0,
+        "fn_voxels@0.5": 0,
+        "gt_voxels": 0
+      },
+      "mask": {
+        "path": "outputs/final_baseline_comparison/plain_unet/mask_regeneration/case_outputs/752/seg_mask_0.5.nii.gz",
+        "shape": [
+          272,
+          272,
+          229
+        ],
+        "binary": true,
+        "readable": true,
+        "sha256": "74aa8dcebe99b19c366f9e2698c34f0beda5ad234585180e23f34b23b4e70a37"
+      },
+      "cldice": 0.8656306310790766
+    }
+  ]
+}

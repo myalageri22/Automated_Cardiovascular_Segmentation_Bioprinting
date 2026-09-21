@@ -1,0 +1,16 @@
+stage_order,stage,kind
+1,CCTA volume,input
+2,"Frozen
+Attention U-Net",frozen
+3,"Original
+segmentation",control
+4,"Topology
+diagnosis
+(Stage A)",new
+5,"Conservative
+correction
+(S1-S3)",new
+6,"Phase B
+reconstruction",shared
+7,"Geometry QC
++ fidelity",eval

@@ -1,0 +1,19 @@
+{
+  "authoritative_artifacts_unchanged": true,
+  "cases_attempted": 250,
+  "cases_failed": 0,
+  "cases_in_split": 250,
+  "cases_succeeded": 250,
+  "cases_with_complete_inputs": 250,
+  "cohort_mean_dice_recomputed": 0.7877542486781849,
+  "cohort_mean_dice_within_expected_interval": true,
+  "failed_case_ids": [],
+  "no_case_excluded": true,
+  "provenance_enforced": true,
+  "provenance_fail": 0,
+  "provenance_fail_case_ids": [],
+  "provenance_pass": 250,
+  "segmentation_threshold_retuned": false,
+  "segmentation_threshold_used": 0.5,
+  "variants_evaluated": 18
+}

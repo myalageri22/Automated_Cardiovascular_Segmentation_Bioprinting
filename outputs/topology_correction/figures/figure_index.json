@@ -1,0 +1,111 @@
+{
+  "A": {
+    "files": [
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_A_pipeline.png",
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_A_pipeline.pdf"
+    ],
+    "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_A_pipeline_source_data.csv"
+  },
+  "B__s1_absolute_volume__mm3_5": {
+    "files": [
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s1_absolute_volume__mm3_5.png",
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s1_absolute_volume__mm3_5.pdf"
+    ],
+    "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s1_absolute_volume__mm3_5_source_data.csv"
+  },
+  "B__s2_relative_volume__frac_0.01": {
+    "files": [
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s2_relative_volume__frac_0.01.png",
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s2_relative_volume__frac_0.01.pdf"
+    ],
+    "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s2_relative_volume__frac_0.01_source_data.csv"
+  },
+  "B__s3_gap_bridge__gap_1.2mm": {
+    "files": [
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s3_gap_bridge__gap_1.2mm.png",
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s3_gap_bridge__gap_1.2mm.pdf"
+    ],
+    "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s3_gap_bridge__gap_1.2mm_source_data.csv"
+  },
+  "B__s3c_closing__r_0.6mm": {
+    "files": [
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s3c_closing__r_0.6mm.png",
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s3c_closing__r_0.6mm.pdf"
+    ],
+    "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s3c_closing__r_0.6mm_source_data.csv"
+  },
+  "C": {
+    "files": [
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_C_tradeoff.png",
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_C_tradeoff.pdf"
+    ],
+    "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_C_tradeoff_source_data.csv"
+  },
+  "D__s1_absolute_volume__mm3_5": {
+    "files": [
+      "/sessions/rcw-01ydt1j37pkddfcdj1eenugm/mnt/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_D_representative_s1_absolute_volume__mm3_5.png",
+      "/sessions/rcw-01ydt1j37pkddfcdj1eenugm/mnt/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_D_representative_s1_absolute_volume__mm3_5.pdf"
+    ],
+    "selection_rules_source": "failure_analysis/selection_rules.json",
+    "source_data": "/sessions/rcw-01ydt1j37pkddfcdj1eenugm/mnt/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_D_representative_s1_absolute_volume__mm3_5_source_data.csv"
+  },
+  "D__s2_relative_volume__frac_0.01": {
+    "files": [
+      "/sessions/rcw-01ydt1j37pkddfcdj1eenugm/mnt/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_D_representative_s2_relative_volume__frac_0.01.png",
+      "/sessions/rcw-01ydt1j37pkddfcdj1eenugm/mnt/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_D_representative_s2_relative_volume__frac_0.01.pdf"
+    ],
+    "selection_rules_source": "failure_analysis/selection_rules.json",
+    "source_data": "/sessions/rcw-01ydt1j37pkddfcdj1eenugm/mnt/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_D_representative_s2_relative_volume__frac_0.01_source_data.csv"
+  },
+  "D__s3_gap_bridge__gap_1.2mm": {
+    "files": [
+      "/sessions/rcw-01ydt1j37pkddfcdj1eenugm/mnt/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_D_representative_s3_gap_bridge__gap_1.2mm.png",
+      "/sessions/rcw-01ydt1j37pkddfcdj1eenugm/mnt/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_D_representative_s3_gap_bridge__gap_1.2mm.pdf"
+    ],
+    "selection_rules_source": "failure_analysis/selection_rules.json",
+    "source_data": "/sessions/rcw-01ydt1j37pkddfcdj1eenugm/mnt/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_D_representative_s3_gap_bridge__gap_1.2mm_source_data.csv"
+  },
+  "D__s3c_closing__r_0.6mm": {
+    "files": [
+      "/sessions/rcw-01ydt1j37pkddfcdj1eenugm/mnt/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_D_representative_s3c_closing__r_0.6mm.png",
+      "/sessions/rcw-01ydt1j37pkddfcdj1eenugm/mnt/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_D_representative_s3c_closing__r_0.6mm.pdf"
+    ],
+    "selection_rules_source": "failure_analysis/selection_rules.json",
+    "source_data": "/sessions/rcw-01ydt1j37pkddfcdj1eenugm/mnt/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_D_representative_s3c_closing__r_0.6mm_source_data.csv"
+  },
+  "E__s1_absolute_volume__mm3_5": {
+    "files": [
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s1_absolute_volume__mm3_5.png",
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s1_absolute_volume__mm3_5.pdf"
+    ],
+    "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s1_absolute_volume__mm3_5_source_data.csv"
+  },
+  "E__s2_relative_volume__frac_0.01": {
+    "files": [
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s2_relative_volume__frac_0.01.png",
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s2_relative_volume__frac_0.01.pdf"
+    ],
+    "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s2_relative_volume__frac_0.01_source_data.csv"
+  },
+  "E__s3_gap_bridge__gap_1.2mm": {
+    "files": [
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s3_gap_bridge__gap_1.2mm.png",
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s3_gap_bridge__gap_1.2mm.pdf"
+    ],
+    "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s3_gap_bridge__gap_1.2mm_source_data.csv"
+  },
+  "E__s3c_closing__r_0.6mm": {
+    "files": [
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s3c_closing__r_0.6mm.png",
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s3c_closing__r_0.6mm.pdf"
+    ],
+    "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s3c_closing__r_0.6mm_source_data.csv"
+  },
+  "S1": {
+    "files": [
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_S1_sensitivity.png",
+      "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_S1_sensitivity.pdf"
+    ],
+    "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_S1_sensitivity_source_data.csv"
+  }
+}

@@ -1,0 +1,61 @@
+# macOS
+.DS_Store
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+Data/
+
+# Heavy, regenerable per-case run artifacts (summary CSV/JSON are committed)
+outputs/final_test_250/case_outputs/
+outputs/phase_b_mesh_qc/case_outputs/
+outputs/final_baseline_comparison/**/case_outputs/
+outputs/eval_logs/
+outputs/full_run.log
+
+# Large local research payloads; commit compact summaries and hashes instead
+*.nii
+*.nii.gz
+*.stl
+*.gcode
+*.bgcode
+*.pt
+
+# pre-dedup raw backups (local provenance only)
+outputs/**/*.raw.csv
+
+# trivial self-join paired outputs (clean table is seg_to_mesh_correlations.csv)
+outputs/final_test_250/paired_scatter/
+outputs/final_test_250/paired_correlations.csv
+
+# Large, reproducible production-slicer payloads (retain compact results/logs/profile)
+outputs/production_slicer_validation/gcode/*.gcode
+outputs/production_slicer_validation/gcode/*.bgcode
+outputs/production_slicer_validation/**/gcode/*.gcode
+outputs/production_slicer_validation/**/gcode/*.bgcode
+outputs/production_slicer_validation/**/logs/*.log
+
+# LaTeX build products (the canonical source and final PDF are retained explicitly)
+manuscript/*.aux
+manuscript/*.bbl
+manuscript/*.blg
+manuscript/*.fls
+manuscript/*.fdb_latexmk
+manuscript/*.log
+manuscript/*.out
+manuscript/*.toc
+manuscript/*.synctex.gz
+
+# topology_correction: heavy regenerable artifacts
+outputs/topology_correction/case_outputs/
+outputs/topology_correction/mesh_qc/*/case_outputs/
+outputs/topology_correction/_transfer/
+outputs/topology_correction/toolpath/sample_gcode/
+*.stl
+*.nii.gz
+*.gcode

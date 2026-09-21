@@ -1,0 +1,23 @@
+{
+  "profile_name": "P1_no_supports",
+  "slicer_version_line": "PrusaSlicer-2.8.1+linux-x64-GTK3-202409181416 based on Slic3r (with GUI support)",
+  "profile": {
+    "layer-height": "0.2",
+    "first-layer-height": "0.2",
+    "nozzle-diameter": "0.4",
+    "filament-diameter": "1.75",
+    "temperature": "210",
+    "first-layer-temperature": "215",
+    "bed-temperature": "60",
+    "perimeters": "2",
+    "fill-density": "15%",
+    "bed-shape": "0x0,250x0,250x210,0x210",
+    "max-print-height": "210",
+    "center": "125,105",
+    "gcode-flavor": "marlin",
+    "filament-density": "1.24"
+  },
+  "command_template": "prusa-slicer --export-gcode --output <out> --layer-height 0.2 --first-layer-height 0.2 --nozzle-diameter 0.4 --filament-diameter 1.75 --temperature 210 --first-layer-temperature 215 --bed-temperature 60 --perimeters 2 --fill-density 15% --bed-shape 0x0,250x0,250x210,0x210 --max-print-height 210 --center 125,105 --gcode-flavor marlin --filament-density 1.24 <stl>",
+  "n_jobs": 1250,
+  "wall_seconds": 5105.4
+}

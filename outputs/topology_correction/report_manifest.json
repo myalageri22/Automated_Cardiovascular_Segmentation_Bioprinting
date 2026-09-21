@@ -1,0 +1,25 @@
+{
+  "figure_d_keys": [
+    "D__s1_absolute_volume__mm3_5",
+    "D__s2_relative_volume__frac_0.01",
+    "D__s3_gap_bridge__gap_1.2mm",
+    "D__s3c_closing__r_0.6mm"
+  ],
+  "figure_index": "/sessions/rcw-01ydt1j37pkddfcdj1eenugm/mnt/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_index.json",
+  "generated": "2026-08-30T20:47:29.900617+00:00",
+  "note": "Derived from an existing run; no measurement was recomputed.",
+  "report": "/sessions/rcw-01ydt1j37pkddfcdj1eenugm/mnt/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/REPORT_topology_correction.md",
+  "source_artifacts": [
+    "cohort_summary.csv",
+    "component_audit.csv",
+    "covariate_analysis.csv",
+    "outcome_classification.csv",
+    "paired_comparison.csv",
+    "per_case_corrected.csv",
+    "per_case_original.csv",
+    "sensitivity_analysis.csv",
+    "statistical_tests.csv",
+    "strategy_variants.csv",
+    "stratified_analysis.csv"
+  ]
+}

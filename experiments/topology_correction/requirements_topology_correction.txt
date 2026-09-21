@@ -1,0 +1,14 @@
+# Dependencies for experiments/topology_correction.
+# Pinned to the versions the validation suite was executed against.
+numpy>=1.24
+scipy>=1.10
+scikit-image>=0.22
+nibabel>=5.0
+trimesh>=4.0
+rtree>=1.0          # REQUIRED: enables exact point-to-surface distance in trimesh.
+                    # Without it geometry falls back to an approximate
+                    # point-to-vertex distance that carries a sampling floor of
+                    # the same order as the effects being measured.
+pandas>=2.0
+matplotlib>=3.7
+PyYAML>=6.0

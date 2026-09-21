@@ -1,0 +1,41 @@
+variant_id,warning,n_cases,fraction,profile_name
+s0_original,Consider enabling supports,250,1.0,P1_no_supports
+s0_original,Detected print stability issues,250,1.0,P1_no_supports
+s0_original,Floating object part,250,1.0,P1_no_supports
+s0_original,Repaired,250,1.0,P1_no_supports
+s0_original,WARNING,250,1.0,P1_no_supports
+s0_original,Loose extrusions,249,0.996,P1_no_supports
+s0_original,Consider enabling brim,242,0.968,P1_no_supports
+s0_original,Low bed adhesion,242,0.968,P1_no_supports
+s1_absolute_volume__mm3_5,Consider enabling supports,250,1.0,P1_no_supports
+s1_absolute_volume__mm3_5,Detected print stability issues,250,1.0,P1_no_supports
+s1_absolute_volume__mm3_5,Floating object part,250,1.0,P1_no_supports
+s1_absolute_volume__mm3_5,Repaired,250,1.0,P1_no_supports
+s1_absolute_volume__mm3_5,WARNING,250,1.0,P1_no_supports
+s1_absolute_volume__mm3_5,Consider enabling brim,249,0.996,P1_no_supports
+s1_absolute_volume__mm3_5,Loose extrusions,249,0.996,P1_no_supports
+s1_absolute_volume__mm3_5,Low bed adhesion,249,0.996,P1_no_supports
+s2_relative_volume__frac_0.01,Consider enabling supports,250,1.0,P1_no_supports
+s2_relative_volume__frac_0.01,Detected print stability issues,250,1.0,P1_no_supports
+s2_relative_volume__frac_0.01,Floating object part,250,1.0,P1_no_supports
+s2_relative_volume__frac_0.01,Repaired,250,1.0,P1_no_supports
+s2_relative_volume__frac_0.01,WARNING,250,1.0,P1_no_supports
+s2_relative_volume__frac_0.01,Consider enabling brim,248,0.992,P1_no_supports
+s2_relative_volume__frac_0.01,Low bed adhesion,248,0.992,P1_no_supports
+s2_relative_volume__frac_0.01,Loose extrusions,247,0.988,P1_no_supports
+s3_gap_bridge__gap_1.2mm,Consider enabling supports,250,1.0,P1_no_supports
+s3_gap_bridge__gap_1.2mm,Detected print stability issues,250,1.0,P1_no_supports
+s3_gap_bridge__gap_1.2mm,Floating object part,250,1.0,P1_no_supports
+s3_gap_bridge__gap_1.2mm,Repaired,250,1.0,P1_no_supports
+s3_gap_bridge__gap_1.2mm,WARNING,250,1.0,P1_no_supports
+s3_gap_bridge__gap_1.2mm,Consider enabling brim,249,0.996,P1_no_supports
+s3_gap_bridge__gap_1.2mm,Loose extrusions,249,0.996,P1_no_supports
+s3_gap_bridge__gap_1.2mm,Low bed adhesion,249,0.996,P1_no_supports
+s3c_closing__r_0.6mm,Consider enabling supports,250,1.0,P1_no_supports
+s3c_closing__r_0.6mm,Detected print stability issues,250,1.0,P1_no_supports
+s3c_closing__r_0.6mm,Floating object part,250,1.0,P1_no_supports
+s3c_closing__r_0.6mm,Repaired,250,1.0,P1_no_supports
+s3c_closing__r_0.6mm,WARNING,250,1.0,P1_no_supports
+s3c_closing__r_0.6mm,Loose extrusions,249,0.996,P1_no_supports
+s3c_closing__r_0.6mm,Consider enabling brim,248,0.992,P1_no_supports
+s3c_closing__r_0.6mm,Low bed adhesion,248,0.992,P1_no_supports

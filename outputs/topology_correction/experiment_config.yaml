@@ -1,0 +1,159 @@
+experiment:
+  name: topology_correction
+  version: 1.0.0
+  seed: 20260826
+  description: Deterministic topology-aware postprocessing of frozen coronary segmentation
+    predictions, evaluated for connectivity benefit versus anatomical fidelity cost.
+paths:
+  splits_json: extra_information/data_information/dataset_splits.json
+  split_key: test
+  pred_root: outputs/reinference_2026/case_outputs
+  pred_mask_template: '{pred_root}/{case}/seg_mask_0.5.nii.gz'
+  pred_prob_template: '{pred_root}/{case}/seg_prob.nii.gz'
+  ct_template: Data/all/{case}/{case}.img.nii.gz
+  gt_template: Data/all/{case}/{case}.label.nii.gz
+  authoritative_metrics_csv: outputs/final_test_250/per_case_metrics.csv
+  authoritative_mesh_qc_csv: outputs/phase_b_mesh_qc/per_case_mesh_qc.csv
+  output_root: outputs/topology_correction
+segmentation:
+  threshold: 0.5
+  binarise_from: mask
+  expected_spacing_mm:
+  - 0.6
+  - 0.6
+  - 0.6
+  spacing_tolerance_mm: 0.05
+provenance:
+  enforce: true
+  dice_abs_tolerance: 0.02
+  cohort_mean_dice_interval:
+  - 0.782
+  - 0.7935
+  expected_n_cases: 250
+connectivity:
+  structure_rank: 1
+strategies:
+  s0_original:
+    enabled: true
+    kind: identity
+    primary: true
+    rationale: Control. No topology correction. Reproduces the authoritative reconstruction.
+  s1_absolute_volume:
+    enabled: true
+    kind: absolute_volume_filter
+    primary_threshold_mm3: 5.0
+    grid_mm3:
+    - 0.216
+    - 1.0
+    - 2.0
+    - 5.0
+    - 10.0
+    - 27.0
+    - 50.0
+    grid_rationale:
+      0.216: single voxel
+      1.0: sub-segment speckle
+      2.0: half the minimum resolvable segment
+      5.0: 'PRIMARY: minimum resolvable 1 mm x 5 mm vessel segment'
+      10.0: 2x primary
+      27.0: 5x5x5 voxel cube
+      50.0: legacy phaseb/configs/default.yaml min_component_mm3 (never applied to
+        the reported cohort)
+  s2_relative_volume:
+    enabled: true
+    kind: relative_volume_filter
+    primary_fraction: 0.01
+    grid_fraction:
+    - 0.001
+    - 0.005
+    - 0.01
+    - 0.05
+    grid_rationale:
+      0.001: 0.1% of largest component
+      0.005: 0.5% of largest component
+      0.01: 'PRIMARY: 1% of largest component'
+      0.05: 5% - deliberately aggressive upper bound, expected to remove real anatomy
+  s3_gap_bridge:
+    enabled: true
+    kind: gap_bridge
+    prefilter_mm3: 5.0
+    primary_max_gap_mm: 1.2
+    grid_max_gap_mm:
+    - 0.6
+    - 1.2
+    - 1.8
+    - 2.4
+    grid_rationale:
+      0.6: one voxel
+      1.2: 'PRIMARY: two voxels; below typical coronary lumen diameter'
+      1.8: three voxels
+      2.4: four voxels - deliberately permissive upper bound
+    bridge_radius_mm: 0.3
+    min_component_mm3_to_bridge: 5.0
+    max_bridges_per_case: 50
+  s3c_closing:
+    enabled: true
+    kind: morphological_closing
+    prefilter_mm3: 5.0
+    primary_radius_mm: 0.6
+    grid_radius_mm:
+    - 0.6
+    - 1.2
+    grid_rationale:
+      0.6: 'PRIMARY: one voxel radius'
+      1.2: two voxel radius - expected to inflate lumen and cost fidelity
+metrics:
+  segmentation:
+    compute_dice: true
+    compute_cldice: true
+    compute_precision_recall: true
+    compute_hd95: true
+    compute_volumes: true
+    compute_skeleton_stats: true
+  mesh:
+    enabled: true
+    minimal: false
+    target_wall_thickness_mm: 3.0
+    slicability_planes: 50
+  geometry:
+    enabled: true
+    surface_sample_points: 50000
+    build_ground_truth_meshes: true
+statistics:
+  paired_test_continuous: auto
+  shapiro_alpha: 0.05
+  wilcoxon_mode: auto
+  binary_test: mcnemar_exact
+  bootstrap_iterations: 10000
+  bootstrap_ci: 0.95
+  multiple_comparison: benjamini_hochberg
+  fdr_alpha: 0.05
+stratification:
+  prespecified:
+    component_count_quantiles:
+    - 0.3333
+    - 0.6667
+  anatomical:
+    low_fragmentation_max_components: 2
+  exploratory_covariates:
+  - dice_original
+  - cldice_original
+  - hd95_original
+  - components_original
+failure_analysis:
+  n_per_category: 3
+  categories:
+  - high_dice_high_fragmentation
+  - moderate_dice_good_topology
+  - largest_component_reduction
+  - no_improvement
+  - largest_fidelity_loss
+  render_slices: 3
+figures:
+  dpi: 300
+  formats:
+  - png
+  - pdf
+toolpath:
+  enabled: false
+  prusaslicer_binary: null

@@ -1,0 +1,215 @@
+# Topology-aware postprocessing experiment - prespecified configuration.
+#
+# SCIENTIFIC INTEGRITY NOTES
+#  * Every parameter below was fixed BEFORE any held-out test endpoint was computed.
+#  * The segmentation threshold is FROZEN at the authoritative value and is never retuned.
+#  * Strategy 0 (original) is the control and must reproduce the authoritative pipeline.
+#  * The full parameter grid is reported as a sensitivity analysis. The `primary`
+#    variant of each strategy is the prespecified one used for the headline table.
+
+experiment:
+  name: topology_correction
+  version: "1.0.0"
+  seed: 20260826
+  description: >-
+    Deterministic topology-aware postprocessing of frozen coronary segmentation
+    predictions, evaluated for connectivity benefit versus anatomical fidelity cost.
+
+paths:
+  # All paths are relative to the repository root unless absolute.
+  splits_json: extra_information/data_information/dataset_splits.json
+  split_key: test
+  # Frozen per-case prediction artifacts. These are the recovered/retained
+  # case_outputs of the authoritative evaluation run.
+  pred_root: outputs/reinference_2026/case_outputs
+  pred_mask_template: "{pred_root}/{case}/seg_mask_0.5.nii.gz"
+  pred_prob_template: "{pred_root}/{case}/seg_prob.nii.gz"
+  ct_template: "Data/all/{case}/{case}.img.nii.gz"
+  gt_template: "Data/all/{case}/{case}.label.nii.gz"
+  # Authoritative artifacts - READ ONLY. Used only for provenance verification.
+  authoritative_metrics_csv: outputs/final_test_250/per_case_metrics.csv
+  authoritative_mesh_qc_csv: outputs/phase_b_mesh_qc/per_case_mesh_qc.csv
+  output_root: outputs/topology_correction
+
+segmentation:
+  # FROZEN. Identical to the authoritative held-out evaluation. Never tuned here.
+  threshold: 0.5
+  binarise_from: mask          # 'mask' uses the saved binary mask; 'prob' thresholds seg_prob
+  expected_spacing_mm: [0.6, 0.6, 0.6]
+  spacing_tolerance_mm: 0.05
+
+# Provenance gate: recomputed Dice on the frozen masks must agree with the
+# archived per-case values, otherwise the inputs are from a different run.
+provenance:
+  enforce: true
+  dice_abs_tolerance: 0.02      # per case
+  cohort_mean_dice_interval: [0.7820, 0.7935]
+  expected_n_cases: 250
+
+connectivity:
+  # 3D connectivity used for all voxel component labelling. 1 == 6-neighbour,
+  # matching scipy.ndimage.generate_binary_structure(3, 1) used by phaseb.
+  structure_rank: 1
+
+strategies:
+  s0_original:
+    enabled: true
+    kind: identity
+    primary: true
+    rationale: "Control. No topology correction. Reproduces the authoritative reconstruction."
+
+  s1_absolute_volume:
+    enabled: true
+    kind: absolute_volume_filter
+    # Geometric motivation, not endpoint-driven:
+    #   voxel volume at 0.6 mm isotropic = 0.216 mm^3
+    #   a 1.0 mm diameter, 5 mm long coronary segment ~= pi*0.5^2*5 = 3.93 mm^3
+    #   -> components below ~4 mm^3 cannot represent a resolvable vessel segment.
+    primary_threshold_mm3: 5.0
+    grid_mm3: [0.216, 1.0, 2.0, 5.0, 10.0, 27.0, 50.0]
+    grid_rationale:
+      0.216: "single voxel"
+      1.0: "sub-segment speckle"
+      2.0: "half the minimum resolvable segment"
+      5.0: "PRIMARY: minimum resolvable 1 mm x 5 mm vessel segment"
+      10.0: "2x primary"
+      27.0: "5x5x5 voxel cube"
+      50.0: "legacy phaseb/configs/default.yaml min_component_mm3 (never applied to the reported cohort)"
+
+  s2_relative_volume:
+    enabled: true
+    kind: relative_volume_filter
+    # Fractions must stay small: the RCA can legitimately be a small fraction of
+    # the LCA tree, so aggressive relative pruning would delete real anatomy.
+    primary_fraction: 0.01
+    grid_fraction: [0.001, 0.005, 0.01, 0.05]
+    grid_rationale:
+      0.001: "0.1% of largest component"
+      0.005: "0.5% of largest component"
+      0.01: "PRIMARY: 1% of largest component"
+      0.05: "5% - deliberately aggressive upper bound, expected to remove real anatomy"
+
+  s3_gap_bridge:
+    enabled: true
+    kind: gap_bridge
+    # Conservative endpoint-to-endpoint reconnection in physical units.
+    # Applied AFTER the primary absolute-volume filter so speckle is not bridged.
+    prefilter_mm3: 5.0
+    primary_max_gap_mm: 1.2
+    grid_max_gap_mm: [0.6, 1.2, 1.8, 2.4]
+    grid_rationale:
+      0.6: "one voxel"
+      1.2: "PRIMARY: two voxels; below typical coronary lumen diameter"
+      1.8: "three voxels"
+      2.4: "four voxels - deliberately permissive upper bound"
+    bridge_radius_mm: 0.3            # half a voxel: thinnest deterministic bridge
+    min_component_mm3_to_bridge: 5.0 # never bridge speckle
+    max_bridges_per_case: 50         # deterministic safety cap
+
+  s3c_closing:
+    enabled: true
+    kind: morphological_closing
+    # The alternative Strategy-3 mechanism named in the protocol. Reported
+    # alongside gap bridging so the mechanism choice is an ablation, not a pick.
+    prefilter_mm3: 5.0
+    primary_radius_mm: 0.6
+    grid_radius_mm: [0.6, 1.2]
+    grid_rationale:
+      0.6: "PRIMARY: one voxel radius"
+      1.2: "two voxel radius - expected to inflate lumen and cost fidelity"
+
+metrics:
+  segmentation:
+    compute_dice: true
+    compute_cldice: true
+    compute_precision_recall: true
+    compute_hd95: true
+    compute_volumes: true
+    compute_skeleton_stats: true
+  mesh:
+    enabled: true
+    # Reuses phaseb_mesh_qc.run_phaseb_for_case UNMODIFIED.
+    minimal: false
+    target_wall_thickness_mm: 3.0
+    slicability_planes: 50
+  geometry:
+    enabled: true
+    surface_sample_points: 50000
+    build_ground_truth_meshes: true   # evaluation only; never guides correction
+
+statistics:
+  paired_test_continuous: auto        # auto -> Shapiro on paired differences, else Wilcoxon
+  shapiro_alpha: 0.05
+  wilcoxon_mode: auto
+  binary_test: mcnemar_exact
+  bootstrap_iterations: 10000
+  bootstrap_ci: 0.95
+  multiple_comparison: benjamini_hochberg
+  fdr_alpha: 0.05
+
+stratification:
+  prespecified:
+    # Rule is prespecified; cut values are cohort quantiles of the ORIGINAL
+    # component count, computed once and reported.
+    component_count_quantiles: [0.3333, 0.6667]
+  anatomical:
+    # CC in {1,2} == plausible major-tree range (LCA and RCA may be separate).
+    low_fragmentation_max_components: 2
+  exploratory_covariates: [dice_original, cldice_original, hd95_original, components_original]
+
+failure_analysis:
+  n_per_category: 3
+  categories:
+    - high_dice_high_fragmentation
+    - moderate_dice_good_topology
+    - largest_component_reduction
+    - no_improvement
+    - largest_fidelity_loss
+  render_slices: 3
+
+figures:
+  dpi: 300
+  formats: [png, pdf]
+
+toolpath:
+  # Secondary, software-level only. Never described as physical printability.
+  enabled: true
+  # PrusaSlicer 2.9.6, used for the authoritative cohort run, ships no Linux
+  # build on its release page and its own CDN is unreachable from this
+  # environment; the per-case results of that run are also absent from the
+  # working copy. This check therefore uses the nearest obtainable official
+  # Linux build and a profile that is fixed here rather than recovered from the
+  # original run. It is a paired control-vs-corrected comparison run under
+  # identical settings, not a reproduction of the 2.9.6 numbers.
+  slicer_build: "PrusaSlicer-2.8.1+linux-x64-GTK3-202409181416 (AppImage)"
+  authoritative_run_slicer: "PrusaSlicer 2.9.6 (per-case results not in the working copy)"
+  control_variant: s0_original
+  mesh_file: segmentation_repaired.stl
+  profiles:
+    # P1 is the strict profile: no supports, no brim. P2 adds the two options the
+    # slicer itself suggests for a floating, branching object. Both were fixed
+    # before the run and both are reported in full.
+    P2_supports_brim:
+      support-material: ""
+      support-material-auto: ""
+      brim-width: "3"
+  profile:
+    layer-height: "0.2"
+    first-layer-height: "0.2"
+    nozzle-diameter: "0.4"
+    filament-diameter: "1.75"
+    filament-density: "1.24"
+    temperature: "210"
+    first-layer-temperature: "215"
+    bed-temperature: "60"
+    perimeters: "2"
+    fill-density: "15%"
+    bed-shape: "0x0,250x0,250x210,0x210"
+    max-print-height: "210"
+    center: "125,105"
+    gcode-flavor: marlin
+  endpoints:
+    binary: [toolpath_success, gcode_generated]
+    continuous: [layer_count, empty_layer_count, warning_count,
+                 estimated_print_time_min, filament_used_g, filament_used_mm,
+                 gcode_bytes]

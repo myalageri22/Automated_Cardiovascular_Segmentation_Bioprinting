@@ -1,0 +1,8 @@
+Metric,Original,Corrected,Paired effect,95% CI,Adjusted P,Test,n
+Dice,0.7878,0.7879,0.7474 (rank_biserial),"[0.0001, 0.0002]",0.000000,wilcoxon_signed_rank,250
+clDice,0.8695,0.8717,0.8082 (rank_biserial),"[0.0010, 0.0018]",0.000000,wilcoxon_signed_rank,250
+HD95 (mm),7.564,7.616,0.0077 (rank_biserial),"[0.000, 0.000]",0.929942,wilcoxon_signed_rank,250
+Components,11.09,7.24,-1.0000 (rank_biserial),"[-4.00, -3.00]",0.000000,wilcoxon_signed_rank,250
+Mesh integrity,0.9120,0.9320,0.0200 (paired_rate_difference),"[0.0040, 0.0400]",0.078125,mcnemar_exact,250
+Centroid displacement (mm),0 (reference),0.1186,0.1186 (mean displacement vs original geometry),"[0.0000, 0.4738]",not applicable,descriptive,250
+Surface deviation (mm),0 (reference),0.0135,0.0135 (mean displacement vs original geometry),"[0.0000, 0.0645]",not applicable,descriptive,250

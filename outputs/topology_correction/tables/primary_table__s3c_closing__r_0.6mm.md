@@ -1,0 +1,13 @@
+# Primary comparison: s3c_closing__r_0.6mm
+
+Original = frozen prediction (control). Corrected = s3c_closing__r_0.6mm. Paired by case, n as shown.
+
+| Metric | Original | Corrected | Paired effect | 95% CI | Adjusted P | Test | n |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Dice | 0.7878 | 0.7877 | -0.2256 (rank_biserial) | [-0.0002, -0.0000] | 0.003307 | wilcoxon_signed_rank | 250 |
+| clDice | 0.8695 | 0.8722 | 0.7426 (rank_biserial) | [0.0015, 0.0023] | 0.000000 | wilcoxon_signed_rank | 250 |
+| HD95 (mm) | 7.564 | 7.600 | -0.0099 (rank_biserial) | [0.000, 0.000] | 0.907363 | wilcoxon_signed_rank | 250 |
+| Components | 11.09 | 7.18 | -1.0000 (rank_biserial) | [-4.00, -3.00] | 0.000000 | wilcoxon_signed_rank | 250 |
+| Mesh integrity | 0.9120 | 0.9640 | 0.0520 (paired_rate_difference) | [0.0120, 0.0920] | 0.018292 | mcnemar_exact | 250 |
+| Centroid displacement (mm) | 0 (reference) | 0.1246 | 0.1246 (mean displacement vs original geometry) | [0.0085, 0.4715] | not applicable | descriptive | 250 |
+| Surface deviation (mm) | 0 (reference) | 0.0152 | 0.0152 (mean displacement vs original geometry) | [0.0010, 0.0661] | not applicable | descriptive | 250 |

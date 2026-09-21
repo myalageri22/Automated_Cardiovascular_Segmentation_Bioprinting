@@ -1,0 +1,26 @@
+# Addendum for A40 reviewer-ready evaluation utilities
+#
+# Install only if missing from the active environment:
+#   python -m pip install -r requirements_addendum.txt
+
+# Core reporting/helpers used by new scripts
+pyyaml
+pandas
+matplotlib
+
+# Medical image IO and metrics helpers
+nibabel
+scipy
+scikit-image
+
+# Phase B mesh QC and fabrication-readiness proxy checks
+trimesh
+SimpleITK
+
+# Optional but useful
+tensorboard
+
+# Optional topology/mesh repair extras. The code records missing_dependency if
+# these are unavailable rather than crashing a cohort run.
+# pymeshfix
+# meshio

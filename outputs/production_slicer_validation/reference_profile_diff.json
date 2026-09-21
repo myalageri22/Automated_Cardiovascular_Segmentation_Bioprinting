@@ -1,0 +1,29 @@
+{
+  "source_profile": "outputs/production_slicer_validation/printer_profile_text_gcode.ini",
+  "source_profile_sha256": "2bd776ac2a3081bc9376960ea94020ce067823fb3beeeb98831b616d9e902d90",
+  "override_profile": "outputs/production_slicer_validation/reference_profile_overrides.ini",
+  "override_profile_sha256": "5b2e9f4905b4cb016259912588b830ccb2e40c539752c3fc3540f7a9099ba475",
+  "derived_profile": "outputs/production_slicer_validation/reference_profile_mk4s_0.4_pla_0.20_organic_auto.ini",
+  "derived_profile_sha256": "eb43615821fc138e5c6ec7f566b734a1492cf6aed62cabbc4b1139b78c7cf4dd",
+  "changed_fields": {
+    "support_material_auto": {
+      "source": "0",
+      "derived": "1"
+    },
+    "support_material_style": {
+      "source": "snug",
+      "derived": "organic"
+    }
+  },
+  "verified_unchanged_fields": {
+    "binary_gcode": "0",
+    "filament_type": "PLA",
+    "layer_height": "0.2",
+    "nozzle_diameter": "0.4",
+    "print_settings_id": "0.20mm STRUCTURAL @MK4S 0.4",
+    "printer_model": "MK4S",
+    "support_material": "1",
+    "support_material_buildplate_only": "0"
+  },
+  "note": "The generated-at timestamp comment also changed; it is not a profile setting. No other profile fields changed."
+}

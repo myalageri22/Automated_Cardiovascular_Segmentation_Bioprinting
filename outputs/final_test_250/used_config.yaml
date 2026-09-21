@@ -1,0 +1,38 @@
+checkpoint:
+  path: checkpoints/best_dice05.pt
+  epoch: 79
+  best_metric: 0.7888903796672821
+  load_diag:
+    path: checkpoints/best_dice05.pt
+    type: checkpoint
+    strict: true
+    missing_keys: []
+    unexpected_keys: []
+    epoch: 79
+    best_metric: 0.7888903796672821
+splits_json: extra_information/data_information/dataset_splits.json
+data_root: Data/all
+imagecas_root: null
+split: test
+output_dir: outputs/final_test_250
+device: mps
+roi_size: 96,192,192
+sw_overlap: 0.625
+sw_batch_size: 1
+num_workers: 0
+thresholds:
+- 0.5
+threshold: '0.5'
+limit: null
+resume: true
+skip_existing: true
+case_start: 0
+save_case_outputs: true
+run_phase_b_qc: true
+smoke_test: false
+val_output_device: cpu
+model_type: attention_unet
+expected_test_cases: 250
+compute_hd95: true
+compute_cldice: true
+device_resolved: mps

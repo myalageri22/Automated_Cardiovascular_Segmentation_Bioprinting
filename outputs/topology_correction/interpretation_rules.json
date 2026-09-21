@@ -1,0 +1,6 @@
+{
+  "meaningful_component_reduction_median": -1.0,
+  "negligible_dice_loss": -0.01,
+  "negligible_hd95_increase": 0.5,
+  "negligible_surface_deviation_mm": 0.6
+}

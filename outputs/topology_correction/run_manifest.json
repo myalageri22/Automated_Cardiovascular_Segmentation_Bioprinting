@@ -1,0 +1,533 @@
+{
+  "authoritative_artifacts_fingerprint": {
+    "extra_information/data_information/dataset_splits.json": {
+      "mtime_iso": "2026-06-10T17:33:16.865750",
+      "sha256": "0c46dcb6e0b2e1e37f7053b9b780680ef13fd408b8ad0b69acd1474edab0e76a",
+      "size_bytes": 116729
+    },
+    "outputs/final_test_250/per_case_fabrication_readiness.csv": {
+      "mtime_iso": "2026-08-17T20:19:28.704292",
+      "sha256": "89400c4d710933b4dc25a139358c18f33f50f19cf08dc57d8e80187cc6994c1d",
+      "size_bytes": 94788
+    },
+    "outputs/final_test_250/per_case_metrics.csv": {
+      "mtime_iso": "2026-08-17T20:19:28.073575",
+      "sha256": "bc0bac797154991fa9dca68934fc6aea97259d4fe2522300eceb00562231b3c7",
+      "size_bytes": 91376
+    },
+    "outputs/final_test_250/summary_metrics.json": {
+      "mtime_iso": "2026-07-21T17:46:49.772543",
+      "sha256": "4579b16c0ba1e0511e8f4c22ca2b38c74422c10fa79127a6369cc2b0c7666eea",
+      "size_bytes": 3837
+    },
+    "outputs/phase_b_mesh_qc/per_case_mesh_qc.csv": {
+      "mtime_iso": "2026-08-29T07:18:03.888921",
+      "sha256": "3c40980049462164f3909794ccdb7200959ef46e9fd681a1dfe9d08c6a690a2b",
+      "size_bytes": 277316
+    }
+  },
+  "cli_args": {
+    "allow_provenance_mismatch": false,
+    "cases": null,
+    "config": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/experiments/topology_correction/config/experiment_config.yaml",
+    "dry_run": false,
+    "limit": null,
+    "mesh_variants": "primary",
+    "mode": "cohort",
+    "no_failure_analysis": false,
+    "no_figures": false,
+    "no_geometry": false,
+    "output_root": null,
+    "surface_sample_points": null
+  },
+  "code_provenance": {
+    "compute_cldice.py": "d4904586590544ee0737ea9ee547b9a74f303d77734c2e91a7a663f8916b0084",
+    "experiment_code": {
+      "experiments/topology_correction/run_topology_correction_experiment.py": "53c9688e55721b3b99c6347113d9efe695d2f898b7767fa8ee3b00258a567cfb",
+      "experiments/topology_correction/tests/test_topology_correction.py": "1c9514eb0a27d5b60462dd47467db38513a2e87e7d2e88bfbab0bade1a82d786",
+      "experiments/topology_correction/topocorr/__init__.py": "9b6781d2768487a768d7b7af80b75067486785bd4ced9eabd1290ea63804601b",
+      "experiments/topology_correction/topocorr/components.py": "8fa52b6f80f35f94ba89241ba0f67e1f8ae957f6be4a545f98a083f35d30561f",
+      "experiments/topology_correction/topocorr/failure_analysis.py": "95872f8d9da8910928be4e48042ad04b92ad0741e5109d2b18bb9707a9a5bc8a",
+      "experiments/topology_correction/topocorr/figures.py": "a092768a07e270f1ae4b2fabb15efc56f33535735cffc40bc910bf796f5c4af7",
+      "experiments/topology_correction/topocorr/geometry.py": "1c842560f29ed3a559d6a08ae4a1668ba9d5f17ebbb2091f41b0c181d60a6661",
+      "experiments/topology_correction/topocorr/io_utils.py": "881e28e7b7ca4db2a3c76a1688613c66d63fc5512f67c8d6370ce9c4a11d09c9",
+      "experiments/topology_correction/topocorr/manifest.py": "6b2761cd1f2442fee7e53a2e3c97f7b6a9e491d374c825b1dcd2d99e9dc8891a",
+      "experiments/topology_correction/topocorr/mesh_metrics.py": "c769e3101c8ea771905a226d475cfec2ba5ddeda754ef76cfb44921f061ada13",
+      "experiments/topology_correction/topocorr/phantoms.py": "75bd556e9ab546dd37ce7c6544108b3e2a77bcca2ae46cab864ec1232c792056",
+      "experiments/topology_correction/topocorr/pipeline.py": "e2aa02527271f32664784dee63313a8a01192b77d7fda52770e016233e99d872",
+      "experiments/topology_correction/topocorr/report.py": "e58be216a4914d9a5586d6f1fb2d92d5e0169c8de380320f348566af4a8b129a",
+      "experiments/topology_correction/topocorr/seg_metrics.py": "da3b3a7277289fff58b533a5bf0010d3c0a8114bf188e003cce985f0ca9c24c9",
+      "experiments/topology_correction/topocorr/stats_tests.py": "3037f72b5c2a0501762a50c2c7e324c60539c472351397fbdc6cda099d4a5c59",
+      "experiments/topology_correction/topocorr/strategies.py": "756a1ce1a225285140c0178c9f0b83b32cdf4b07e1c4217ffe4103d62902ed1f",
+      "experiments/topology_correction/topocorr/stratify.py": "e02303c557cdc72b417c809a379ddab269f49956288d161ba17d2ebdf7c9864c"
+    },
+    "phaseb/src/phaseb/mesh.py": "0e631160e0838f62a48a671cda7644bb6fb44639172a6ad5bee28547d00c90e5",
+    "phaseb/src/phaseb/postprocess.py": "13a98ae01a9ca72fdb76ea3712c2a11278949b76bae61dcead77fdfd60bb0dc2",
+    "phaseb/src/phaseb/repair.py": "239d3673c46540f4ed45eeadf7592e8eb6527bd58ef8970c3f4dc1c90163efb3",
+    "phaseb_mesh_qc.py": "0512a4637ff45d075fa861163df1ceb26d13c5eae5a6a6acd649f66a376240c2"
+  },
+  "config_path": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/experiments/topology_correction/config/experiment_config.yaml",
+  "config_resolved": {
+    "connectivity": {
+      "structure_rank": 1
+    },
+    "experiment": {
+      "description": "Deterministic topology-aware postprocessing of frozen coronary segmentation predictions, evaluated for connectivity benefit versus anatomical fidelity cost.",
+      "name": "topology_correction",
+      "seed": 20260826,
+      "version": "1.0.0"
+    },
+    "failure_analysis": {
+      "categories": [
+        "high_dice_high_fragmentation",
+        "moderate_dice_good_topology",
+        "largest_component_reduction",
+        "no_improvement",
+        "largest_fidelity_loss"
+      ],
+      "n_per_category": 3,
+      "render_slices": 3
+    },
+    "figures": {
+      "dpi": 300,
+      "formats": [
+        "png",
+        "pdf"
+      ]
+    },
+    "metrics": {
+      "geometry": {
+        "build_ground_truth_meshes": true,
+        "enabled": true,
+        "surface_sample_points": 50000
+      },
+      "mesh": {
+        "enabled": true,
+        "minimal": false,
+        "slicability_planes": 50,
+        "target_wall_thickness_mm": 3.0
+      },
+      "segmentation": {
+        "compute_cldice": true,
+        "compute_dice": true,
+        "compute_hd95": true,
+        "compute_precision_recall": true,
+        "compute_skeleton_stats": true,
+        "compute_volumes": true
+      }
+    },
+    "paths": {
+      "authoritative_mesh_qc_csv": "outputs/phase_b_mesh_qc/per_case_mesh_qc.csv",
+      "authoritative_metrics_csv": "outputs/final_test_250/per_case_metrics.csv",
+      "ct_template": "Data/all/{case}/{case}.img.nii.gz",
+      "gt_template": "Data/all/{case}/{case}.label.nii.gz",
+      "output_root": "outputs/topology_correction",
+      "pred_mask_template": "{pred_root}/{case}/seg_mask_0.5.nii.gz",
+      "pred_prob_template": "{pred_root}/{case}/seg_prob.nii.gz",
+      "pred_root": "outputs/reinference_2026/case_outputs",
+      "split_key": "test",
+      "splits_json": "extra_information/data_information/dataset_splits.json"
+    },
+    "provenance": {
+      "cohort_mean_dice_interval": [
+        0.782,
+        0.7935
+      ],
+      "dice_abs_tolerance": 0.02,
+      "enforce": true,
+      "expected_n_cases": 250
+    },
+    "segmentation": {
+      "binarise_from": "mask",
+      "expected_spacing_mm": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "spacing_tolerance_mm": 0.05,
+      "threshold": 0.5
+    },
+    "statistics": {
+      "binary_test": "mcnemar_exact",
+      "bootstrap_ci": 0.95,
+      "bootstrap_iterations": 10000,
+      "fdr_alpha": 0.05,
+      "multiple_comparison": "benjamini_hochberg",
+      "paired_test_continuous": "auto",
+      "shapiro_alpha": 0.05,
+      "wilcoxon_mode": "auto"
+    },
+    "strategies": {
+      "s0_original": {
+        "enabled": true,
+        "kind": "identity",
+        "primary": true,
+        "rationale": "Control. No topology correction. Reproduces the authoritative reconstruction."
+      },
+      "s1_absolute_volume": {
+        "enabled": true,
+        "grid_mm3": [
+          0.216,
+          1.0,
+          2.0,
+          5.0,
+          10.0,
+          27.0,
+          50.0
+        ],
+        "grid_rationale": {
+          "0.216": "single voxel",
+          "1.0": "sub-segment speckle",
+          "10.0": "2x primary",
+          "2.0": "half the minimum resolvable segment",
+          "27.0": "5x5x5 voxel cube",
+          "5.0": "PRIMARY: minimum resolvable 1 mm x 5 mm vessel segment",
+          "50.0": "legacy phaseb/configs/default.yaml min_component_mm3 (never applied to the reported cohort)"
+        },
+        "kind": "absolute_volume_filter",
+        "primary_threshold_mm3": 5.0
+      },
+      "s2_relative_volume": {
+        "enabled": true,
+        "grid_fraction": [
+          0.001,
+          0.005,
+          0.01,
+          0.05
+        ],
+        "grid_rationale": {
+          "0.001": "0.1% of largest component",
+          "0.005": "0.5% of largest component",
+          "0.01": "PRIMARY: 1% of largest component",
+          "0.05": "5% - deliberately aggressive upper bound, expected to remove real anatomy"
+        },
+        "kind": "relative_volume_filter",
+        "primary_fraction": 0.01
+      },
+      "s3_gap_bridge": {
+        "bridge_radius_mm": 0.3,
+        "enabled": true,
+        "grid_max_gap_mm": [
+          0.6,
+          1.2,
+          1.8,
+          2.4
+        ],
+        "grid_rationale": {
+          "0.6": "one voxel",
+          "1.2": "PRIMARY: two voxels; below typical coronary lumen diameter",
+          "1.8": "three voxels",
+          "2.4": "four voxels - deliberately permissive upper bound"
+        },
+        "kind": "gap_bridge",
+        "max_bridges_per_case": 50,
+        "min_component_mm3_to_bridge": 5.0,
+        "prefilter_mm3": 5.0,
+        "primary_max_gap_mm": 1.2
+      },
+      "s3c_closing": {
+        "enabled": true,
+        "grid_radius_mm": [
+          0.6,
+          1.2
+        ],
+        "grid_rationale": {
+          "0.6": "PRIMARY: one voxel radius",
+          "1.2": "two voxel radius - expected to inflate lumen and cost fidelity"
+        },
+        "kind": "morphological_closing",
+        "prefilter_mm3": 5.0,
+        "primary_radius_mm": 0.6
+      }
+    },
+    "stratification": {
+      "anatomical": {
+        "low_fragmentation_max_components": 2
+      },
+      "exploratory_covariates": [
+        "dice_original",
+        "cldice_original",
+        "hd95_original",
+        "components_original"
+      ],
+      "prespecified": {
+        "component_count_quantiles": [
+          0.3333,
+          0.6667
+        ]
+      }
+    },
+    "toolpath": {
+      "enabled": false,
+      "prusaslicer_binary": null
+    }
+  },
+  "config_sha256": "4a1b818d3339204b86e519fb15c116451edc2647399ac21101b146a2b1d1fef4",
+  "environment": {
+    "machine": "arm64",
+    "packages": {
+      "SimpleITK": "2.5.3",
+      "matplotlib": "3.10.8",
+      "nibabel": "5.3.3",
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "pymeshfix": "0.18.1",
+      "scipy": "1.15.3",
+      "skimage": "0.25.2",
+      "trimesh": "4.11.0",
+      "yaml": "6.0.3"
+    },
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "processor": "arm",
+    "python": "3.10.19 | packaged by conda-forge | (main, Oct 22 2025, 22:46:49) [Clang 19.1.7 ]",
+    "python_executable": "/anonymized/user/opt/miniconda3/envs/vascseg/bin/python"
+  },
+  "environment_selftest": {
+    "backend": "skimage.morphology.skeletonize",
+    "cylinder_components_preserved": true,
+    "cylinder_input_voxels": 260,
+    "cylinder_length_plausible": true,
+    "cylinder_skeleton_voxels": 20,
+    "gate_passed": true,
+    "note": "Installed scikit-image empties perfectly symmetric even-sided solid blocks. Does not affect tube-like coronary anatomy; affects synthetic box phantoms only. See KNOWN_ISSUES.md.",
+    "skimage_version": "0.25.2",
+    "symmetric_block_artifact_present": true,
+    "symmetric_block_skeleton_voxels": 0
+  },
+  "experiment": {
+    "description": "Deterministic topology-aware postprocessing of frozen coronary segmentation predictions, evaluated for connectivity benefit versus anatomical fidelity cost.",
+    "name": "topology_correction",
+    "seed": 20260826,
+    "version": "1.0.0"
+  },
+  "git": {
+    "branch": "experiment/topology_correction",
+    "commit": "3ba711d0cef4ae5558329ddb09d835bf4557c332",
+    "is_git_repository": true,
+    "note": "Repository initialised after the experiment run: the working copy had no .git directory while the cohort was processed, so this hash was recorded afterwards. It is the commit that contains the experiment code and its results; the run itself is pinned by config_sha256, input_manifest.json and the authoritative artifact fingerprints, not by this hash.",
+    "recorded": "post_run"
+  },
+  "outputs": {
+    "figure_index": {
+      "A": {
+        "files": [
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_A_pipeline.png",
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_A_pipeline.pdf"
+        ],
+        "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_A_pipeline_source_data.csv"
+      },
+      "B__s1_absolute_volume__mm3_5": {
+        "files": [
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s1_absolute_volume__mm3_5.png",
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s1_absolute_volume__mm3_5.pdf"
+        ],
+        "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s1_absolute_volume__mm3_5_source_data.csv"
+      },
+      "B__s2_relative_volume__frac_0.01": {
+        "files": [
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s2_relative_volume__frac_0.01.png",
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s2_relative_volume__frac_0.01.pdf"
+        ],
+        "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s2_relative_volume__frac_0.01_source_data.csv"
+      },
+      "B__s3_gap_bridge__gap_1.2mm": {
+        "files": [
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s3_gap_bridge__gap_1.2mm.png",
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s3_gap_bridge__gap_1.2mm.pdf"
+        ],
+        "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s3_gap_bridge__gap_1.2mm_source_data.csv"
+      },
+      "B__s3c_closing__r_0.6mm": {
+        "files": [
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s3c_closing__r_0.6mm.png",
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s3c_closing__r_0.6mm.pdf"
+        ],
+        "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_B_components_s3c_closing__r_0.6mm_source_data.csv"
+      },
+      "C": {
+        "files": [
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_C_tradeoff.png",
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_C_tradeoff.pdf"
+        ],
+        "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_C_tradeoff_source_data.csv"
+      },
+      "E__s1_absolute_volume__mm3_5": {
+        "files": [
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s1_absolute_volume__mm3_5.png",
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s1_absolute_volume__mm3_5.pdf"
+        ],
+        "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s1_absolute_volume__mm3_5_source_data.csv"
+      },
+      "E__s2_relative_volume__frac_0.01": {
+        "files": [
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s2_relative_volume__frac_0.01.png",
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s2_relative_volume__frac_0.01.pdf"
+        ],
+        "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s2_relative_volume__frac_0.01_source_data.csv"
+      },
+      "E__s3_gap_bridge__gap_1.2mm": {
+        "files": [
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s3_gap_bridge__gap_1.2mm.png",
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s3_gap_bridge__gap_1.2mm.pdf"
+        ],
+        "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s3_gap_bridge__gap_1.2mm_source_data.csv"
+      },
+      "E__s3c_closing__r_0.6mm": {
+        "files": [
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s3c_closing__r_0.6mm.png",
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s3c_closing__r_0.6mm.pdf"
+        ],
+        "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_E_benefit_vs_baseline_s3c_closing__r_0.6mm_source_data.csv"
+      },
+      "S1": {
+        "files": [
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_S1_sensitivity.png",
+          "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_S1_sensitivity.pdf"
+        ],
+        "source_data": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction/figures/figure_S1_sensitivity_source_data.csv"
+      }
+    },
+    "files": [
+      "cohort_summary.csv",
+      "component_audit.csv",
+      "covariate_analysis.csv",
+      "experiment_config.yaml",
+      "failure_analysis/high_dice_high_fragmentation/803_meshes.png",
+      "failure_analysis/high_dice_high_fragmentation/803_slices.png",
+      "failure_analysis/high_dice_high_fragmentation/856_meshes.png",
+      "failure_analysis/high_dice_high_fragmentation/856_slices.png",
+      "failure_analysis/high_dice_high_fragmentation/984_meshes.png",
+      "failure_analysis/high_dice_high_fragmentation/984_slices.png",
+      "failure_analysis/largest_component_reduction/798_meshes.png",
+      "failure_analysis/largest_component_reduction/798_slices.png",
+      "failure_analysis/largest_component_reduction/852_meshes.png",
+      "failure_analysis/largest_component_reduction/852_slices.png",
+      "failure_analysis/largest_component_reduction/892_meshes.png",
+      "failure_analysis/largest_component_reduction/892_slices.png",
+      "failure_analysis/largest_fidelity_loss/759_meshes.png",
+      "failure_analysis/largest_fidelity_loss/759_slices.png",
+      "failure_analysis/largest_fidelity_loss/827_meshes.png",
+      "failure_analysis/largest_fidelity_loss/827_slices.png",
+      "failure_analysis/largest_fidelity_loss/883_meshes.png",
+      "failure_analysis/largest_fidelity_loss/883_slices.png",
+      "failure_analysis/largest_fidelity_loss/888_meshes.png",
+      "failure_analysis/largest_fidelity_loss/888_slices.png",
+      "failure_analysis/largest_fidelity_loss/914_meshes.png",
+      "failure_analysis/largest_fidelity_loss/914_slices.png",
+      "failure_analysis/largest_fidelity_loss/932_meshes.png",
+      "failure_analysis/largest_fidelity_loss/932_slices.png",
+      "failure_analysis/largest_fidelity_loss/962_meshes.png",
+      "failure_analysis/largest_fidelity_loss/962_slices.png",
+      "failure_analysis/largest_fidelity_loss/973_meshes.png",
+      "failure_analysis/largest_fidelity_loss/973_slices.png",
+      "failure_analysis/moderate_dice_good_topology/890_meshes.png",
+      "failure_analysis/moderate_dice_good_topology/890_slices.png",
+      "failure_analysis/moderate_dice_good_topology/977_meshes.png",
+      "failure_analysis/moderate_dice_good_topology/977_slices.png",
+      "failure_analysis/no_improvement/772_meshes.png",
+      "failure_analysis/no_improvement/772_slices.png",
+      "failure_analysis/no_improvement/792_meshes.png",
+      "failure_analysis/no_improvement/792_slices.png",
+      "failure_analysis/no_improvement/793_meshes.png",
+      "failure_analysis/no_improvement/793_slices.png",
+      "failure_analysis/no_improvement/826_meshes.png",
+      "failure_analysis/no_improvement/826_slices.png",
+      "failure_analysis/no_improvement/854_meshes.png",
+      "failure_analysis/no_improvement/854_slices.png",
+      "failure_analysis/no_improvement/878_meshes.png",
+      "failure_analysis/no_improvement/878_slices.png",
+      "failure_analysis/no_improvement/879_meshes.png",
+      "failure_analysis/no_improvement/879_slices.png",
+      "failure_analysis/rendered_cases.csv",
+      "failure_analysis/selected_cases.csv",
+      "failure_analysis/selection_rules.json",
+      "figures/figure_A_pipeline.pdf",
+      "figures/figure_A_pipeline.png",
+      "figures/figure_A_pipeline_source_data.csv",
+      "figures/figure_B_components_s1_absolute_volume__mm3_5.pdf",
+      "figures/figure_B_components_s1_absolute_volume__mm3_5.png",
+      "figures/figure_B_components_s1_absolute_volume__mm3_5_source_data.csv",
+      "figures/figure_B_components_s2_relative_volume__frac_0.01.pdf",
+      "figures/figure_B_components_s2_relative_volume__frac_0.01.png",
+      "figures/figure_B_components_s2_relative_volume__frac_0.01_source_data.csv",
+      "figures/figure_B_components_s3_gap_bridge__gap_1.2mm.pdf",
+      "figures/figure_B_components_s3_gap_bridge__gap_1.2mm.png",
+      "figures/figure_B_components_s3_gap_bridge__gap_1.2mm_source_data.csv",
+      "figures/figure_B_components_s3c_closing__r_0.6mm.pdf",
+      "figures/figure_B_components_s3c_closing__r_0.6mm.png",
+      "figures/figure_B_components_s3c_closing__r_0.6mm_source_data.csv",
+      "figures/figure_C_tradeoff.pdf",
+      "figures/figure_C_tradeoff.png",
+      "figures/figure_C_tradeoff_source_data.csv",
+      "figures/figure_E_benefit_vs_baseline_s1_absolute_volume__mm3_5.pdf",
+      "figures/figure_E_benefit_vs_baseline_s1_absolute_volume__mm3_5.png",
+      "figures/figure_E_benefit_vs_baseline_s1_absolute_volume__mm3_5_source_data.csv",
+      "figures/figure_E_benefit_vs_baseline_s2_relative_volume__frac_0.01.pdf",
+      "figures/figure_E_benefit_vs_baseline_s2_relative_volume__frac_0.01.png",
+      "figures/figure_E_benefit_vs_baseline_s2_relative_volume__frac_0.01_source_data.csv",
+      "figures/figure_E_benefit_vs_baseline_s3_gap_bridge__gap_1.2mm.pdf",
+      "figures/figure_E_benefit_vs_baseline_s3_gap_bridge__gap_1.2mm.png",
+      "figures/figure_E_benefit_vs_baseline_s3_gap_bridge__gap_1.2mm_source_data.csv",
+      "figures/figure_E_benefit_vs_baseline_s3c_closing__r_0.6mm.pdf",
+      "figures/figure_E_benefit_vs_baseline_s3c_closing__r_0.6mm.png",
+      "figures/figure_E_benefit_vs_baseline_s3c_closing__r_0.6mm_source_data.csv",
+      "figures/figure_S1_sensitivity.pdf",
+      "figures/figure_S1_sensitivity.png",
+      "figures/figure_S1_sensitivity_source_data.csv",
+      "figures/figure_index.json",
+      "input_manifest.json",
+      "interpretation_rules.json",
+      "logs/authoritative_fingerprint_after.json",
+      "logs/authoritative_fingerprint_before.json",
+      "logs/environment_selftest.json",
+      "mesh_qc/ground_truth/per_case_mesh_qc.csv",
+      "mesh_qc/s0_original/per_case_mesh_qc.csv",
+      "mesh_qc/s1_absolute_volume__mm3_5/per_case_mesh_qc.csv",
+      "mesh_qc/s2_relative_volume__frac_0.01/per_case_mesh_qc.csv",
+      "mesh_qc/s3_gap_bridge__gap_1.2mm/per_case_mesh_qc.csv",
+      "mesh_qc/s3c_closing__r_0.6mm/per_case_mesh_qc.csv",
+      "outcome_classification.csv",
+      "paired_comparison.csv",
+      "per_case_corrected.csv",
+      "per_case_original.csv",
+      "qc_checklist.json",
+      "sensitivity_analysis.csv",
+      "statistical_tests.csv",
+      "strategy_variants.csv",
+      "stratified_analysis.csv",
+      "tables/primary_table__s1_absolute_volume__mm3_5.csv",
+      "tables/primary_table__s1_absolute_volume__mm3_5.md",
+      "tables/primary_table__s2_relative_volume__frac_0.01.csv",
+      "tables/primary_table__s2_relative_volume__frac_0.01.md",
+      "tables/primary_table__s3_gap_bridge__gap_1.2mm.csv",
+      "tables/primary_table__s3_gap_bridge__gap_1.2mm.md",
+      "tables/primary_table__s3c_closing__r_0.6mm.csv",
+      "tables/primary_table__s3c_closing__r_0.6mm.md"
+    ],
+    "output_root": "/anonymized/user/Projects/Automated_Cardiovascular_Segmentation_for_Bioprinting_Project/outputs/topology_correction"
+  },
+  "phaseb_source_sha256": "0512a4637ff45d075fa861163df1ceb26d13c5eae5a6a6acd649f66a376240c2",
+  "qc_checklist": {
+    "authoritative_artifacts_unchanged": true,
+    "cases_attempted": 250,
+    "cases_failed": 0,
+    "cases_in_split": 250,
+    "cases_succeeded": 250,
+    "cases_with_complete_inputs": 250,
+    "cohort_mean_dice_recomputed": 0.7877542486781849,
+    "cohort_mean_dice_within_expected_interval": true,
+    "failed_case_ids": [],
+    "no_case_excluded": true,
+    "provenance_enforced": true,
+    "provenance_fail": 0,
+    "provenance_fail_case_ids": [],
+    "provenance_pass": 250,
+    "segmentation_threshold_retuned": false,
+    "segmentation_threshold_used": 0.5,
+    "variants_evaluated": 18
+  },
+  "seed": 20260826,
+  "timestamp_finished": "2026-08-30T03:16:53.890433-05:00",
+  "timestamp_started": "2026-08-29T08:13:45.426152-05:00",
+  "timezone": "CDT"
+}

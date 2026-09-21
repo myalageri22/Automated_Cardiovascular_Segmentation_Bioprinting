@@ -1,0 +1,8 @@
+source_path,role,checkpoint,checkpoint_epoch,threshold,roi,overlap,rows,unique_test_ids,duplicate_ids,extra_ids,missing_ids,failed_rows,saved_masks,cldice_status,decision
+outputs/final_test_250/per_case_metrics.csv,archived metrics,/tmp/train_runs/bioprint_v14_tversky_fn/checkpoints/soup_ep75-80.pt,-1,0.5,96x192x192,0.625,250,250,,,0,0,0,not_computed,exclude_wrong_checkpoint
+outputs/final_test_250_traceable_v14_local/per_case_metrics.csv,intended checkpoint metrics,outputs/train_runs/bioprint_v14_tversky_fn_local_rebuild_mps_lowmem/checkpoints/best_dice05.pt,79,0.5,96x192x192,0.625,252,250,1000;751,,0,0,0,missing_dependency,deduplicate_only_after_documented_identical_rows
+outputs/final_test_250_phaseb_traceable_v14/per_case_metrics.csv,intended checkpoint metrics_and_masks,outputs/train_runs/bioprint_v14_tversky_fn_local_rebuild_mps_lowmem/checkpoints/best_dice05.pt,79,0.5,96x192x192,0.625,250,250,,,0,0,250,not_computed,authoritative_exact250_attention_source
+bibm_submission/derived_metrics/deduplicated_per_case_metrics.csv,derived copy,epoch79_traceable_source,79,0.5,96x192x192,0.625,250,250,,,0,0,0,missing_dependency,derived_not_primary
+bibm_submission_final/derived_metrics/deduplicated_per_case_metrics.csv,derived copy,epoch79_traceable_source,79,0.5,96x192x192,0.625,250,250,,,0,0,0,missing_dependency,derived_not_primary
+bibm_submission_final_reviewed/derived_metrics/deduplicated_per_case_metrics.csv,derived copy,epoch79_traceable_source,79,0.5,96x192x192,0.625,250,250,,,0,0,0,missing_dependency,derived_not_primary
+outputs/full_test_eval_mps_smoke/per_case_metrics.csv,smoke_only,unknown_from_table,unknown,0.5,96x192x192,0.625,2,2,,,248,0,0,unknown,exclude_partial

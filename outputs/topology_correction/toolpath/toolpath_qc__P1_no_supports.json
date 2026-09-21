@@ -1,0 +1,632 @@
+{
+  "cases_per_variant": {
+    "s0_original": 250,
+    "s1_absolute_volume__mm3_5": 250,
+    "s2_relative_volume__frac_0.01": 250,
+    "s3_gap_bridge__gap_1.2mm": 250,
+    "s3c_closing__r_0.6mm": 250
+  },
+  "claim_boundary": "Software-level slicing outcome only. Not evidence of physical printability, print quality, or fabrication success.",
+  "control_variant": "s0_original",
+  "failed": [
+    {
+      "case_id": "779",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "784",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "785",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "787",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "788",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "795",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "799",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "806",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "821",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "838",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "846",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "852",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "868",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "871",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "913",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "914",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "917",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "919",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "928",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "943",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "964",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "968",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "976",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "979",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "981",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s0_original"
+    },
+    {
+      "case_id": "779",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "784",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "785",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "787",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "788",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "799",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "806",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "838",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "846",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "852",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "868",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "871",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "913",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "914",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "917",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "919",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "928",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "943",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "964",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "979",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s1_absolute_volume__mm3_5"
+    },
+    {
+      "case_id": "784",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "787",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "788",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "799",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "806",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "838",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "846",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "855",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "868",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "871",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "899",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "913",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "917",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "928",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "943",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "964",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s2_relative_volume__frac_0.01"
+    },
+    {
+      "case_id": "779",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "784",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "785",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "787",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "788",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "799",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "806",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "838",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "846",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "852",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "868",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "871",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "913",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "914",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "917",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "919",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "928",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "943",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "964",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "979",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3_gap_bridge__gap_1.2mm"
+    },
+    {
+      "case_id": "779",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "784",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "785",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "787",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "788",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "799",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "806",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "838",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "846",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "852",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "868",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "871",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "913",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "914",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "917",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "919",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "928",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "943",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "964",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    },
+    {
+      "case_id": "979",
+      "return_code": 1,
+      "stderr_tail": "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl",
+      "variant_id": "s3c_closing__r_0.6mm"
+    }
+  ],
+  "failure_reasons": {
+    "There is an object with no extrusions in the first layer. | Object name: segmentation_repaired.stl": 101
+  },
+  "n_failures": 101,
+  "n_rows": 1250,
+  "profile_name": "P1_no_supports",
+  "variants": [
+    "s0_original",
+    "s1_absolute_volume__mm3_5",
+    "s2_relative_volume__frac_0.01",
+    "s3_gap_bridge__gap_1.2mm",
+    "s3c_closing__r_0.6mm"
+  ]
+}

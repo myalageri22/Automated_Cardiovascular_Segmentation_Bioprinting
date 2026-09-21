@@ -1,0 +1,31 @@
+experiment: attention_unet_reference
+architecture: attention_unet_3d
+model_type: attention_unet
+checkpoint:
+  local_path: outputs/train_runs/bioprint_v14_tversky_fn_local_rebuild_mps_lowmem/checkpoints/best_dice05.pt
+  sha256: 792178759e9e579eb65f89a5a63f6538d7d0202da7e8eeeefda4825bfffc743b
+  epoch: 79
+  selection_criterion: validation_dice_at_threshold_0.5
+  committed: false
+split:
+  file: splits.json
+  sha256: 70e847d64dc020cc8233016052772bc9b4d119c56685f6333dd4a1495b72d2db
+  train_cases: 700
+  validation_cases: 50
+  test_cases: 250
+evaluation:
+  threshold: 0.5
+  test_threshold_tuning: false
+  roi_size: [96, 192, 192]
+  sliding_window_overlap: 0.625
+  sliding_window_batch_size: 1
+  device: mps
+preprocessing:
+  orientation: RAS
+  pixdim: [0.6, 0.6, 0.6]
+  ct_window: [-200, 700]
+  intensity_scale: [0, 1]
+  label_binarization: label > 0
+artifacts:
+  local_mask_pattern: outputs/final_test_250_phaseb_traceable_v14/case_outputs/{case_id}/seg_mask_0.5.nii.gz
+  masks_committed: false

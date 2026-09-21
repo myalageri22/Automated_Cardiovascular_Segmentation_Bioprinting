@@ -1,0 +1,23 @@
+{
+  "cases_per_variant": {
+    "s0_original": 250,
+    "s1_absolute_volume__mm3_5": 250,
+    "s2_relative_volume__frac_0.01": 250,
+    "s3_gap_bridge__gap_1.2mm": 250,
+    "s3c_closing__r_0.6mm": 250
+  },
+  "claim_boundary": "Software-level slicing outcome only. Not evidence of physical printability, print quality, or fabrication success.",
+  "control_variant": "s0_original",
+  "failed": [],
+  "failure_reasons": {},
+  "n_failures": 0,
+  "n_rows": 1250,
+  "profile_name": "P2_supports_brim",
+  "variants": [
+    "s0_original",
+    "s1_absolute_volume__mm3_5",
+    "s2_relative_volume__frac_0.01",
+    "s3_gap_bridge__gap_1.2mm",
+    "s3c_closing__r_0.6mm"
+  ]
+}

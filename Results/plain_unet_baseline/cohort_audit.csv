@@ -1,0 +1,5 @@
+source,rows,unique_test_ids,duplicate_ids,missing_ids,extra_ids,failed_rows,decision
+plain_unet_final,250,250,,,,0,authoritative
+attention_unet_final,250,250,,,,0,authoritative
+paired_exact250,250,250,,,,0,authoritative
+historical_attention_traceable,252,250,751;1000,,,0,documented_repeated_evaluation_output

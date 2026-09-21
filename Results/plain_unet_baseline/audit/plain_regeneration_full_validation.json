@@ -1,0 +1,13 @@
+{
+  "rows": 250,
+  "unique_ids": 250,
+  "split_ids": 250,
+  "missing": [],
+  "extra": [],
+  "mask_count": 250,
+  "invalid_masks": [],
+  "failed_file_exists": false,
+  "max_absolute_metric_difference": 0.0,
+  "max_voxel_count_difference": 0,
+  "passed": true
+}

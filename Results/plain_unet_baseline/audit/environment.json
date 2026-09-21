@@ -1,0 +1,23 @@
+{
+  "audit_date": "2026-08-30",
+  "python": "3.12.12",
+  "numpy": "2.4.1",
+  "scipy": "1.17.0",
+  "scikit_image": "0.26.0",
+  "pytorch": "2.12.0",
+  "monai": "1.5.1",
+  "split_file": "splits.json",
+  "split_sha256": "70e847d64dc020cc8233016052772bc9b4d119c56685f6333dd4a1495b72d2db",
+  "split_counts": {
+    "train": 700,
+    "validation": 50,
+    "test": 250
+  },
+  "unique_test_ids": 250,
+  "skeletonization_api": {
+    "skimage_morphology_skeletonize_3d_available": false,
+    "skimage_morphology_skeletonize_available": true,
+    "skeletonize_signature": "skeletonize(image, *, method=None)",
+    "documented_3d_behavior": "Lee thinning is supported and is the default for 3D input; output is a same-shape boolean array."
+  }
+}
