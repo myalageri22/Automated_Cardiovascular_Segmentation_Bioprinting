@@ -1,177 +1,104 @@
-# Cloud Bundle: 3D Vascular Segmentation + Mesh Pipeline
+# Topology-aware image-to-mesh pipeline for coronary CTA
 
-End-to-end research pipeline for vascular segmentation in CT volumes and conversion into mesh/STL artifacts for downstream review and bioprintability checks.
+Code and derived results for the manuscript *A Topology-Aware Image-to-Mesh Pipeline for
+Coronary Artery Segmentation and 3D Reconstruction from CT Angiography* (under
+double-anonymous review).
 
-This repo combines:
-- Phase A: MONAI/PyTorch 3D U-Net training + inference
-- Phase B: segmentation cleanup, meshing, repair, and QC reporting
+The pipeline has two phases:
 
-## Highlights:
+- **Phase A**: 3D Attention U-Net (MONAI `AttentionUnet`, channels 32-512, strides 2x4,
+  dropout 0.1) segments coronary arteries from CCTA resampled to 0.6 mm isotropic RAS.
+- **Phase B**: threshold-0.5 masks become world-coordinate surface meshes (Lewiner
+  marching cubes, full NIfTI affine), repaired with trimesh, then checked by automated
+  geometry QC; an optional topology-correction stage runs on the frozen masks first.
 
-- 3D vessel segmentation training pipeline (`train_vascular.py`)
-- Inference + postprocessing runner (`run_full_pipeline.py`)
-- Standalone Phase B CLI (`run_phaseb.py` / `phaseb/src/phaseb/cli.py`)
-- Mesh generation + repair (`vessels_raw.stl`, `vessels_repaired.stl`)
-- QC artifacts (`qc_report.json`, `qc_summary.txt`, `qc_summary.csv`)
-- Small test suite for Phase B (`phaseb/tests`)
+ImageCAS images, labels, predictions, per-case NIfTI/STL files and G-code are not
+redistributed. Everything below is derived data that reproduces the reported numbers.
 
-## Repository Layout:
+## Where each reported result lives
 
-```text
-.
-├── run_full_pipeline.py          # Phase A inference -> Phase B pipeline
-├── run_phaseb.py                 # Convenience wrapper for Phase B CLI
-├── train_vascular.py         # Main training script (Phase A)
-├── requirements.txt              # Core dependencies
-├── requirements_phaseb.txt       # Additional Phase B dependencies
-├── checkpoints/                  # Model checkpoints + split snapshots
-├── logs/                         # Training logs
-├── phaseb/
-│   ├── configs/default.yaml
-│   ├── scripts/
-│   ├── src/phaseb/               # Phase B package
-│   └── tests/
-└── phaseb_outputs/               # Example generated outputs
-```
+| Result | Artifact | Produced by |
+|---|---|---|
+| Held-out segmentation metrics (250 cases, IDs 751-1000) | `outputs/final_test_250/per_case_metrics.csv`, `summary_metrics.*` | `evaluate_full_test_a40.py` (run on Apple MPS; see `eval_command.txt`, `used_config.yaml`) |
+| HD95 on the 0.6 mm grid | `outputs/final_test_250/hd95_corrected_per_case.csv` | recomputed from saved masks by the topology-correction pipeline (see *Known issue* below) |
+| Mesh QC (integrity, components, roughness, volume change) | `outputs/phase_b_mesh_qc/per_case_mesh_qc.csv`, `summary_mesh_qc.*` | `phaseb_mesh_qc.py` |
+| Contour closure, centroid, bounding-box alignment | `outputs/phase_b_mesh_qc/missing_checks_per_case_traceable_v14.csv` | `run_missing_checks.py` |
+| Primary endpoint (clDice vs Dice association with fragmentation) | `outputs/final_test_250/primary_endpoint_bootstrap.json` | `scripts/evaluation/segmentation_geometry_association.py` |
+| Metric-vs-component correlations; integrity-group comparison | `outputs/final_test_250/segmentation_component_correlations.csv`, `integrity_group_comparison.csv` | same script |
+| clDice | `cldice@0.5` in `per_case_metrics.csv` | `compute_cldice.py`, `scripts/evaluation/compute_cldice_3d.py` |
+| Same-split plain 3D U-Net baseline | `Results/plain_unet_baseline/` | `baseline_orchestration.py`, `scripts/evaluation/compare_attention_vs_plain.py` |
+| Topology correction (4 primary strategies, 18 arms incl. control) | `outputs/topology_correction/` (`cohort_summary.csv`, `statistical_tests.csv`, `sensitivity_analysis.csv`) | `experiments/topology_correction/` |
+| PrusaSlicer toolpath check (250 STLs) | `outputs/production_slicer_validation/cohort_250_real/` | `production_slicer_validation.py`, `verify_production_slicer_cohort.py` |
+| Data split | `extra_information/data_information/dataset_splits.json` (train 1-700, val 701-750, test 751-1000) | fixed before evaluation |
 
-## Environment Setup:
+Reproduce the association analysis (seconds, needs only pandas/scipy):
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
-pip install -r requirements_phaseb.txt
+python scripts/evaluation/segmentation_geometry_association.py
 ```
 
-## Quick Start:
+## Evaluated model and training provenance
 
-### 1) Run Phase B only (from CT + segmentation):
+- Checkpoint: `checkpoints/best_dice05.pt` (Git LFS, ~284 MB). Epoch 79, validation
+  Dice@0.5 0.7889, selected on validation Dice@0.5 only. Loads strictly into the
+  architecture above.
+- The model was developed in stages on the same 700-case training partition. Earlier
+  stages (A40 GPU) trained the Attention U-Net with other loss settings. The evaluated
+  checkpoint comes from a final fine-tuning stage that resumed from the stage-v11
+  checkpoint and trained with the `tversky_dice` objective on Apple silicon (MPS):
+  lr 2e-5, AdamW (weight decay 1e-5), ReduceLROnPlateau (factor 0.5, patience 6),
+  early-stopping patience 15, batch 1 with gradient accumulation 8, one 96x192x192 patch
+  per case (3:1 positive:negative), gradient checkpointing, seed 42. Epoch numbers
+  continue across stages. The full config is stored in the checkpoint (`config` key).
+- Training entry points: `train_a40_resume.py` (resume trainer; imports the data,
+  model and loss code in `train_core.py`) and `train_v14_local_mps.py` (MPS wrapper used
+  for the final stage). `evaluate_full_test_a40.py` also imports `train_core.py`.
+  `train_vascular.py` is the original trainer used in early stages.
+
+## Metric definitions worth knowing
+
+- **Mesh integrity** = watertight repaired mesh AND zero non-manifold edges.
+- **Surface roughness** (`surface_roughness_*` in mesh QC) is a proxy: the mean angle,
+  in radians, between normals of consecutively indexed faces. It is not a curvature or
+  a length and is reported only as a before/after smoothing comparison.
+- **Topology-correction surface deviation** is the mean symmetric distance between the
+  corrected and original reconstructed surfaces; the per-variant maximum (Hausdorff) is
+  also in `cohort_summary.csv`.
+
+## Known issue: HD95 in the first evaluation run
+
+`per_case_metrics.csv` column `hd95@0.5` was computed with the loader's original header
+spacing (~0.25-0.45 mm) instead of the 0.6 mm grid the arrays were resampled to, which
+underestimates HD95 (cohort mean 5.01 mm vs 7.56 mm on the correct grid; a 0.50 mm
+minimum is impossible on a 0.6 mm grid). `spacing_from_batch` in
+`evaluate_full_imagecas_test_mps.py` now reads spacing from the resampled tensor's
+affine (regression test: `tests/test_hd95_spacing.py`). Use
+`hd95_corrected_per_case.csv` for HD95; Dice, clDice, precision and recall are voxel
+counts and are unaffected. The plain U-Net baseline was scored by the same script
+(`baseline_orchestration.py` calls `evaluate_full_test_a40.py`), so its `hd95@0.5`
+values in `Results/plain_unet_baseline/` carry the same bias until re-scored.
+
+## Scope
+
+Software-level geometry and toolpath checks only. No physical printing, bioprinter or
+bioink validation, biological validation, or clinical use.
+
+## Setup and tests
 
 ```bash
-python run_phaseb.py \
-  --ct /path/to/ct.nii.gz \
-  --seg /path/to/seg_prob_or_mask.nii.gz \
-  --seg-type auto \
-  --case-id demo \
-  --outdir ./phaseb_outputs \
-  --threshold-sweep
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt -r requirements_phaseb.txt
+pytest tests phaseb/tests experiments/topology_correction/tests
 ```
 
-### 2) Run full pipeline (Phase A inference -> Phase B):
+Phase B on one case:
 
 ```bash
-python run_full_pipeline.py \
-  --ct /path/to/ct.nii.gz \
-  --checkpoint checkpoints/checkpoint_best.pt \
-  --outdir pipeline_outputs \
-  --case-id demo \
-  --phaseb-threshold-sweep \
-  --phaseb-previews
+python run_phaseb.py --ct ct.nii.gz --seg seg_prob.nii.gz --seg-type auto --case-id demo --outdir ./phaseb_outputs
 ```
 
-## Training (Phase A):
-
-Example:
+Full pipeline on one case:
 
 ```bash
-python "train_vascular.py" \
-  --dataset_preset imagecas \
-  --imagecas_root /path/to/data \
-  --epochs 100 \
-  --batch_size 1 \
-  --roi_size 96,192,192 \
-  --experiment_name bioprint_v1
+python run_full_pipeline.py --ct ct.nii.gz --checkpoint checkpoints/best_dice05.pt --outdir pipeline_outputs --case-id demo
 ```
-
-Useful sanity modes:
-- `--dry_run`: validates forward/backward pass and validation inference
-- `--overfit_one`: overfit single case for debugging
-- `--verify_data`: transform/data pipeline checks
-
-## Inputs and Outputs:
-
-### Supported inputs:
-- CT: NIfTI (`.nii/.nii.gz`) or DICOM directory
-- Segmentation for Phase B:
-  - probability map (`float`, preferred), or
-  - binary mask
-
-### Typical output structure:
-
-```text
-pipeline_outputs/<case_id>/
-├── phasea/
-│   ├── ct_preprocessed.nii.gz
-│   ├── seg_prob.nii.gz
-│   └── seg_mask.nii.gz          
-├── vessels_raw.stl
-├── vessels_repaired.stl
-├── qc_report.json
-├── qc_summary.txt
-├── qc_summary.csv
-└── used_config.yaml
-```
-
-## Testing:
-
-```bash
-pytest phaseb/tests
-```
-
-## Corrected Phase B cohort checks
-
-The retained lightweight cohort artifacts are:
-
-- `outputs/phase_b_mesh_qc/per_case_mesh_qc.csv`: repair, mesh integrity, and connected-component results.
-- `outputs/phase_b_mesh_qc/missing_checks_per_case_traceable_v14.csv`: 50-plane slicability, centroid displacement, and affine-aware world-coordinate bounding-box alignment.
-- `outputs/phase_b_mesh_qc/TRACEABLE_V14_MISSING_CHECKS_REPORT.md`: provenance, definitions, and audited summary statistics.
-
-`phaseb_mesh_qc.py` applies the complete NIfTI affine during mesh export, including orientation/reflection, translation, and voxel spacing. `run_missing_checks.py` reproduces the supplementary checks when the case-level repaired STLs and threshold-0.5 masks are available:
-
-```bash
-python run_missing_checks.py \
-  --stl-glob 'outputs/phase_b_mesh_qc/case_outputs/*/segmentation_repaired.stl' \
-  --mask-glob 'outputs/final_test_250_phaseb_traceable_v14/case_outputs/*/seg_mask_0.5.nii.gz' \
-  --case-regex '(?<=case_outputs/)[0-9]{1,4}' \
-  --mesh-space ras \
-  --out-csv outputs/phase_b_mesh_qc/missing_checks_per_case_traceable_v14.csv
-```
-
-The primary slicability definition requires every plane that intersects a mesh to contain only closed contours. The strict definition additionally requires all 50 requested planes to intersect and close. These definitions must not be interchanged.
-
-## Production-slicer cohort validation
-
-`production_slicer_validation.py` automates PrusaSlicer invocation and verifies textual G-code, layer markers, positive-extrusion movements, support roles, warnings, complete-STL processing, and reference build-volume fit. The authoritative publication result is the complete 250-case held-out test cohort in `outputs/production_slicer_validation/cohort_250_real/`.
-
-The fixed computational reference profile is PrusaSlicer 2.9.6, Original Prusa MK4S, Generic PLA, a 0.4 mm nozzle, `0.20mm STRUCTURAL @MK4S 0.4`, 0.20 mm layers, two perimeters, 15% infill, native scale, retained source orientation, and automatic organic supports everywhere. Success requires exit status zero, nonempty textual G-code, at least one printed layer, and at least one spatial movement with positive extrusion.
-
-Recheck the retained CSV, summary, manifest, profile hash, cohort identity, warnings, and Phase B join with:
-
-```bash
-python verify_production_slicer_cohort.py
-```
-
-The earlier case-720 result remains an illustrative validation-partition example at threshold 0.4. It is not part of the 250-case held-out cohort, whose segmentation threshold is 0.5. See `outputs/production_slicer_validation/README.md` for the retained-artifact index and scope boundary.
-
-Large/private artifacts are intentionally excluded: ImageCAS images and labels, predictions, checkpoints beyond those already tracked, case-level NIfTI/STL payloads, generated G-code, caches, and temporary LaTeX products. Their compact derived results, provenance, and available hashes are retained.
-
-This is software-level production-slicer execution under one fixed computational profile. It is not physical printing, bioprinter or bioink validation, print-fidelity validation, biological validation, or evidence of clinical readiness.
-
-## Conventional 3D U-Net Baseline
-
-The finalized same-split comparison uses exactly 250 paired ImageCAS held-out cases at a fixed threshold of 0.5 without test-set threshold tuning. The Attention U-Net achieved Dice 0.7878 versus 0.7723 and clDice 0.8695 versus 0.8590 for the conventional plain 3D U-Net. It also had higher precision and lower HD95, while recall was statistically similar.
-
-This is a same-split conventional 3D U-Net baseline comparison, not a pure architecture ablation. See [the detailed baseline documentation](docs/experiments/plain_unet_baseline/README.md) for cohort provenance, paired statistics, reproducibility scripts, and manuscript-ready text.
-
-## Utility Scripts:
-
-- `beforevsafter.py`: posterstyle pipeline visualizations and mesh export
-- `graph1.py`: metric projection/plotting from `epoch_metrics.csv`
-- `sparsity.py`: dataset sparsity analysis for label volumes
-- `precompute_label_bboxes.py`: offline bbox cache generation (`label_bboxes.json`)
-
-## Other Notes:
-
-- This repository contains generated artifacts (checkpoints, logs, example outputs) to make local experimentation easier.
-- For reproducibility, Phase B writes the effective runtime config to `used_config.yaml` per case.

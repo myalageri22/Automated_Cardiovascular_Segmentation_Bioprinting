@@ -2,7 +2,7 @@
 """A40-ready training/resume entry point for ImageCAS vessel segmentation.
 
 This script reuses the repository's canonical MONAI transforms/model/loss code
-from ``train_updated copy.py`` while adding CUDA-first resume selection,
+from ``train_core.py`` while adding CUDA-first resume selection,
 reviewer-ready run artifacts, atomic checkpoints, CSV logs, and CPU-only smoke
 tests. Heavy training is only started when the user runs this script directly.
 """
@@ -38,7 +38,7 @@ from scripts.checkpoint_utils import (
 
 DEFAULT_CHANNELS = (32, 64, 128, 256, 512)
 DEFAULT_STRIDES = (2, 2, 2, 2)
-TRAIN_SCRIPT = Path(__file__).resolve().parent / "train_updated copy.py"
+TRAIN_SCRIPT = Path(__file__).resolve().parent / "train_core.py"
 
 
 def parse_tuple(text: str, cast=int, expected: Optional[int] = None) -> Tuple[Any, ...]:

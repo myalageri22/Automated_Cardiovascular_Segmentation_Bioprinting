@@ -4,7 +4,7 @@
 Example:
   python run_full_pipeline.py \
     --ct /path/to/ct.nii.gz \
-    --checkpoint checkpoints/checkpoint_best.pt \
+    --checkpoint checkpoints/best_dice05.pt \
     --outdir pipeline_outputs \
     --case-id demo
 """
@@ -218,7 +218,7 @@ def run_phase_b(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run Phase A inference + Phase B STL pipeline")
     parser.add_argument("--ct", required=True, help="Path to CT NIfTI or DICOM directory")
-    parser.add_argument("--checkpoint", default="checkpoints/checkpoint_best.pt", help="Phase A checkpoint path")
+    parser.add_argument("--checkpoint", default="checkpoints/best_dice05.pt", help="Phase A checkpoint path")
     parser.add_argument("--outdir", default="pipeline_outputs", help="Output directory root")
     parser.add_argument("--case-id", default=None, help="Case identifier (defaults to CT filename stem)")
     parser.add_argument("--device", default=None, choices=["cuda", "cpu", "mps"], help="Force device (default: auto)")

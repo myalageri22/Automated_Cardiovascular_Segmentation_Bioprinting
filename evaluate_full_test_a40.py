@@ -28,7 +28,7 @@ from scripts.checkpoint_utils import load_checkpoint_for_model, safe_torch_load
 
 DEFAULT_CHANNELS = (32, 64, 128, 256, 512)
 DEFAULT_THRESHOLDS = (0.1, 0.2, 0.3, 0.4, 0.5)
-TRAIN_SCRIPT = Path(__file__).resolve().parent / "train_updated copy.py"
+TRAIN_SCRIPT = Path(__file__).resolve().parent / "train_core.py"
 
 
 def parse_tuple(text: str, cast=float, expected: Optional[int] = None) -> Tuple[Any, ...]:

@@ -54,7 +54,7 @@
 | Taubin smoothing example | `manuscript/figures/figure3_taubin_smoothing.png` | illustrative case-level Phase B QC | Present; illustrative |
 | clDice versus components | `manuscript/figures/figure11_cldice_vs_components.png` | `per_case_metrics.csv` joined to `per_case_mesh_qc.csv` | Present; values verified |
 | Metric-mesh heatmap | `manuscript/figures/fig_metric_mesh_heatmap.png` | `seg_to_mesh_correlations.csv`, correlation summary JSON | Present; values verified |
-| Training curves | `manuscript/figures/figure4_training_curves.png` | retained training history and `scripts/build_combined_training_curve.py` | Present |
+| Training curves | `manuscript/figures/figure4_training_curves.png` | training history not included in this repository | Figure only |
 | Dice distribution | `manuscript/figures/figure7_full_test_dice_distribution.png` | `per_case_metrics.csv` | Present; values verified |
 | Qualitative segmentation | `manuscript/figures/fig_qualitative_segmentation.png` | private case volumes excluded; derived panel retained | Present |
 | Ranked Dice | `manuscript/figures/figure8_per_case_dice_ranked.png` | `per_case_metrics.csv` | Present; values verified |

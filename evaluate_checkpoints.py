@@ -617,7 +617,7 @@ def evaluate_single_checkpoint(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Evaluate saved checkpoints on a fixed split")
-    parser.add_argument("--train-script", default="train_updated copy.py", help="Path to the training script module")
+    parser.add_argument("--train-script", default="train_core.py", help="Path to the training script module")
     parser.add_argument("--split-file", default="splits.json", help="Path to split JSON file")
     parser.add_argument("--split-name", default="test", choices=["train", "val", "test"], help="Which split to evaluate")
     parser.add_argument("--data-root", default=None, help="Dataset root used for auto-remapping stale split paths")

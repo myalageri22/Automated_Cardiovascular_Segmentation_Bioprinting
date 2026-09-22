@@ -1899,7 +1899,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--top_k_best", type=int, default=5, help="Number of best cases for quick reference")
     parser.add_argument("--export_markdown_report", action="store_true", help="Export markdown results report")
     parser.add_argument("--run_inference", action="store_true", help="Optional inference mode (adapter)")
-    parser.add_argument("--checkpoint", default="checkpoints/checkpoint_best.pt", help="Checkpoint path for optional inference adapter")
+    parser.add_argument("--checkpoint", default="checkpoints/best_dice05.pt", help="Checkpoint path for optional inference adapter")
     parser.add_argument("--device", default="auto", choices=["cpu", "cuda", "mps", "auto"], help="Device for optional inference adapter")
     parser.add_argument("--strict_device", action="store_true", help="Fail if requested device is unavailable")
     parser.add_argument("--allow_empty_eval", action="store_true", help="Allow writing outputs even when zero val/test cases are matched")

@@ -1,0 +1,15 @@
+{
+  "endpoint": "|rho(clDice@0.5, components)| - |rho(Dice@0.5, components)|",
+  "outcome": "repaired-mesh connected_component_count",
+  "n_cases": 250,
+  "rho_cldice": -0.49219944577856034,
+  "rho_dice": -0.37371593217606697,
+  "delta_abs_rho": 0.11848351360249337,
+  "ci95_percentile": [
+    0.05374746285797154,
+    0.1830393341736982
+  ],
+  "bootstrap_resamples": 10000,
+  "bootstrap_seed": 42,
+  "bootstrap_unit": "case (paired: both correlations recomputed on the same resample)"
+}

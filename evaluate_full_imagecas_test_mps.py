@@ -394,14 +394,26 @@ def cldice_cpu(pred: np.ndarray, label: np.ndarray) -> float:
 
 
 def spacing_from_batch(batch: Dict[str, Any], fallback: Tuple[float, float, float]) -> Tuple[float, float, float]:
-    meta = batch.get("label_meta_dict") or batch.get("image_meta_dict") or {}
-    pixdim = meta.get("pixdim") if isinstance(meta, dict) else None
-    if pixdim is not None:
-        arr = pixdim.detach().cpu().numpy() if isinstance(pixdim, torch.Tensor) else np.asarray(pixdim)
-        flat = arr.reshape(-1)
-        if flat.size >= 4:
-            return tuple(float(x) for x in flat[1:4])  # type: ignore[return-value]
-    return fallback
+    """Voxel spacing (mm) of the arrays actually being scored.
+
+    Uses the affine carried by the (post-Spacingd) label/image tensor. The loader's
+    ``*_meta_dict["pixdim"]`` is NOT used: it holds the ORIGINAL NIfTI header spacing
+    (~0.25-0.45 mm for ImageCAS), not the 0.6 mm grid produced by resampling. Using it
+    underestimated HD95 by roughly one third in the first held-out evaluation.
+    Falls back to the configured preprocessing spacing.
+    """
+    for key in ("label", "image"):
+        affine = getattr(batch.get(key), "affine", None)
+        if affine is None:
+            continue
+        arr = affine.detach().cpu().numpy() if isinstance(affine, torch.Tensor) else np.asarray(affine)
+        if arr.ndim == 3:
+            arr = arr[0]
+        if arr.shape[0] >= 3 and arr.shape[1] >= 3:
+            sp = np.linalg.norm(arr[:3, :3], axis=0)
+            if np.all(np.isfinite(sp)) and np.all(sp > 0):
+                return tuple(float(x) for x in sp)  # type: ignore[return-value]
+    return tuple(float(x) for x in fallback)  # type: ignore[return-value]
 
 
 def summarize(values: Sequence[float]) -> Dict[str, Any]:
@@ -516,13 +528,13 @@ def finalize_outputs(outdir: Path, logger: logging.Logger) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Evaluate full 250-case ImageCAS test split on MPS/CPU")
-    parser.add_argument("--checkpoint", default="checkpoints/checkpoint_best.pt")
+    parser.add_argument("--checkpoint", default="checkpoints/best_dice05.pt")
     parser.add_argument(
         "--allow-external-checkpoint",
         action="store_true",
         help="Allow --checkpoint to point outside the current repository. Default is repo-local only.",
     )
-    parser.add_argument("--train-script", default="train_updated copy.py")
+    parser.add_argument("--train-script", default="train_core.py")
     parser.add_argument("--split-file", default="splits.json")
     parser.add_argument("--data-root", default="Data/all")
     parser.add_argument("--outdir", default="outputs/full_test_eval_mps")

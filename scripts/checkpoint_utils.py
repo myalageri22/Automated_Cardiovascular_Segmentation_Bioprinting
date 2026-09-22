@@ -228,7 +228,7 @@ def load_checkpoint_for_model(
 def select_best_checkpoint(checkpoint_paths: Iterable[str | Path]) -> Tuple[Optional[str], Dict[str, Any]]:
     """Select the most useful resume checkpoint with a documented rationale."""
     reports = [test_checkpoint(path) for path in checkpoint_paths]
-    candidate_priority = "outputs/checkpoints/bioprint_v5_mps_retrain_evalprep_lowmem/checkpoint_best.pt"
+    candidate_priority = "checkpoints/best_dice05.pt"
 
     def rank(report: Dict[str, Any]) -> Tuple[int, float, int, int, int]:
         readable = 1 if report.get("readable") else 0
@@ -245,7 +245,7 @@ def select_best_checkpoint(checkpoint_paths: Iterable[str | Path]) -> Tuple[Opti
     rationale = {
         "selected": selected["path"] if selected else None,
         "reason": (
-            "selected highest-ranked readable checkpoint with model weights; current local checkpoint_best.pt is prioritized when valid"
+            "selected highest-ranked readable checkpoint with model weights; checkpoints/best_dice05.pt is prioritized when valid"
             if selected
             else "no readable checkpoint with model weights found"
         ),
